@@ -1,0 +1,223 @@
+---
+title: Minería de Datos de un CNC para la identificación del desgaste de herramientas de corte
+author:
+    - "José Luis Pérez"
+    - "Fernando Lango"
+    - "Thomas M. Rudolf"
+include-in-header:
+  - text: |
+      <style>
+      #title-slide .title {
+        font-size: 1.5em;
+        margin-bottom: 10%;
+      }
+      p, li {
+        font-size: 20pt; /* Ajusta el tamaño de la letra normal */
+      }
+      .reveal .footer {
+        z-index: 0; /* Ajusta el tamaño de la letra del footer */
+      }
+      </style>
+format: 
+    revealjs:
+        theme: serif
+        logo: images/logo-ITAM.png
+        footer: "Minería y Análisis de Datos"
+---
+
+```{r}
+knitr::opts_chunk$set(echo = FALSE, cache = TRUE, cache.lazy = FALSE)
+
+library(tidyverse)
+library(kableExtra)
+library(skimr)
+
+options(scipen = 999)
+```
+
+
+## Problema
+
+Identificar características/señales que indiquen desgaste de la herramienta.
+
+![](images/clipboard-1073081830.png)
+
+## Resumen de la base de datos
+
+```{r}
+directory_path <- "data/"
+csv_files <- list.files(path = directory_path, pattern = "\\.csv$", full.names = TRUE, recursive = TRUE)
+
+column_mapping <- c(
+  'time' = 'time',
+  '+/Nck/!SD/nckServoDataActCurr32 [u1; 1]' = 'torque_x',
+  '+/Nck/!SD/nckServoDataActCurr32 [u1; 2]' = 'torque_y',
+  '+/Nck/!SD/nckServoDataActCurr32 [u1; 3]' = 'torque_z',
+  '+/Nck/!SD/nckServoDataActCurr32 [u1; 4]' = 'torque_spindle',
+  #'+/Nck/!SD/nckServoDataActPos2ndEnc32 [u1; 1]' = 'posAx1',
+  #'+/Nck/!SD/nckServoDataActPos2ndEnc32 [u1; 2]' = 'posAx2',
+  #'+/Nck/!SD/nckServoDataActPos2ndEnc32 [u1; 3]' = 'posAx3',
+  #'+/Nck/!SD/nckServoDataActPower32 [u1; 6]' = 'PowerSp',
+  #'+/Nck/!SD/nckServoDataActVelMot32 [u1; 6]' = 'VelMotSp',
+  #'+/Nck/!SD/nckServoDataActVelMot32 [u1; 4]' = 'ActVelMot32',
+  '+/Nck/!SD/nckServoDataActPos1stEnc32 [u1; 1]' = 'position_x',
+  '+/Nck/!SD/nckServoDataActPos1stEnc32 [u1; 2]' = 'position_y',
+  '+/Nck/!SD/nckServoDataActPos1stEnc32 [u1; 3]' = 'position_z',
+  '+/Nck/!SD/nckServoDataActPos1stEnc32 [u1; 4]' = 'position_spindle',    
+  '+/Channel/!RP/rpa [u1; 15]' = 'Recording_flag'
+)
+
+data <- list()
+
+for (file in csv_files){
+    df <- read_csv(file, col_names = TRUE, show_col_types = FALSE)
+    # Obtener nombres de columnas presentes en el archivo y que están en el diccionario
+    columns_to_rename <- intersect(names(df), names(column_mapping))
+    
+    # Renombrar las columnas solo si coinciden con el diccionario
+    if (length(columns_to_rename) > 0) {
+        df <- df %>%
+            rename_with(~ column_mapping[.x], .cols = columns_to_rename)
+    }
+    
+    df$file_path <- file
+    file_path_parts <- str_split(file, "/")[[1]]
+    
+    df$file_name <- file_path_parts[length(file_path_parts)]
+    df$file_dir <- file_path_parts[length(file_path_parts) - 1]
+    
+    df$time_increment <- c(0, diff(df$time))
+    data[[file]] <- df
+}
+
+selected_columns <- c(unname(column_mapping), "file_path", "file_dir",
+                      "file_name", "time_increment")
+
+
+combined_data <- bind_rows(data) %>%
+    select(any_of(selected_columns))
+```
+
+Se han acotado los datos que utilizaremos en el análisis al proceso *WearMillingY_50* para la CNC E900 debido a que revisando los datos, determinamos que es el proceso que presenta la mejor calidad de la información.
+
+En total tenemos `r length(csv_files)` archivos CSV con las señales de los sensores. Estos archivos representan un total de `r nrow(combined_data)` observaciones y `r length(column_mapping)` columnas, las cuales se muestran a continuación:
+
+```{r}
+combined_data %>%
+    as.data.frame() %>%
+    str()
+```
+
+## Datos faltantes {.scrollable}
+
+Para las variables que presentan 7,953 datos faltantes, se eliminarán los registros, ya que se trata de un solo csv erróneo.
+
+Las variables que presentan una gran cantidad de faltantes se eliminarán.
+
+```{r}
+data.frame(
+  Faltantes = colSums(is.na(combined_data)),
+  Porcentaje = round(colSums(is.na(combined_data))/nrow(combined_data)*100, 2)) %>%
+    kable() %>%
+    kable_styling(font_size = 20)
+```
+
+```{r}
+clean_data <-
+    combined_data %>%
+    select(-c("torque_z", "position_x", "Recording_flag")) %>%
+    drop_na()
+```
+
+## Limpieza
+
+La mayoría de las carpetas con los datos del proceso contienen una estructura del estilo "Level_###", donde ### es un número. Hemos identificado algunos con una estructura distinta. Identificamos que corresponden a archivos temporales, de otros procesos o momentos en los que no funcionó correctamente la grabación. Por lo tanto, se eliminarán.
+
+```{r}
+data.frame(
+    file_dir = unique(clean_data$file_dir)
+) %>%
+    filter(!grepl("^Level_[0-9]{3}$", file_dir))  %>%
+    kable() %>%
+    kable_styling(font_size = 20)
+    
+```
+
+```{r}
+clean_data <-
+    clean_data %>%
+    filter(grepl("^Level_[0-9]{3}$", file_dir)) %>%
+    arrange(file_dir, file_name, time)
+
+clean_data <-
+    clean_data %>%
+    group_by(file_dir) %>%
+    mutate(level_time = cumsum(time_increment)) %>%
+    ungroup() %>%
+    mutate(total_time = cumsum(time_increment))
+```
+
+Resultando en un total de `r nrow(clean_data)` observaciones.
+
+## Limpieza
+
+Además, hemos creado las variables level_time y total_time para saber el tiempo total transcurrido del proceso y para cada nivel.
+
+```{r}
+clean_data %>%
+    select(file_dir, level_time, total_time) %>%
+    as.data.frame() %>%
+    head() %>%
+    kable() %>%
+    kable_styling(font_size = 20)
+
+clean_data %>%
+    select(file_dir, level_time, total_time) %>%
+    mutate(total_time = sprintf("%.3f", total_time)) %>%
+    as.data.frame() %>%
+    tail() %>%
+    kable() %>%
+    kable_styling(font_size = 20)
+```
+
+
+## Resumen estadístico
+
+Teniendo nuestros datos limpios, podemos observar un resumen estadístico de las variables numéricas.
+
+```{r}
+stats <-
+    clean_data %>%
+    select(c("torque_x", "torque_y", "torque_spindle", "position_y",
+           "position_z", "position_spindle")) %>%
+    skim()
+
+stats %>%
+    select(skim_variable, starts_with("numeric.")) %>%
+    mutate_if(is.numeric, round, 2) %>%
+    rename_with(~ gsub("^numeric\\.", "", .), starts_with("numeric.")) %>%
+    rename(variable = skim_variable) %>%
+    kable() %>%
+    kable_styling(font_size = 20)
+```
+
+
+## Correlaciones
+
+## Baseline
+
+## Intuiciones y conclusiones
+
+## Referencias
+
+1.  Adaptive loggingmodule formonitoringapplicationsusingcontrol internaldigital drive signalsC. Brecher, T. Rudolf, 2009, ProductionEngineering3, 305-312
+
+2.  Signalvorverarbeitung zur Anwendung steuerungsintegrierter ProzessüberwachungC.Brecher, T Rudolf , wt-online, 2009, S. 479-486
+
+3.  Fundamentals of Modern Manufacturing; M. P. Groover, John Wiley & Sons, Inc. 2002
+
+4.  Werkzeugmaschinen 3 Mechatronische Systeme, Vorschubantriebe, Prozessdiagnose M. Weck, C. Brecher; Springer, 2006
+
+5.  JAGS Version4.3.0 usermanual, https://people.stat.sc.edu/hansont/stat740/jags_user_manual.pdf
+
+6.  Regresión Avanzada (con enfoque Bayesiano); L. E. Nieto Barajas, Scriptum maetriaen Ciencias de Datos, ITAM

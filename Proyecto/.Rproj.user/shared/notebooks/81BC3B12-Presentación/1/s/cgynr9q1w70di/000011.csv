@@ -1,0 +1,5 @@
+"0","data.frame("
+"0","  Faltantes = colSums(is.na(combined_data)),"
+"0","  Porcentaje = round(colSums(is.na(combined_data))/nrow(combined_data)*100, 2)) %>%"
+"0","    kable() %>%"
+"0","    kable_styling(font_size = 20)"

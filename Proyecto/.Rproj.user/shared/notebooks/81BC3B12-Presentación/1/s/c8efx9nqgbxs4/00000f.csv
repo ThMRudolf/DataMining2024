@@ -1,0 +1,4 @@
+"0","clean_data <-"
+"0","    combined_data %>%"
+"0","    select(-c(""torque_z"", ""position_x"", ""Recording_flag"")) %>%"
+"0","    drop_na()"

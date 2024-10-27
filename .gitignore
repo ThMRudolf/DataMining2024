@@ -163,3 +163,9 @@ cython_debug/
 
 # data
 data/
+
+# Ignore all .RData files
+*.RData
+
+# Ignore all directories ending with _cache
+*_cache/
