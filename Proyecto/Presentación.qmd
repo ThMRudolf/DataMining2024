@@ -62,6 +62,8 @@ The available signals are listed in table 1:
 
 The objective is to identify the which of the available data are useful to build a cutting model that can be compared to the real data. Under normal conditions and a non-worn tool the compaction between the real data and the modelled signal should be equal or at least with very little differences.
 
+![Fig. 1: Project Structure](images/project_structure.png){width="100%"}Fig. 1 Illustrates the current project structure. The main task is number (1), the data mining of existing measurement to identify which signals contribute the most to identify process parameters. The first measurements of a new cutting tool are the input to a Gibbs Sampler which identifies to relevant model parameters: specific cutting force $k_{c1,1}$ and increasing value of the specific cutting force $1-m_c$ (4). Number (4) is the second major part of the project. Based on this parameters and some meta data (2), the cutting model is constructed (5) and compared to the real measured but normalized data (3). Comparing both signals (real and modelled) a Wear Id Feature (6) is defined. Number (5) and number (6) are possible applications but do not play a major part in this project. The parts number (2) and number (3) are not part of this project and are adjusted manually.
+
 -   Analyse existing data (missing data?)
 
 -   Reallocate data if necessary}
