@@ -169,3 +169,4 @@ data/
 
 # Ignore all directories ending with _cache
 *_cache/
+.Rproj.user

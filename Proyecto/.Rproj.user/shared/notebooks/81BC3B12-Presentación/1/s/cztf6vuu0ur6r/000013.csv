@@ -1,6 +1,0 @@
-"0","clean_data %>%"
-"0","    select(file_dir, level_time, total_time) %>%"
-"0","    as.data.frame() %>%"
-"0","    head() %>%"
-"0","    kable() %>%"
-"0","    kable_styling(font_size = 20)"

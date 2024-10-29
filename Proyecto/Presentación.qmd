@@ -1,5 +1,5 @@
 ---
-title: Minería de Datos de un CNC para la identificación del desgaste de herramientas de corte
+title: Data mining of CNC data for cutting tool wear identification
 author:
     - "José Luis Pérez"
     - "Fernando Lango"
@@ -12,10 +12,15 @@ include-in-header:
         margin-bottom: 10%;
       }
       p, li {
-        font-size: 20pt; /* Ajusta el tamaño de la letra normal */
+        font-size: 17pt; /* Ajusta el tamaño de la letra normal */
       }
       .reveal .footer {
         z-index: 0; /* Ajusta el tamaño de la letra del footer */
+      }
+      .reveal .slide figure > figcaption,
+      .reveal .slide img.stretch + p.caption,
+      .reveal .slide img.r-stretch + p.caption {
+        font-size: 12px;
       }
       </style>
 format: 
@@ -31,114 +36,53 @@ knitr::opts_chunk$set(echo = FALSE, cache = TRUE, cache.lazy = FALSE)
 library(tidyverse)
 library(kableExtra)
 library(skimr)
+library(corrplot)
+library(factoextra)
 
 options(scipen = 999)
 ```
 
-## Problema
+## Problem
 
-Identify the characteristics and CNC signals that that help to indicate tool wear. The general behaviour of wear is illustrated in fig. 1a. At the beginning a new component (in this case a cutting tool) has a progressive, non linear phase, where the requiredcurrent to cut increases slowly (1). The following phase has a linear behaviour with very little increase under the same cutting conditions (2) until it reaches the end of usage (3). In this last phase a very progressive increase of the required current can be noticed. Fig.1b shows the measurement of tool wear taken form different stage of the cutting process with reference to removed volume.
+Identify the characteristics and CNC signals that help to indicate tool wear. The general behaviour of wear is illustrated in fig. 1a. At the beginning, a new component (in this case a cutting tool) has a progressive, non linear phase, where the required current to cut increases slowly (1). The following phase has a linear behaviour with very little increase under the same cutting conditions (2) until it reaches the end of usage (3). In this last phase a very progressive increase of the required current can be noticed.
 
-![fig 1a. wear curve of a cutting tool](images/clipboard-1073081830.png)
+![fig. 1: Wear curve of a cutting tool](images/clipboard-1073081830.png)
 
-![fig.1b: measurements of tool wear pér volume](images/ToolWear_with_volume_ref.png){fig-align="center"}
+## Problem
+
+Fig.2 shows the measurement of tool wear taken form different stage of the cutting process with reference to removed volume.
+
+![fig. 2: measurements of tool wear per volume](images/ToolWear_with_volume_ref.png)
 
 The challenge is to identify which of the available signals are the best indicator to identify a worn tool.
 
-The available signals are listed in table 1:
+## Project Structure
 
-| Signal | NC variable | unit |
-|----|----|----|
-| time | time | s |
-| +/Nck/!SD/nckServoDataActCurr32 \[u1; 1\] | torque producing current of axis x | A |
-| +/Nck/!SD/nckServoDataActCurr32 \[u1; 2\] | torque producing current of axis y | A |
-| +/Nck/!SD/nckServoDataActCurr32 \[u1; 3\] | torque producing current of axis z | A |
-| +/Nck/!SD/nckServoDataActPos1stEnc32 \[u1; 1\] | current position in x | mm |
-| +/Nck/!SD/nckServoDataActPos1stEnc32 \[u1; 2\] | current position in y | mm |
-| +/Nck/!SD/nckServoDataActPos1stEnc32 \[u1; 3\] | current position in z | mm |
-| +/Nck/!SD/nckServoDataActVelMot32 \[u1; 4\] | current velocity of spindle | rpm (factor 36) |
+![Fig. 3: Project Structure](images/project_structure.png)
 
-## Objective
+## Model
 
-The objective is to identify the which of the available data are useful to build a cutting model that can be compared to the real data. Under normal conditions and a non-worn tool the compaction between the real data and the modelled signal should be equal or at least with very little differences.
+::::: columns
+::: {.column width="50%"}
+![fig. 4: Indicator calculated form cutting model and real data](images/objective.png)
+:::
 
-![Fig. 1: Project Structure](images/project_structure.png){width="100%"}Fig. 1 Illustrates the current project structure. The main task is number (1), the data mining of existing measurement to identify which signals contribute the most to identify process parameters. The first measurements of a new cutting tool are the input to a Gibbs Sampler which identifies to relevant model parameters: specific cutting force $k_{c1,1}$ and increasing value of the specific cutting force $1-m_c$ (4). Number (4) is the second major part of the project. Based on this parameters and some meta data (2), the cutting model is constructed (5) and compared to the real measured but normalized data (3). Comparing both signals (real and modelled) a Wear Id Feature (6) is defined. Number (5) and number (6) are possible applications but do not play a major part in this project. The parts number (2) and number (3) are not part of this project and are adjusted manually.
+::: {.column width="50%"}
+There are different models that describe the cutting force $F_c$ and the resulting cutting torque $M_c$ . The one used in this project is the model proposed by Otto Kienzle. It is based on the volume that each cutting tool removes from the material and two material parameters the specific cutting force $k_{c1,1}$ \[units $N/m^2$\] and increasing value of the specific cutting force $1-m_c$ . The parameters 𝑏 and ℎ are the geometric values of the removed material.
 
--   Analyse existing data (missing data?)
+It is necessary to estimate accurately the value for both parameter to model relaiable the cutting torque, since small variations have a significant impact of the modelled signal.
+:::
+:::::
 
--   Reallocate data if necessary}
+## Data structure
 
--   Apply different strategies on the signal (e.g. scale norm)
+The available data are stored in folder with the structure illustrated in the fig. 5. The meta data of each measurement is stored in the folders name {cutting edge type}\_{number of cutting edges}\_{cutting depth in mm}\_{tool diameter}\_{% of tool diameter involved}\_{process}
 
--   Model the cutting force / torque online and compare to the values real data.
+![fig. 5: Data structure](images/DataStructure.png)
 
--   Identify features that indicate a tool wear.
+Each csv file is a time series with a duration of approximately $10$ seconds and a sample time of $2 ms$, leading to approximatly $5,000$ entries per variable per csv file.
 
-![fig 2: indicator calculated form cutting model and real data](images/objective.png){fig-align="center" width="40%"}
-
-There are different models that describe the cutting force $F_c$ and the resulting cutting torque $M_c$ . The one used in this project is the model proposed by Otto Kienzle. It is based on the volume that each cutting tool removes from the material and two material parameters the specific cutting force $k_{c1,1}$ \[units $N/m^2$\] and increasing value of the specific cutting force $1-m_c$ . The parameters 𝑏 and ℎ are the geometric values of the removed material
-
-$$
-F_c = k_{c1,1}bh^{1-m_c}
-$$
-
-For the cutting process, the value of $b$ equals the cutting depth $a_p$. The parameter $h$ depends on the geometry of cutting tool and the cutter movements: $ℎ=𝑓_𝑧 (sin𝜅)$ , with $𝑓_𝑧$ as feed per cutting edge and 𝜅 tool angle.
-
-Finally, the for can be rewritten as follows:
-
-$$
-F_c = k_{c1,1}a_p 𝑓_𝑧^{1-m_c} (sin𝜅)^{1-m_c}
-$$
-
-In general there cutting tool is working with one or more cutting edges. The available data were recorded with three cutting edges. Each cutting tool is equally placed around the tool base. In the available case the with a angle displacement of 120°. The value $z$ indicates the number of cutting edges. The angle $\phi$ represents the current position of the first cutting edge.
-
-$$
-F_{ci} = k_c b h^{1-m_c} = a_p f_z^{1-m_c} sin(\kappa)^{m_c} k_{c1.1} sin(\phi + (k-1) \frac{360}{z})^{1-m_c}
-$$
-
-The available data are torque producing currents. The relation between torque and current is a motor constants $k_m$, and the relation between torque $M_c$ and cutting force $F_c$ is the tool radius $r$.
-
-$$
-M_c = \sum_1^z{F_{ci} r_{tool}}=a_p f_z^{1-m_c} sin(\kappa)^{m_c} k_{c1.1} \sum_1^z{sin(\phi + (k-1) \frac{360}{z})^{1-m_c}}
-$$
-
-Considering the formula and the the available data, the only unknown parameters are $k_{c1,1}$ and $1-m_c$ .
-
-Form data based, one can get the following informations about these two parameters:
-
-$$
-m_{c, mean} = 0.23,\newline  m_{c, sdt} = 0.02 \newline k_{c11, mean}=2306.92 N/m^2\newline k_{c11, sdt} = 977.56 N/m^2
-$$
-
-It is, however, relevant to detect the correct values for $k_{c1,1}$ and $1-m_c$ since small variations have a significant impact of the modelled signal.
-
-If one change the values of \$m_c\$ to its extreme values, the difference in the resulting amplitude is
-
-significant: The fig. 3 illustrates the amplitudes with $m_c=0.22,0.23,0.24$. fig 3a has an amplitude of approx. 2200 Nm while the case of fig. 3c results in an amplitude of 3000 Nm. In all three cases the value of $k_{c,11}=2306 MPa$ were set to the mean value.
-
-| $m_c=0.22$ | $m_c=0.23$ | $m_c=0.24$ |
-|----|----|----|
-| ![fig 3a](images/clipboard-409739672.png){width="100%"} | ![fig 3b](images/clipboard-936063025.png){width="100%"} | ![fig 3c](images/clipboard-2298907086.png){width="100%"} |
-
-The same analysis can be conducted to the effect of $k_{c,11}$. The values were set to the minimum, mean and maximum value of $k_{c,11}=1329MPa, 2306MPa, 3283MPa$ while $m_c$ was the mean value of 0.23. While with a minimum value of $k_{c,11}$ the amplitude is around $1500Nm$ increase with the maximum value of $k_{c,11}$ is around $3000Nm$.
-
-| $k_{c,11}=1329MPa$ | $k_{c,11}=2306MPa$ | $k_{c,11}=3283MPa$ |
-|----|----|----|
-| ![](images/clipboard-2683306313.png){width="100%"} | ![](images/clipboard-936063025.png){width="100%"} | ![](images/clipboard-205141012.png){width="100%"} |
-
-This analysis demonstrated the significance of an exact value for both parameter to model relaiable the cutting torque.
-
-The available data are stored in folder with the structure illustrated in the fig. 4:
-
-![](images/DataStructure.png){fig-align="center" width="100%"}
-
-The meta data of each measurement is stored in the folders name {cutting edge tyoe}\_{number of cutting edges}\_{cutting depth in mm}\_{tool diameter}\_{% of tool diameter involved}\_{process}
-
-for example 4240_z2_ap2_d40_ae085_wearV01 means the cutting edge 4240 with 2 cutters, a cutting depth of $2 mm$ a with a diameter of $40mm$ and diameter percentage of 85% with a process wear.
-
-Each csv file is a time series and has the entries the corresponding time, position in x, y the torque producing currents in x, y and the spindle. Some entries also have the position values z and the corresponding toque producing current in z. Each time series has a duration of approx. $10s$ with a sample time of $2 ms$. This leads to approximatly $5000$ entries per variable per csv file.
-
-## Resumen de la base de datos
+## Selected data
 
 ```{r}
 directory_path <- "data/"
@@ -194,9 +138,9 @@ combined_data <- bind_rows(data) %>%
     select(any_of(selected_columns))
 ```
 
-Se han acotado los datos que utilizaremos en el análisis al proceso *WearMillingY_50* para la CNC E900 debido a que revisando los datos, determinamos que es el proceso que presenta la mejor calidad de la información.
+The data we will use in the analysis has been limited to the *WearMillingY_50* process for the CNC E900, as we determined that this process provides the best data quality.
 
-En total tenemos `r length(csv_files)` archivos CSV con las señales de los sensores. Estos archivos representan un total de `r nrow(combined_data)` observaciones y `r length(column_mapping)` columnas, las cuales se muestran a continuación:
+In total, we have `r length(csv_files)` CSV files containing sensor signals. These files represent a total of `r nrow(combined_data)` observations and `r length(column_mapping)` columns:
 
 ```{r}
 combined_data %>%
@@ -204,16 +148,16 @@ combined_data %>%
     str()
 ```
 
-## Datos faltantes {.scrollable}
+## Missing data {.scrollable}
 
-Para las variables que presentan 7,953 datos faltantes, se eliminarán los registros, ya que se trata de un solo csv erróneo.
+For variables with 7,953 missing data points, the records will be removed, as they belong to a single erroneous CSV file.
 
-Las variables que presentan una gran cantidad de faltantes se eliminarán.
+Variables with a large amount of missing data will be removed.
 
 ```{r}
 data.frame(
-  Faltantes = colSums(is.na(combined_data)),
-  Porcentaje = round(colSums(is.na(combined_data))/nrow(combined_data)*100, 2)) %>%
+  Missing = colSums(is.na(combined_data)),
+  Percent = round(colSums(is.na(combined_data))/nrow(combined_data)*100, 2)) %>%
     kable() %>%
     kable_styling(font_size = 20)
 ```
@@ -225,9 +169,9 @@ clean_data <-
     drop_na()
 ```
 
-## Limpieza
+## Data cleaning
 
-La mayoría de las carpetas con los datos del proceso contienen una estructura del estilo "Level\_###", donde \### es un número. Hemos identificado algunos con una estructura distinta. Identificamos que corresponden a archivos temporales, de otros procesos o momentos en los que no funcionó correctamente la grabación. Por lo tanto, se eliminarán.
+Most of the folders with process data follow a structure like "Level\_###," where \### is a number. We identified some with a different structure, which correspond to temporary files, other processes, or instances where recording did not function correctly. Therefore, they will be removed.
 
 ```{r}
 data.frame(
@@ -253,12 +197,14 @@ clean_data <-
     mutate(total_time = cumsum(time_increment))
 ```
 
-Resultando en un total de `r nrow(clean_data)` observaciones.
+Resulting in a total of `r nrow(clean_data)` observations.
 
-## Limpieza
+## Data cleaning
 
-Además, hemos creado las variables level_time y total_time para saber el tiempo total transcurrido del proceso y para cada nivel.
+Additionally, we have created the variables level_time and total_time to track the total elapsed time of the process and for each level.
 
+::::: columns
+::: {.column width="50%"}
 ```{r}
 clean_data %>%
     select(file_dir, level_time, total_time) %>%
@@ -266,7 +212,11 @@ clean_data %>%
     head() %>%
     kable() %>%
     kable_styling(font_size = 20)
+```
+:::
 
+::: {.column width="50%"}
+```{r}
 clean_data %>%
     select(file_dir, level_time, total_time) %>%
     mutate(total_time = sprintf("%.3f", total_time)) %>%
@@ -275,10 +225,12 @@ clean_data %>%
     kable() %>%
     kable_styling(font_size = 20)
 ```
+:::
+:::::
 
-## Resumen estadístico
+## Statistical summary
 
-Teniendo nuestros datos limpios, podemos observar un resumen estadístico de las variables numéricas.
+With our data cleaned, we can observe a statistical summary of the numerical variables.
 
 ```{r}
 stats <-
@@ -296,9 +248,88 @@ stats %>%
     kable_styling(font_size = 20)
 ```
 
-## Correlaciones
+## Correlations & PCA {.scrollable}
 
-## Baseline
+```{r}
+clean_data %>%
+    select(c("torque_x", "torque_y", "torque_spindle",
+             "position_y", "position_z", "position_spindle")) %>%
+    cor() %>%
+    corrplot(method = "number", type = "upper", tl.col = "black", tl.srt = 45)
+```
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+clean_data %>%
+    select(c("torque_x", "torque_y", "torque_spindle",
+             "position_y", "position_z", "position_spindle")) %>%
+    prcomp(scale = TRUE) %>%
+    fviz_pca_var(col.var = "contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE,
+                 title = "PCA - .002 s")
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+clean_data %>%
+    select(c("torque_x", "torque_y", "torque_spindle",
+             "position_y", "position_z", "position_spindle")) %>%
+    prcomp(scale = TRUE) %>%
+    fviz_contrib(choice = "var", axes = 1, top = 10, title = "PCA - .002 s")
+```
+:::
+:::::
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+clean_data %>%
+    filter(level_time %% .008 == 0) %>%
+    select(c("torque_x", "torque_y", "torque_spindle",
+             "position_y", "position_z", "position_spindle")) %>%
+    prcomp(scale = TRUE) %>%
+    fviz_pca_var(col.var = "contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE,
+                 title = "PCA - .008 s")
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+clean_data %>%
+    filter(level_time %% .008 == 0) %>%
+    select(c("torque_x", "torque_y", "torque_spindle",
+             "position_y", "position_z", "position_spindle")) %>%
+    prcomp(scale = TRUE) %>%
+    fviz_contrib(choice = "var", axes = 1, top = 10, title = "PCA - .008 s")
+```
+:::
+:::::
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+clean_data %>%
+    filter(level_time %% .016 == 0) %>%
+    select(c("torque_x", "torque_y", "torque_spindle",
+             "position_y", "position_z", "position_spindle")) %>%
+    prcomp(scale = TRUE) %>%
+    fviz_pca_var(col.var = "contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE,
+                 title = "PCA - .016 s")
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+clean_data %>%
+    filter(level_time %% .016 == 0) %>%
+    select(c("torque_x", "torque_y", "torque_spindle",
+             "position_y", "position_z", "position_spindle")) %>%
+    prcomp(scale = TRUE) %>%
+    fviz_contrib(choice = "var", axes = 1, top = 10, title = "PCA - .016 s")
+```
+:::
+:::::
 
 ## Signal processing on the current signals
 
@@ -306,42 +337,45 @@ In order to start analysing the most highly appreciated signals, some signal pro
 
 1.  Moving Standard Scalar: $x_{ssc}=\frac{x-\mu_{mov}}{\sigma_{mov}}$
 
-    with $x$ the current value, $\mu_{mov}$ the moving average value of the last N values and $\sigma_{mov}$ the standard deviation over the last N values.
+With $x$ the current value, $\mu_{mov}$ the moving average value of the last N values and $\sigma_{mov}$ the standard deviation over the last N values.
 
 2.  low pass Butterworth filter: This filter cuts values with frequencies higher as a defined frequency form the signal and makes it "cleaner".
 
-The method moving standard scalar was deduced by the commonly known method standard scalar but over a total of N values. The value N depends on the applied rotational velocity $S$ and the sample time $T_s$. If $S=2300rpm$ with a sample time $Ts=0.002$ the measurement obtains between 12 and 13 samples per round:
+## Signal processing on the current signals
 
-$$
-S_{in-rps}=\frac{2300rpm}{60s}=38.33rps \newline
-spr = \frac{1}{S_{in-rps}}=\frac{1}{38.33}=0.026 spr
-$$
-
-With a sample time of $Ts=0.002$ one obtain 13 signals per round. This is the number to use for the moving standard scalar.
-
-#### Moving Standard Scalar
-
+::::: columns
+::: {.column width="50%"}
 Applying the moving standard scalar to the signal of the spindle current eliminates the static component to the signal and leaves the dynamic of a signal. This is helpful in this application since we are analysing the amplitudes resulting form the material removing process and we do not want static behaviour in our signal. The following figure illustrates the results. The green signal is the rough signal without any precessing. The blue and orange signals are the butterworth filtered signal and the moving standard scalar signal, respectively. The same function calculating the standard scalar value returns the moving average value (not illustrated) to have the static behaviour as well.
+:::
 
-### ![](images/clipboard-2041312673.png){width="50%"}
+::: {.column width="50%"}
+![](images/clipboard-2041312673.png)
+:::
+:::::
 
-### Fast Fourier Transformation (FFT)
+## Fast Fourier Transformation (FFT)
 
 Over the moving standard scalar value, the FFT was applied. Since the static components were eliminated, the the FFT has two significant peaks. The first one at aprox. $35Hz$ and the $105Hz$. $35Hz$ corresponds to the rotational speed and $105Hz$ is a multiple of the spindle speed and corresponds to the 3 cutting edges used. Doing the FFT over the complete time series gives the relevant information about significant frequencies. However, a FFT over a defined number of samples can lead to more information about when the material removing process starts and ends. To identify the amplitudes of the cutting signals, this is an important indicator.
 
-![](images/clipboard-3589973023.png){fig-align="center" width="50%"}
+![](images/clipboard-3589973023.png){fig-align="center"}
 
 For this reason, the next step is to divide the time series in time windows and calculate the FFT again for each window. By doing this, one obtains a "moving FFT" with corresponding information.
 
-#### Window FFT (wFFT)
+## Window FFT (wFFT) {.scrollable}
 
-For the wFFT, the same function was used as for the complete FFT. The algorithm starts evaluating the first N samples (\$1....N\$) and calculates the FFT over these signals. In the next step, it takes the values form $2...N+1$ and so on. Fig ? the results. For illustrative purposes, only some wFFTs are ploted (each 1000 times in this case.) What can be noticed that both frequencies are always dominant. The the frequency at $105Hz$, however, increases significantly when the material removing process starts and decreases a when finished
+For the wFFT, the same function was used as for the complete FFT. The algorithm starts evaluating the first N samples ($1....N$) and calculates the FFT over these signals. In the next step, it takes the values form $2...N+1$ and so on. Fig ? the results. For illustrative purposes, only some wFFTs are ploted (each 1000 times in this case.) What can be noticed that both frequencies are always dominant. The the frequency at $105Hz$, however, increases significantly when the material removing process starts and decreases a when finished
 
-| window FFT over the complete time series (examples each 1000 FFT) | examples for wFFT at the beginning and during material removing process. |
-|----|----|
-| ![fig. ?](images/wFFT.png) | ![fig ??](images/clipboard-1940175733.png) |
+::::: columns
+::: {.column width="45%"}
+![window FFT over the complete time series (examples each 1000 FFT)](images/wFFT.png)
+:::
 
-### Model: Gibbs Sampler (Jags model)
+::: {.column width="55%"}
+![examples for wFFT at the beginning and during material removing process.](images/clipboard-1940175733.png)
+:::
+:::::
+
+## Model: Gibbs Sampler (Jags model)
 
 As a first approach to find reasonable values for $m_c$ and $k_{c,11}$ a gibbs sampler using jags was implemented using as input the maximal values of
 
@@ -350,7 +384,10 @@ $$
 $$
 
 $$
-\tau \sim \gamma(0.1,0.1)\newline
+\tau \sim \gamma(0.1,0.1)
+$$
+
+$$
 \hat{M_c} \sim dnorm(predict[i], \tau)
 $$
 
@@ -358,37 +395,27 @@ $$
 log⁡(𝑝𝑟𝑒𝑑[𝑖])= log⁡(a_p) + (1 − 𝑚_𝑐)∗ log⁡(𝑓_𝑧) + (1−𝑚_𝑐)∗log⁡(sin⁡(𝜅)) +log⁡(𝑘_{𝑐11}) +log⁡( 𝑟_{𝑡𝑜𝑜𝑙})
 $$
 
-```{r definition of jags model to identify mc and kc11}
+## Model: Gibbs Sampler (Jags model)
 
-cat("model {
-    # Likelihood
-    for (i in 1:k) {
-        # Model equation
-        Mc[i] ~ dnorm(pred[i], tau)
-        #pred[i] <- ap * fz^(1 - mc) * sin(kappa)^(mc) * kc11 * rtool
-        log(pred[i]) <- log(ap) + (1 - mc)* log(fz) + (1-mc)*log(sin(kappa)) +log(kc11) +log( rtool) 
-    }
+::::: columns
+::: {.column width="50%"}
+![result gibbs sampler $k_{c11}$](images/gibbs_sampler_kc.png)
+:::
 
-    # Priors
-    kc11 ~ dnorm(m_kc, tau_kc)  # Normal prior with mean 1200 and precision 1/50^2
-    mc ~ dbeta(alpha_mc, beta_mc)      # Uniform prior between 0 and 1
-
-    # Precision for the normal distribution (tau = 1/variance)
-    tau ~ dgamma(0.1, 0.1) # Gamma prior for precision
-}", file="jags_kienzle_McMax.txt")
-
-
-```
-
-| result gibbs sampler $k_{c11}$ | results gibbs sampler $m_c$  |
-|--------------------------------|------------------------------|
-| ![](images/gibbs_sampler_kc)   | ![](images/gibbs_sampler_mc) |
+::: {.column width="50%"}
+![results gibbs sampler $m_c$](images/gibbs_sampler_mc.png)
+:::
+:::::
 
 The first results for $𝑘_{𝑐11}$ as normal distribution with mean at 1481 MPa and standard deviation at 54 MPa are close to the expected values., and the $𝑚_𝑐$ was simulated as beta distribution with 𝛼=112.61 , 𝛽=382.14 (equiv. to mean value at 0.22 and std at 0.018) which also represents a good results. The value of deviance is relatively high with $8268.584$. This value is an indicator for the stability of the model using the identified values.
 
-## Intuiciones y conclusiones
+## Insights and Conclusions
 
-## Referencias
+-   **Data Reduction Benefits:** The exploration of reducing the frequency and number of variables for information recording can lead to significant improvements in processing efficiency. By simplifying the dataset, we can enhance computational performance and reduce noise, allowing for more accurate modeling and clearer insights.
+
+-   **Model Complexity and Performance:** While the Gibbs Sampler (JAGS model) has produced promising expected values, the complexity of the model can lead to challenges in interpretability and stability. Simplifying the model structure or using fewer variables may not only help reduce deviance but also improve convergence rates and make the results more robust.
+
+## References
 
 1.  Adaptive loggingmodule formonitoringapplicationsusingcontrol internaldigital drive signalsC. Brecher, T. Rudolf, 2009, ProductionEngineering3, 305-312
 
