@@ -1,0 +1,7102 @@
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:01:27 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:01:27 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:01:33 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:01:33 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:01:43 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:01:43 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:01:43 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:01:52 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:01:52 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:01:52 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:00 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:00 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:00 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:00 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:01 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:01 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:01 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:01 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:11 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:11 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:19 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:19 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:19 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:19 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:20 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:20 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:20 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:20 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:30 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:30 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:38 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:38 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:39 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:39 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:39 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:39 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:40 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:40 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:49 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:49 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:49 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:49 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:57 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:57 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:57 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:57 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:58 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:58 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:58 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:58 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:02:59 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:02:59 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:03:08 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:03:08 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:03:16 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:03:16 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:03:17 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:03:17 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:03:17 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:03:17 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:03:18 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:03:18 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:03:27 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:03:27 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:03:27 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:03:27 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:03:36 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:03:36 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:03:36 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:03:36 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:03:37 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:03:37 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:03:37 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:03:37 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:03:46 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:03:47 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:03:47 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:03:55 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:03:55 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:03:55 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:03:55 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:03:56 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:03:56 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:03:56 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:03:56 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:03:56 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:04:05 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:04:05 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:04:06 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:04:13 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:04:14 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:04:14 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:04:14 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:04:14 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:04:14 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:04:15 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:04:15 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:04:24 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:04:24 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:04:24 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:04:32 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:04:32 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:04:33 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:04:33 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:04:33 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:04:34 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:04:34 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:04:34 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:04:43 
+Quality:	good
+Value:	STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:04:43 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:04:43 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:04:52 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:04:52 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:04:52 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:04:52 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:04:53 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:04:53 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:04:53 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:04:53 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:05:03 
+Quality:	good
+Value:	STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:05:03 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:05:03 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:05:11 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:05:11 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:05:11 
+Quality:	good
+Value:	N1290 G00 X-100 Y100 Z200 M5
+
+Block NC Value:
+Timestamp:	07.08.2008 10:05:11 
+Quality:	good
+Value:	N1290 G00 X-100 Y100 Z200 M5
+
+Block NC Value:
+Timestamp:	07.08.2008 10:05:12 
+Quality:	good
+Value:	N1300 M30
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:05:12 
+Quality:	good
+Value:	
+
+Block NC Value:
+Timestamp:	07.08.2008 10:05:12 
+Quality:	good
+Value:	
+
+Block NC Value:
+Timestamp:	07.08.2008 10:10:32 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:10:32 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:10:35 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:10:35 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:10:42 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:10:42 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:10:42 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:10:55 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:10:55 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:10:55 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:11:04 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:11:04 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:11:04 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:11:04 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:11:04 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:11:04 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:11:05 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:11:05 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:11:14 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:11:14 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:11:23 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:11:23 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:11:23 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:11:23 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:11:24 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:11:24 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:11:24 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:11:24 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:11:34 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:11:34 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:11:34 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:11:42 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:11:42 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:11:42 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:11:42 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:11:43 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:11:43 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:11:43 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:11:43 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:11:53 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:11:53 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:12:01 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:01 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:12:02 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:02 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:02 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:12:02 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:02 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:12:03 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:03 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:12:03 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:12 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:12:12 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:12:12 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:12 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:12:20 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:20 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:20 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:12:21 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:12:21 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:21 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:21 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:12:21 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:21 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:12:31 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:31 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:39 
+Quality:	good
+Value:	MSG("Trace Fertig - Warteparameter zur?ckgesetzt: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:12:39 
+Quality:	good
+Value:	MSG("Trace Fertig - Warteparameter zur?ckgesetzt: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:40 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:12:40 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:40 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:12:40 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:41 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:12:41 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:41 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:12:41 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:50 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:12:51 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:12:59 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:59 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:12:59 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:12:59 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:13:00 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:13:00 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:13:00 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:13:00 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:13:10 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:13:10 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:13:18 
+Quality:	good
+Value:	MSG("Trace Fertig - Warteparameter zur?ckgesetzt: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:13:18 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:13:18 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:13:18 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:13:18 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:13:19 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:13:19 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:13:19 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:13:19 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:13:29 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:13:29 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:13:29 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:13:37 
+Quality:	good
+Value:	MSG("Trace Fertig - Warteparameter zur?ckgesetzt: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:13:37 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:13:37 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:13:38 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:13:38 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:13:38 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:13:38 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:13:38 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:13:39 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:13:48 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:13:48 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:13:56 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:13:56 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:13:57 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:13:57 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:13:57 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:13:57 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:13:58 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:13:58 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:14:07 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:14:07 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:14:07 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:14:16 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:14:16 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:14:16 
+Quality:	good
+Value:	N1290 G00 X-100 Y100 Z200 M5
+
+Block NC Value:
+Timestamp:	07.08.2008 10:14:16 
+Quality:	good
+Value:	N1290 G00 X-100 Y100 Z200 M5
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:14:17 
+Quality:	good
+Value:	N1300 M30
+
+Block NC Value:
+Timestamp:	07.08.2008 10:14:17 
+Quality:	good
+Value:	N1300 M30
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:14:17 
+Quality:	good
+Value:	
+
+Block NC Value:
+Timestamp:	07.08.2008 10:14:17 
+Quality:	good
+Value:	
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:15:12 
+Quality:	good
+Value:	N1160 S=R100 M03
+
+Block NC Value:
+Timestamp:	07.08.2008 10:15:12 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:15:12 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:15:13 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:15:13 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:15:13 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:15:14 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:15:14 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:15:23 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:15:23 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:15:23 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:15:31 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:15:31 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:15:31 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:15:32 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:15:32 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:15:32 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:15:32 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:15:32 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:15:42 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:15:42 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:15:42 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:15:51 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:15:51 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:15:51 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:15:51 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:15:52 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:15:52 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:15:52 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:15:52 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:16:02 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:16:02 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:16:10 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:16:10 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:16:10 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:16:10 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:16:11 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:16:11 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:16:11 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:16:11 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:16:11 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:16:21 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:16:21 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:16:29 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:16:29 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:16:29 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:16:29 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:16:30 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:16:30 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:16:30 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:16:30 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:16:30 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:16:40 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:16:40 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:16:40 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:16:48 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:16:48 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:16:49 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:16:49 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:16:49 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:16:49 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:16:50 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:16:50 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:16:50 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:16:59 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:16:59 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:16:59 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:17:08 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:17:08 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:17:08 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:17:08 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:17:09 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:17:09 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:17:09 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:17:09 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:17:18 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:17:18 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:17:27 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:17:27 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:17:27 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:17:28 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:17:28 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:17:28 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:17:28 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:17:28 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:17:28 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:17:38 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:17:38 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:17:38 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:17:47 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:17:47 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:17:47 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:17:47 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:17:47 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:17:47 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:17:48 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:17:48 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:17:48 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:17:57 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:17:57 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:17:57 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:18:05 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:18:05 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:18:06 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:18:06 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:18:06 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:18:06 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:18:07 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:18:07 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:18:07 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:18:16 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:18:16 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:18:25 
+Quality:	good
+Value:	MSG("Trace Fertig - Warteparameter zur?ckgesetzt: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:18:25 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:18:25 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:18:25 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:18:25 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:18:26 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:18:26 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:18:26 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:18:26 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:18:36 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:18:36 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:18:36 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:18:44 
+Quality:	good
+Value:	MSG("Trace Fertig - Warteparameter zur?ckgesetzt: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:18:44 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:18:44 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:18:45 
+Quality:	good
+Value:	N1290 G00 X-100 Y100 Z200 M5
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:18:45 
+Quality:	good
+Value:	N1290 G00 X-100 Y100 Z200 M5
+
+Block NC Value:
+Timestamp:	07.08.2008 10:18:46 
+Quality:	good
+Value:	N1300 M30
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:18:46 
+Quality:	good
+Value:	
+
+Block NC Value:
+Timestamp:	07.08.2008 10:18:46 
+Quality:	good
+Value:	
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:18:54 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:18:54 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:18:55 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:18:55 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:18:55 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:18:56 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:18:56 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:19:05 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:19:05 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:19:05 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:19:13 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:19:13 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:19:13 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:19:13 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:19:14 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:19:14 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:19:14 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:19:14 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:19:14 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:19:24 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:19:24 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:19:32 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:19:32 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:19:33 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:19:33 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:19:33 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:19:33 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:19:34 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:19:34 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:19:43 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:19:43 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:19:43 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:19:43 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:19:52 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:19:52 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:19:52 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:19:52 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:19:53 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:19:53 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:19:53 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:19:53 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:20:03 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:20:03 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:20:11 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:20:11 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:20:12 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:20:12 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:20:12 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:20:12 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:20:13 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:20:13 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:20:22 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:20:22 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:20:22 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:20:31 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:20:31 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:20:31 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:20:31 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:20:31 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:20:32 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:20:32 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:20:32 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:20:41 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:20:41 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:20:42 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:20:42 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:20:50 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:20:50 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:20:50 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:20:50 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:20:51 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:20:51 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:20:51 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:20:51 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:20:51 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:21:01 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:21:01 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:01 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:21:09 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:10 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:21:10 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:10 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:10 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:21:11 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:21:11 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:11 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:20 
+Quality:	good
+Value:	STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:21:20 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:21 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:29 
+Quality:	good
+Value:	MSG("Trace Fertig - Warteparameter zur?ckgesetzt: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:21:29 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:29 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:21:29 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:29 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:21:30 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:30 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:30 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:21:30 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:30 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:21:40 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:40 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:21:40 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:48 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:21:48 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:48 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:21:48 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:21:49 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:49 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:49 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:21:49 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:49 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:21:49 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:59 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:21:59 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:21:59 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:21:59 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:22:07 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:22:07 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:22:07 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:22:07 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:22:08 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:22:08 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:22:08 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:22:08 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:22:18 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:22:18 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:22:18 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:22:26 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:22:26 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:22:26 
+Quality:	good
+Value:	N1290 G00 X-100 Y100 Z200 M5
+
+Block NC Value:
+Timestamp:	07.08.2008 10:22:26 
+Quality:	good
+Value:	N1290 G00 X-100 Y100 Z200 M5
+
+Block NC Value:
+Timestamp:	07.08.2008 10:22:27 
+Quality:	good
+Value:	N1300 M30
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:22:28 
+Quality:	good
+Value:	
+
+Block NC Value:
+Timestamp:	07.08.2008 10:22:28 
+Quality:	good
+Value:	
+
+Block NC Value:
+Timestamp:	07.08.2008 10:23:32 
+Quality:	good
+Value:	N1160 S=R100 M03
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:23:32 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:23:32 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:23:33 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:23:33 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:23:33 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:23:33 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:23:33 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:23:43 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:23:43 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:23:43 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:23:51 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:23:51 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:23:51 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:23:51 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:23:51 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:23:52 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:23:52 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:23:52 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:23:52 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:24:01 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:24:01 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:24:10 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:24:10 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:24:10 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:24:10 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:24:11 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:24:11 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:24:11 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:24:11 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:24:21 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:24:21 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:24:21 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:24:29 
+Quality:	good
+Value:	MSG("Trace Fertig - Warteparameter zur?ckgesetzt: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:24:29 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:24:29 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:24:29 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:24:29 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:24:30 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:24:30 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:24:30 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:24:30 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:24:40 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:24:40 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:24:48 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:24:48 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:24:49 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:24:49 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:24:49 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:24:49 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:24:49 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:24:49 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:24:50 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:24:59 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:24:59 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:24:59 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:24:59 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:25:07 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:25:07 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:25:08 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:25:08 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:25:08 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:25:09 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:25:09 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:25:09 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:25:18 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:25:18 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:25:27 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:25:27 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:25:27 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:25:27 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:25:28 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:25:28 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:25:28 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:25:28 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:25:28 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:25:38 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:25:38 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:25:46 
+Quality:	good
+Value:	MSG("Trace Fertig - Warteparameter zur?ckgesetzt: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:25:46 
+Quality:	good
+Value:	MSG("Trace Fertig - Warteparameter zur?ckgesetzt: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:25:46 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:25:46 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:25:47 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:25:47 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:25:47 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:25:47 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:25:48 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:25:48 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:25:57 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:25:57 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:25:57 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:26:05 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:26:05 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:26:06 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:26:06 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:26:06 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:26:06 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:26:07 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:26:07 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:26:16 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:26:16 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:26:24 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:26:25 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:26:25 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:26:25 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:26:26 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:26:26 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:26:26 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:26:26 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:26:35 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:26:36 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:26:36 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:26:44 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:26:44 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:26:44 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:26:44 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:26:45 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:26:45 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:26:45 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:26:45 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:26:45 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:26:55 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:26:55 
+Quality:	good
+Value:	STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:26:55 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:26:55 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:27:03 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:27:03 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:27:03 
+Quality:	good
+Value:	N1290 G00 X-100 Y100 Z200 M5
+
+Block NC Value:
+Timestamp:	07.08.2008 10:27:03 
+Quality:	good
+Value:	N1290 G00 X-100 Y100 Z200 M5
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:27:05 
+Quality:	good
+Value:	N1300 M30
+
+Block NC Value:
+Timestamp:	07.08.2008 10:27:05 
+Quality:	good
+Value:	
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:27:05 
+Quality:	good
+Value:	
+
+Block NC Value:
+Timestamp:	07.08.2008 10:29:14 
+Quality:	good
+Value:	N1160 S=R100 M03
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:29:14 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:29:14 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:29:14 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:29:14 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:29:15 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:29:15 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:29:15 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:29:24 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:29:24 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:29:32 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:29:32 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:29:32 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:29:32 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:29:33 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:29:33 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:29:33 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:29:33 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:29:33 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:29:43 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:29:43 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:29:43 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:29:51 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:29:51 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:29:51 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:29:52 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:29:52 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:29:52 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:29:52 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:29:52 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:30:02 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:30:02 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:30:11 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:30:11 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:30:11 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:30:11 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:30:12 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:30:12 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:30:12 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:30:12 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:30:22 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:30:22 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:30:22 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:30:30 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:30:30 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:30:30 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:30:30 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:30:31 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:30:31 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:30:31 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:30:31 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:30:31 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:30:41 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:30:41 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:30:49 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:30:49 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:30:49 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:30:49 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:30:50 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:30:50 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:30:50 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:30:50 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:31:00 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:31:00 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:31:08 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:31:08 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:31:09 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:31:09 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:31:09 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:31:10 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:31:10 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:31:10 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:31:19 
+Quality:	good
+Value:	STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:31:19 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:31:19 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:31:28 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:31:28 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:31:28 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:31:28 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:31:29 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:31:29 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:31:29 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:31:29 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:31:29 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:31:39 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:31:39 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:31:39 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:31:47 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:31:47 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:31:48 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:31:48 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:31:48 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:31:48 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:31:49 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:31:49 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:31:49 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:31:58 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:31:58 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:31:59 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:32:07 
+Quality:	good
+Value:	MSG("Trace Fertig - Warteparameter zur?ckgesetzt: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:32:07 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:32:07 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:32:07 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:32:07 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:32:08 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:32:08 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:32:08 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:32:08 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:32:18 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:32:18 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:32:29 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:32:29 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:32:29 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:32:29 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:32:30 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:32:30 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:32:30 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:32:30 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:32:30 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:32:40 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:32:40 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:32:40 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:32:48 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:32:48 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:32:49 
+Quality:	good
+Value:	N1290 G00 X-100 Y100 Z200 M5
+
+Block NC Value:
+Timestamp:	07.08.2008 10:32:49 
+Quality:	good
+Value:	N1290 G00 X-100 Y100 Z200 M5
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:32:50 
+Quality:	good
+Value:	N1300 M30
+
+Block NC Value:
+Timestamp:	07.08.2008 10:32:50 
+Quality:	good
+Value:	
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:32:50 
+Quality:	good
+Value:	
+
+Block NC Value:
+Timestamp:	07.08.2008 10:34:27 
+Quality:	good
+Value:	N1160 S=R100 M03
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:34:27 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:34:27 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:34:28 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:34:28 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:34:28 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:34:28 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:34:29 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:34:38 
+Quality:	good
+Value:	STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:34:38 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:34:38 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:34:46 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:34:46 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:34:46 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:34:46 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:34:47 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:34:47 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:34:47 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:34:47 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:34:57 
+Quality:	good
+Value:	STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:34:57 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:34:57 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:35:05 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:35:05 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:35:06 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:35:06 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:35:06 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:35:06 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:35:07 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:35:07 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:35:07 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:35:16 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:35:16 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:35:25 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:35:25 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:35:25 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:35:25 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:35:26 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:35:26 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:35:26 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:35:27 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:35:36 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:35:36 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:35:44 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:35:44 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:35:45 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:35:45 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:35:45 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:35:45 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:35:46 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:35:46 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:35:55 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:35:55 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:36:04 
+Quality:	good
+Value:	MSG("Trace Fertig - Warteparameter zur?ckgesetzt: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:36:04 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:36:04 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:36:04 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:36:04 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:36:05 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:36:05 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:36:05 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:36:05 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:36:15 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:36:15 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:36:24 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:36:24 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:36:24 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:36:24 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:36:25 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:36:25 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:36:25 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:36:25 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:36:25 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:36:34 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:36:35 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:36:35 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:36:43 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:36:43 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:36:44 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:36:44 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:36:44 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:36:45 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:36:45 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:36:45 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:36:45 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:36:54 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:36:54 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:36:54 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:37:03 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:37:03 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:37:03 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:37:03 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:37:04 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:37:04 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:37:05 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:37:05 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:37:14 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:37:14 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:37:14 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:37:23 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:37:23 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:37:23 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:37:23 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:37:24 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:37:24 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:37:24 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:37:24 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:37:34 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:37:34 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:37:34 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:37:42 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:37:42 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:37:43 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:37:43 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:37:43 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:37:43 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:37:44 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:37:44 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:37:53 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:37:53 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:37:53 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:37:53 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:38:01 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:38:01 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:38:02 
+Quality:	good
+Value:	N1290 G00 X-100 Y100 Z200 M5
+
+Block NC Value:
+Timestamp:	07.08.2008 10:38:02 
+Quality:	good
+Value:	N1290 G00 X-100 Y100 Z200 M5
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:38:03 
+Quality:	good
+Value:	N1300 M30
+
+Block NC Value:
+Timestamp:	07.08.2008 10:38:03 
+Quality:	good
+Value:	
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:38:03 
+Quality:	good
+Value:	
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:38:06 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:38:06 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:38:06 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:38:06 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:38:07 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:38:07 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:38:07 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:38:16 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:38:16 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:38:24 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:38:24 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:38:25 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:38:25 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:38:25 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:38:25 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:38:26 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:38:26 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:38:35 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:38:35 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:38:44 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:38:44 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:38:44 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:38:44 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:38:45 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:38:45 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:38:45 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:38:45 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:38:55 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:38:55 
+Quality:	good
+Value:	STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:38:55 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:38:55 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:39:03 
+Quality:	good
+Value:	MSG("Trace Fertig - Warteparameter zur?ckgesetzt: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:39:03 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:39:03 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:39:03 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:39:03 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:39:04 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:39:04 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:39:04 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:39:04 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:39:04 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:39:14 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:39:14 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:39:23 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:39:23 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:39:23 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:39:23 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:39:24 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:39:24 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:39:24 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:39:24 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:39:34 
+Quality:	good
+Value:	STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:39:34 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:39:34 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:39:42 
+Quality:	good
+Value:	MSG("Trace Fertig - Warteparameter zur?ckgesetzt: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:39:42 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:39:42 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:39:43 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:39:43 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:39:43 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:39:43 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:39:44 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:39:44 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:39:53 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:39:53 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:39:53 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:39:53 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:40:01 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:40:01 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:40:02 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:40:02 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:40:02 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:40:02 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:40:03 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:40:03 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:40:03 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:40:03 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:40:12 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:40:12 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:40:12 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:40:21 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:40:21 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:40:21 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:40:21 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:40:22 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:40:22 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:40:22 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:40:22 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:40:22 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:40:32 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:40:32 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:40:32 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:40:40 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:40:40 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:40:40 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:40:41 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:40:41 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:40:41 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:40:42 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:40:42 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:40:51 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:40:51 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:40:51 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:41:00 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:41:00 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:41:00 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:41:00 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:41:01 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:41:01 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:41:01 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:41:01 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:41:11 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:41:11 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:41:11 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:41:11 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:41:20 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:41:20 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:41:20 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:41:20 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:41:21 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:41:21 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:41:21 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:41:21 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:41:21 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:41:31 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:41:31 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:41:39 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:41:39 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:41:39 
+Quality:	good
+Value:	N1290 G00 X-100 Y100 Z200 M5
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:41:39 
+Quality:	good
+Value:	N1290 G00 X-100 Y100 Z200 M5
+
+Block NC Value:
+Timestamp:	07.08.2008 10:41:40 
+Quality:	good
+Value:	N1300 M30
+
+Block NC Value:
+Timestamp:	07.08.2008 10:41:40 
+Quality:	good
+Value:	
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:41:40 
+Quality:	good
+Value:	
+
+Block NC Value:
+Timestamp:	07.08.2008 10:43:36 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:43:36 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:43:37 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:43:37 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:43:37 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:43:38 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:43:38 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:43:47 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:43:47 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:43:47 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:43:55 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:43:55 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:43:55 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:43:56 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:43:56 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:43:56 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:43:57 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:43:57 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:44:06 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:44:06 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:44:06 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:44:14 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:44:14 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:44:15 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:44:15 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:44:15 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:44:15 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:44:16 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:44:16 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:44:25 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:44:25 
+Quality:	good
+Value:	STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:44:25 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:44:25 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:44:34 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:44:34 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:44:34 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:44:34 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:44:35 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:44:35 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:44:35 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:44:35 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:44:35 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:44:45 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:44:45 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:44:45 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:44:53 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:44:53 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:44:53 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:44:53 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:44:54 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:44:54 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:44:55 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:44:55 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:45:04 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:45:04 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:45:04 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:45:13 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:45:13 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:45:13 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:45:13 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:45:14 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:45:14 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:45:14 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:45:14 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:45:24 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:45:24 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:45:32 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:45:32 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:45:32 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:45:32 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:45:33 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:45:33 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:45:33 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:45:33 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:45:43 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:45:43 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:45:43 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:45:51 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:45:51 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:45:51 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:45:51 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:45:52 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:45:52 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:45:52 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:45:52 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:45:52 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:46:02 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:46:02 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:46:02 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:46:10 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:46:10 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:46:11 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:46:11 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:46:11 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:46:11 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:46:12 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:46:12 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:46:21 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:46:21 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:46:30 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:46:30 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:46:30 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:46:31 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:46:31 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:46:31 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:46:31 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:46:31 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:46:32 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:46:41 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:46:41 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:46:41 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:46:49 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:46:49 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:46:49 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:46:50 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:46:50 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:46:50 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:46:51 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:46:51 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:47:00 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:47:00 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:47:09 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:47:09 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:47:09 
+Quality:	good
+Value:	N1290 G00 X-100 Y100 Z200 M5
+
+Block NC Value:
+Timestamp:	07.08.2008 10:47:09 
+Quality:	good
+Value:	N1290 G00 X-100 Y100 Z200 M5
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:47:10 
+Quality:	good
+Value:	N1300 M30
+
+Block NC Value:
+Timestamp:	07.08.2008 10:47:10 
+Quality:	good
+Value:	N1300 M30
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:47:10 
+Quality:	good
+Value:	
+
+Block NC Value:
+Timestamp:	07.08.2008 10:47:10 
+Quality:	good
+Value:	
+
+Block NC Value:
+Timestamp:	07.08.2008 10:51:20 
+Quality:	good
+Value:	N1160 S=R100 M03
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:51:20 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:51:20 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:51:21 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:51:21 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:51:21 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:51:21 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:51:21 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:51:31 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:51:31 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:51:38 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:51:38 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:51:39 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:51:39 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:51:39 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:51:39 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:51:40 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:51:40 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:51:49 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:51:49 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:51:49 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:51:58 
+Quality:	good
+Value:	MSG("Trace Fertig - Warteparameter zur?ckgesetzt: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:51:58 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:51:58 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:51:58 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:51:58 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:51:59 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:51:59 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:51:59 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:51:59 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:51:59 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:52:09 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:52:09 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:52:09 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:52:17 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:52:17 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:52:18 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:52:18 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:52:18 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:52:18 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:52:19 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:52:19 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:52:28 
+Quality:	good
+Value:	STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:52:28 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:52:28 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:52:37 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:52:37 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:52:37 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:52:37 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:52:38 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:52:38 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:52:38 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:52:38 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:52:38 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:52:48 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:52:48 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:52:57 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:52:57 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:52:57 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:52:57 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:52:58 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:52:58 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:52:58 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:52:58 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:53:08 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:53:08 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:53:16 
+Quality:	good
+Value:	MSG("Trace Fertig - Warteparameter zur?ckgesetzt: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:53:16 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:53:16 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:53:16 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:53:17 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:53:17 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:53:17 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:53:17 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:53:18 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:53:18 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:53:27 
+Quality:	good
+Value:	STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:53:27 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:53:27 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:53:35 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:53:35 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:53:36 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:53:36 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:53:36 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:53:36 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:53:37 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:53:37 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:53:37 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:53:46 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:53:46 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:53:46 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:53:46 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:53:55 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:53:55 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:53:55 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:53:55 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:53:56 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:53:56 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:53:56 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:53:56 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:54:06 
+Quality:	good
+Value:	STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 10:54:06 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:54:06 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:54:14 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:54:14 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:54:14 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:54:14 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:54:15 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:54:15 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:54:15 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:54:15 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:54:25 
+Quality:	good
+Value:	STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:54:25 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:54:25 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:54:34 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:54:34 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:54:34 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:54:34 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:54:35 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 10:54:35 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:54:35 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 10:54:35 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:54:45 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:54:45 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 10:54:53 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:54:53 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 10:54:53 
+Quality:	good
+Value:	N1290 G00 X-100 Y100 Z200 M5
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:54:53 
+Quality:	good
+Value:	N1290 G00 X-100 Y100 Z200 M5
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:54:54 
+Quality:	good
+Value:	N1300 M30
+
+Block NC Value:
+Timestamp:	07.08.2008 10:54:54 
+Quality:	good
+Value:	
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 10:54:54 
+Quality:	good
+Value:	
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:00:20 
+Quality:	good
+Value:	N1160 S=R100 M03
+
+Block NC Value:
+Timestamp:	07.08.2008 11:00:20 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:00:20 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:00:21 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 11:00:21 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:00:21 
+Quality:	good
+Value:	N1210 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 11:00:21 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:00:21 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:00:31 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 11:00:31 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:00:38 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:00:39 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:00:39 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:00:39 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:00:40 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:00:40 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 11:00:40 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:00:40 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 11:00:40 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:00:49 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 11:00:49 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:00:50 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 11:00:50 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 11:00:58 
+Quality:	good
+Value:	MSG("Trace Fertig - Warteparameter zur?ckgesetzt: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:00:58 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:00:59 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:00:59 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:00:59 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:00:59 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:01:00 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:00 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:01:00 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:00 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:01:10 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:10 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:18 
+Quality:	good
+Value:	MSG("Trace Fertig - Warteparameter zur?ckgesetzt: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:01:18 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:18 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:01:18 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:18 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:19 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:01:19 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:19 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:01:20 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:20 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:29 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:01:29 
+Quality:	good
+Value:	STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:29 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:01:29 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:01:37 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:37 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:01:38 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:38 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:01:38 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:38 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:01:39 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:39 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:48 
+Quality:	good
+Value:	N1240 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:01:48 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:48 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:57 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:01:57 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:01:57 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:57 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:01:58 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:58 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:01:58 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 11:01:58 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:02:08 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 11:02:08 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:02:17 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:02:17 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:02:17 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:02:17 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:02:18 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:02:18 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 11:02:18 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:02:18 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 11:02:18 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:02:28 
+Quality:	good
+Value:	STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 11:02:28 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:02:28 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+Block NC Value:
+Timestamp:	07.08.2008 11:02:36 
+Quality:	good
+Value:	N1270 G00 Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:02:37 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:02:37 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:02:37 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:02:38 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:02:38 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 11:02:38 
+Quality:	good
+Value:	N1210 STOPRE
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:02:38 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 11:02:38 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 11:02:48 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:02:48 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:02:56 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:02:56 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:02:56 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:02:56 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:02:57 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:02:57 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 11:02:57 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:02:57 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:03:07 
+Quality:	good
+Value:	N1240 STOPRE
+
+Block NC Value:
+Timestamp:	07.08.2008 11:03:07 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:03:07 
+Quality:	good
+Value:	MSG("Warteparameter f?r Trace aktiv: R21="<<R21)
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:03:15 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:03:15 
+Quality:	good
+Value:	N1270 G00 Z10
+
+Block NC Value:
+Timestamp:	07.08.2008 11:03:16 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:03:16 
+Quality:	good
+Value:	N1190 G00 X=R107 Y=-5-(R102/2) Z10
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:03:16 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+Block NC Value:
+Timestamp:	07.08.2008 11:03:16 
+Quality:	good
+Value:	N1200 G00 Z=0-R108
+
+SingleBlock NC Value:
+Timestamp:	07.08.2008 11:03:17 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+Block NC Value:
+Timestamp:	07.08.2008 11:03:17 
+Quality:	good
+Value:	N1230 G01 Y=100+5+(R102/2) F=R106
+
+SingleBlock NC Value:
+Times
