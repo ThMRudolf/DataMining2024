@@ -332,10 +332,10 @@
     margin-bottom: 10%;
   }
   p, li {
-    font-size: 17pt; /* Ajusta el tamaño de la letra normal */
+    font-size: 16pt;
   }
   .reveal .footer {
-    z-index: 0; /* Ajusta el tamaño de la letra del footer */
+    z-index: 0;
   }
   .reveal .slide figure > figcaption,
   .reveal .slide img.stretch + p.caption,
@@ -406,7 +406,7 @@ Thomas M. Rudolf
 
 <img data-src="images/DataStructure.png" class="r-stretch quarto-figure-center"><p class="caption">fig.&nbsp;5: Data structure</p><p>Each csv file is a time series with a duration of approximately <span class="math inline">\(10\)</span> seconds and a sample time of <span class="math inline">\(2 ms\)</span>, leading to approximatly <span class="math inline">\(5,000\)</span> entries per variable per csv file.</p>
 </section>
-<section id="selected-data" class="slide level2">
+<section id="selected-data" class="slide level2 smaller">
 <h2>Selected data</h2>
 <p>The data we will use in the analysis has been limited to the <em>WearMillingY_50</em> process for the CNC E900, as we determined that this process provides the best data quality.</p>
 <p>In total, we have 2310 CSV files containing sensor signals. These files represent a total of 11224049 observations and 10 columns:</p>
@@ -430,13 +430,13 @@ Thomas M. Rudolf
 </div>
 </div>
 </section>
-<section id="missing-data" class="slide level2 scrollable">
+<section id="missing-data" class="slide level2">
 <h2>Missing data</h2>
 <p>For variables with 7,953 missing data points, the records will be removed, as they belong to a single erroneous CSV file.</p>
 <p>Variables with a large amount of missing data will be removed.</p>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table caption-top" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
+<table class="table caption-top" data-quarto-postprocess="true" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th"></th>
@@ -762,17 +762,12 @@ Thomas M. Rudolf
 </div>
 </div>
 </section>
-<section id="correlations-pca" class="slide level2 scrollable">
+<section id="correlations-pca" class="slide level2">
 <h2>Correlations &amp; PCA</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Presentación_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
+
+<img data-src="Presentación_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="correlations-pca-1" class="slide level2 scrollable">
+<h2>Correlations &amp; PCA</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
@@ -866,7 +861,7 @@ Thomas M. Rudolf
 
 <img data-src="images/clipboard-3589973023.png" class="quarto-figure quarto-figure-center r-stretch"><p>For this reason, the next step is to divide the time series in time windows and calculate the FFT again for each window. By doing this, one obtains a “moving FFT” with corresponding information.</p>
 </section>
-<section id="window-fft-wfft" class="slide level2 scrollable">
+<section id="window-fft-wfft" class="slide level2">
 <h2>Window FFT (wFFT)</h2>
 <p>For the wFFT, the same function was used as for the complete FFT. The algorithm starts evaluating the first N samples (<span class="math inline">\(1....N\)</span>) and calculates the FFT over these signals. In the next step, it takes the values form <span class="math inline">\(2...N+1\)</span> and so on. Fig ? the results. For illustrative purposes, only some wFFTs are ploted (each 1000 times in this case.) What can be noticed that both frequencies are always dominant. The the frequency at <span class="math inline">\(105Hz\)</span>, however, increases significantly when the material removing process starts and decreases a when finished</p>
 <div class="columns">

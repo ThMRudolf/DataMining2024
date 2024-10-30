@@ -12,10 +12,10 @@ include-in-header:
         margin-bottom: 10%;
       }
       p, li {
-        font-size: 17pt; /* Ajusta el tamaño de la letra normal */
+        font-size: 16pt;
       }
       .reveal .footer {
-        z-index: 0; /* Ajusta el tamaño de la letra del footer */
+        z-index: 0; 
       }
       .reveal .slide figure > figcaption,
       .reveal .slide img.stretch + p.caption,
@@ -82,7 +82,7 @@ The available data are stored in folder with the structure illustrated in the fi
 
 Each csv file is a time series with a duration of approximately $10$ seconds and a sample time of $2 ms$, leading to approximatly $5,000$ entries per variable per csv file.
 
-## Selected data
+## Selected data {.smaller}
 
 ```{r}
 directory_path <- "data/"
@@ -148,7 +148,7 @@ combined_data %>%
     str()
 ```
 
-## Missing data {.scrollable}
+## Missing data
 
 For variables with 7,953 missing data points, the records will be removed, as they belong to a single erroneous CSV file.
 
@@ -159,7 +159,7 @@ data.frame(
   Missing = colSums(is.na(combined_data)),
   Percent = round(colSums(is.na(combined_data))/nrow(combined_data)*100, 2)) %>%
     kable() %>%
-    kable_styling(font_size = 20)
+    kable_styling(font_size = 16)
 ```
 
 ```{r}
@@ -248,7 +248,7 @@ stats %>%
     kable_styling(font_size = 20)
 ```
 
-## Correlations & PCA {.scrollable}
+## Correlations & PCA
 
 ```{r}
 clean_data %>%
@@ -257,6 +257,8 @@ clean_data %>%
     cor() %>%
     corrplot(method = "number", type = "upper", tl.col = "black", tl.srt = 45)
 ```
+
+## Correlations & PCA {.scrollable}
 
 ::::: columns
 ::: {.column width="50%"}
@@ -361,7 +363,7 @@ Over the moving standard scalar value, the FFT was applied. Since the static com
 
 For this reason, the next step is to divide the time series in time windows and calculate the FFT again for each window. By doing this, one obtains a "moving FFT" with corresponding information.
 
-## Window FFT (wFFT) {.scrollable}
+## Window FFT (wFFT) 
 
 For the wFFT, the same function was used as for the complete FFT. The algorithm starts evaluating the first N samples ($1....N$) and calculates the FFT over these signals. In the next step, it takes the values form $2...N+1$ and so on. Fig ? the results. For illustrative purposes, only some wFFTs are ploted (each 1000 times in this case.) What can be noticed that both frequencies are always dominant. The the frequency at $105Hz$, however, increases significantly when the material removing process starts and decreases a when finished
 
