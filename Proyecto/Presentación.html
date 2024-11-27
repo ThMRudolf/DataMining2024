@@ -13,7 +13,7 @@
   <meta name="author" content="José Luis Pérez">
   <meta name="author" content="Fernando Lango">
   <meta name="author" content="Thomas M. Rudolf">
-  <title>Minería de Datos de un CNC para la identificación del desgaste de herramientas de corte</title>
+  <title>Data mining of CNC data for cutting tool wear identification</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -332,10 +332,15 @@
     margin-bottom: 10%;
   }
   p, li {
-    font-size: 20pt; /* Ajusta el tamaño de la letra normal */
+    font-size: 16pt;
   }
   .reveal .footer {
-    z-index: 0; /* Ajusta el tamaño de la letra del footer */
+    z-index: 0;
+  }
+  .reveal .slide figure > figcaption,
+  .reveal .slide img.stretch + p.caption,
+  .reveal .slide img.r-stretch + p.caption {
+    font-size: 12px;
   }
   </style>
 </head>
@@ -344,7 +349,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Minería de Datos de un CNC para la identificación del desgaste de herramientas de corte</h1>
+  <h1 class="title">Data mining of CNC data for cutting tool wear identification</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -365,15 +370,46 @@ Thomas M. Rudolf
 </div>
 
 </section>
-<section id="problema" class="slide level2">
-<h2>Problema</h2>
-<p>Identificar características/señales que indiquen desgaste de la herramienta.</p>
+<section id="problem" class="slide level2">
+<h2>Problem</h2>
+<p>Identify the characteristics and CNC signals that help to indicate tool wear. The general behaviour of wear is illustrated in fig.&nbsp;1a. At the beginning, a new component (in this case a cutting tool) has a progressive, non linear phase, where the required current to cut increases slowly (1). The following phase has a linear behaviour with very little increase under the same cutting conditions (2) until it reaches the end of usage (3). In this last phase a very progressive increase of the required current can be noticed.</p>
 
-<img data-src="images/clipboard-1073081830.png" class="r-stretch"></section>
-<section id="resumen-de-la-base-de-datos" class="slide level2">
-<h2>Resumen de la base de datos</h2>
-<p>Se han acotado los datos que utilizaremos en el análisis al proceso <em>WearMillingY_50</em> para la CNC E900 debido a que revisando los datos, determinamos que es el proceso que presenta la mejor calidad de la información.</p>
-<p>En total tenemos 2310 archivos CSV con las señales de los sensores. Estos archivos representan un total de 11224049 observaciones y 10 columnas, las cuales se muestran a continuación:</p>
+<img data-src="images/clipboard-1073081830.png" class="r-stretch quarto-figure-center"><p class="caption">fig.&nbsp;1: Wear curve of a cutting tool</p></section>
+<section id="problem-1" class="slide level2">
+<h2>Problem</h2>
+<p>Fig.2 shows the measurement of tool wear taken form different stage of the cutting process with reference to removed volume.</p>
+
+<img data-src="images/ToolWear_with_volume_ref.png" class="r-stretch quarto-figure-center"><p class="caption">fig.&nbsp;2: measurements of tool wear per volume</p><p>The challenge is to identify which of the available signals are the best indicator to identify a worn tool.</p>
+</section>
+<section id="project-structure" class="slide level2">
+<h2>Project Structure</h2>
+
+<img data-src="images/project_structure.png" class="r-stretch quarto-figure-center"><p class="caption">Fig. 3: Project Structure</p></section>
+<section id="model" class="slide level2">
+<h2>Model</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/objective.png"></p>
+<figcaption>fig.&nbsp;4: Indicator calculated form cutting model and real data</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<p>There are different models that describe the cutting force <span class="math inline">\(F_c\)</span> and the resulting cutting torque <span class="math inline">\(M_c\)</span> . The one used in this project is the model proposed by Otto Kienzle. It is based on the volume that each cutting tool removes from the material and two material parameters the specific cutting force <span class="math inline">\(k_{c1,1}\)</span> [units <span class="math inline">\(N/m^2\)</span>] and increasing value of the specific cutting force <span class="math inline">\(1-m_c\)</span> . The parameters 𝑏 and ℎ are the geometric values of the removed material.</p>
+<p>It is necessary to estimate accurately the value for both parameter to model relaiable the cutting torque, since small variations have a significant impact of the modelled signal.</p>
+</div></div>
+</section>
+<section id="data-structure" class="slide level2">
+<h2>Data structure</h2>
+<p>The available data are stored in folder with the structure illustrated in the fig.&nbsp;5. The meta data of each measurement is stored in the folders name {cutting edge type}_{number of cutting edges}_{cutting depth in mm}_{tool diameter}_{% of tool diameter involved}_{process}</p>
+
+<img data-src="images/DataStructure.png" class="r-stretch quarto-figure-center"><p class="caption">fig.&nbsp;5: Data structure</p><p>Each csv file is a time series with a duration of approximately <span class="math inline">\(10\)</span> seconds and a sample time of <span class="math inline">\(2 ms\)</span>, leading to approximatly <span class="math inline">\(5,000\)</span> entries per variable per csv file.</p>
+</section>
+<section id="selected-data" class="slide level2 smaller">
+<h2>Selected data</h2>
+<p>The data we will use in the analysis has been limited to the <em>WearMillingY_50</em> process for the CNC E900, as we determined that this process provides the best data quality.</p>
+<p>In total, we have 2310 CSV files containing sensor signals. These files represent a total of 11224049 observations and 10 columns:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   11224049 obs. of  14 variables:
@@ -394,18 +430,18 @@ Thomas M. Rudolf
 </div>
 </div>
 </section>
-<section id="datos-faltantes" class="slide level2 scrollable">
-<h2>Datos faltantes</h2>
-<p>Para las variables que presentan 7,953 datos faltantes, se eliminarán los registros, ya que se trata de un solo csv erróneo.</p>
-<p>Las variables que presentan una gran cantidad de faltantes se eliminarán.</p>
+<section id="missing-data" class="slide level2">
+<h2>Missing data</h2>
+<p>For variables with 7,953 missing data points, the records will be removed, as they belong to a single erroneous CSV file.</p>
+<p>Variables with a large amount of missing data will be removed.</p>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table caption-top" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
+<table class="table caption-top" data-quarto-postprocess="true" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th"></th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Faltantes</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Porcentaje</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Missing</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Percent</th>
 </tr>
 </thead>
 <tbody>
@@ -486,9 +522,9 @@ Thomas M. Rudolf
 </div>
 </div>
 </section>
-<section id="limpieza" class="slide level2">
-<h2>Limpieza</h2>
-<p>La mayoría de las carpetas con los datos del proceso contienen una estructura del estilo “Level_###”, donde ### es un número. Hemos identificado algunos con una estructura distinta. Identificamos que corresponden a archivos temporales, de otros procesos o momentos en los que no funcionó correctamente la grabación. Por lo tanto, se eliminarán.</p>
+<section id="data-cleaning" class="slide level2">
+<h2>Data cleaning</h2>
+<p>Most of the folders with process data follow a structure like “Level_###,” where ### is a number. We identified some with a different structure, which correspond to temporary files, other processes, or instances where recording did not function correctly. Therefore, they will be removed.</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table caption-top" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
@@ -522,11 +558,13 @@ Thomas M. Rudolf
 
 </div>
 </div>
-<p>Resultando en un total de 5706528 observaciones.</p>
+<p>Resulting in a total of 5706528 observations.</p>
 </section>
-<section id="limpieza-1" class="slide level2">
-<h2>Limpieza</h2>
-<p>Además, hemos creado las variables level_time y total_time para saber el tiempo total transcurrido del proceso y para cada nivel.</p>
+<section id="data-cleaning-1" class="slide level2">
+<h2>Data cleaning</h2>
+<p>Additionally, we have created the variables level_time and total_time to track the total elapsed time of the process and for each level.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
 <table class="table caption-top" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
@@ -573,6 +611,9 @@ Thomas M. Rudolf
 
 
 </div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
 <div class="cell-output-display">
 <table class="table caption-top" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
 <thead>
@@ -626,10 +667,11 @@ Thomas M. Rudolf
 
 </div>
 </div>
+</div></div>
 </section>
-<section id="resumen-estadístico" class="slide level2">
-<h2>Resumen estadístico</h2>
-<p>Teniendo nuestros datos limpios, podemos observar un resumen estadístico de las variables numéricas.</p>
+<section id="statistical-summary" class="slide level2">
+<h2>Statistical summary</h2>
+<p>With our data cleaned, we can observe a statistical summary of the numerical variables.</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table caption-top" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
@@ -720,17 +762,170 @@ Thomas M. Rudolf
 </div>
 </div>
 </section>
-<section id="correlaciones" class="slide level2">
-<h2>Correlaciones</h2>
+<section id="correlations-pca" class="slide level2">
+<h2>Correlations &amp; PCA</h2>
+
+<img data-src="Presentación_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="correlations-pca-1" class="slide level2 scrollable">
+<h2>Correlations &amp; PCA</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Presentación_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Presentación_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Presentación_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Presentación_files/figure-revealjs/unnamed-chunk-15-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Presentación_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Presentación_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
 </section>
-<section id="baseline" class="slide level2">
-<h2>Baseline</h2>
+<section id="signal-processing-on-the-current-signals" class="slide level2">
+<h2>Signal processing on the current signals</h2>
+<p>In order to start analysing the most highly appreciated signals, some signal processing methods were conducted:</p>
+<ol type="1">
+<li>Moving Standard Scalar: <span class="math inline">\(x_{ssc}=\frac{x-\mu_{mov}}{\sigma_{mov}}\)</span></li>
+</ol>
+<p>With <span class="math inline">\(x\)</span> the current value, <span class="math inline">\(\mu_{mov}\)</span> the moving average value of the last N values and <span class="math inline">\(\sigma_{mov}\)</span> the standard deviation over the last N values.</p>
+<ol start="2" type="1">
+<li>low pass Butterworth filter: This filter cuts values with frequencies higher as a defined frequency form the signal and makes it “cleaner”.</li>
+</ol>
 </section>
-<section id="intuiciones-y-conclusiones" class="slide level2">
-<h2>Intuiciones y conclusiones</h2>
+<section id="signal-processing-on-the-current-signals-1" class="slide level2">
+<h2>Signal processing on the current signals</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Applying the moving standard scalar to the signal of the spindle current eliminates the static component to the signal and leaves the dynamic of a signal. This is helpful in this application since we are analysing the amplitudes resulting form the material removing process and we do not want static behaviour in our signal. The following figure illustrates the results. The green signal is the rough signal without any precessing. The blue and orange signals are the butterworth filtered signal and the moving standard scalar signal, respectively. The same function calculating the standard scalar value returns the moving average value (not illustrated) to have the static behaviour as well.</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/clipboard-2041312673.png"></p>
+</div></div>
 </section>
-<section id="referencias" class="slide level2">
-<h2>Referencias</h2>
+<section id="fast-fourier-transformation-fft" class="slide level2">
+<h2>Fast Fourier Transformation (FFT)</h2>
+<p>Over the moving standard scalar value, the FFT was applied. Since the static components were eliminated, the the FFT has two significant peaks. The first one at aprox. <span class="math inline">\(35Hz\)</span> and the <span class="math inline">\(105Hz\)</span>. <span class="math inline">\(35Hz\)</span> corresponds to the rotational speed and <span class="math inline">\(105Hz\)</span> is a multiple of the spindle speed and corresponds to the 3 cutting edges used. Doing the FFT over the complete time series gives the relevant information about significant frequencies. However, a FFT over a defined number of samples can lead to more information about when the material removing process starts and ends. To identify the amplitudes of the cutting signals, this is an important indicator.</p>
+
+<img data-src="images/clipboard-3589973023.png" class="quarto-figure quarto-figure-center r-stretch"><p>For this reason, the next step is to divide the time series in time windows and calculate the FFT again for each window. By doing this, one obtains a “moving FFT” with corresponding information.</p>
+</section>
+<section id="window-fft-wfft" class="slide level2">
+<h2>Window FFT (wFFT)</h2>
+<p>For the wFFT, the same function was used as for the complete FFT. The algorithm starts evaluating the first N samples (<span class="math inline">\(1....N\)</span>) and calculates the FFT over these signals. In the next step, it takes the values form <span class="math inline">\(2...N+1\)</span> and so on. Fig ? the results. For illustrative purposes, only some wFFTs are ploted (each 1000 times in this case.) What can be noticed that both frequencies are always dominant. The the frequency at <span class="math inline">\(105Hz\)</span>, however, increases significantly when the material removing process starts and decreases a when finished</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/wFFT.png"></p>
+<figcaption>window FFT over the complete time series (examples each 1000 FFT)</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/clipboard-1940175733.png"></p>
+<figcaption>examples for wFFT at the beginning and during material removing process.</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="model-gibbs-sampler-jags-model" class="slide level2">
+<h2>Model: Gibbs Sampler (Jags model)</h2>
+<p>As a first approach to find reasonable values for <span class="math inline">\(m_c\)</span> and <span class="math inline">\(k_{c,11}\)</span> a gibbs sampler using jags was implemented using as input the maximal values of</p>
+<p><span class="math display">\[
+\hat{M_c} = \sum_1^z{F_{ci} r_{tool}}=a_p f_z^{1-m_c} sin(\kappa)^{m_c} k_{c1.1}
+\]</span></p>
+<p><span class="math display">\[
+\tau \sim \gamma(0.1,0.1)
+\]</span></p>
+<p><span class="math display">\[
+\hat{M_c} \sim dnorm(predict[i], \tau)
+\]</span></p>
+<p><span class="math display">\[
+log⁡(𝑝𝑟𝑒𝑑[𝑖])= log⁡(a_p) + (1 − 𝑚_𝑐)∗ log⁡(𝑓_𝑧) + (1−𝑚_𝑐)∗log⁡(sin⁡(𝜅)) +log⁡(𝑘_{𝑐11}) +log⁡( 𝑟_{𝑡𝑜𝑜𝑙})
+\]</span></p>
+</section>
+<section id="model-gibbs-sampler-jags-model-1" class="slide level2">
+<h2>Model: Gibbs Sampler (Jags model)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/gibbs_sampler_kc.png"></p>
+<figcaption>result gibbs sampler <span class="math inline">\(k_{c11}\)</span></figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/gibbs_sampler_mc.png"></p>
+<figcaption>results gibbs sampler <span class="math inline">\(m_c\)</span></figcaption>
+</figure>
+</div>
+</div></div>
+<p>The first results for <span class="math inline">\(𝑘_{𝑐11}\)</span> as normal distribution with mean at 1481 MPa and standard deviation at 54 MPa are close to the expected values., and the <span class="math inline">\(𝑚_𝑐\)</span> was simulated as beta distribution with 𝛼=112.61 , 𝛽=382.14 (equiv. to mean value at 0.22 and std at 0.018) which also represents a good results. The value of deviance is relatively high with <span class="math inline">\(8268.584\)</span>. This value is an indicator for the stability of the model using the identified values.</p>
+</section>
+<section id="insights-and-conclusions" class="slide level2">
+<h2>Insights and Conclusions</h2>
+<ul>
+<li><p><strong>Data Reduction Benefits:</strong> The exploration of reducing the frequency and number of variables for information recording can lead to significant improvements in processing efficiency. By simplifying the dataset, we can enhance computational performance and reduce noise, allowing for more accurate modeling and clearer insights.</p></li>
+<li><p><strong>Model Complexity and Performance:</strong> While the Gibbs Sampler (JAGS model) has produced promising expected values, the complexity of the model can lead to challenges in interpretability and stability. Simplifying the model structure or using fewer variables may not only help reduce deviance but also improve convergence rates and make the results more robust.</p></li>
+</ul>
+</section>
+<section id="references" class="slide level2">
+<h2>References</h2>
 <ol type="1">
 <li><p>Adaptive loggingmodule formonitoringapplicationsusingcontrol internaldigital drive signalsC. Brecher, T. Rudolf, 2009, ProductionEngineering3, 305-312</p></li>
 <li><p>Signalvorverarbeitung zur Anwendung steuerungsintegrierter ProzessüberwachungC.Brecher, T Rudolf , wt-online, 2009, S. 479-486</p></li>

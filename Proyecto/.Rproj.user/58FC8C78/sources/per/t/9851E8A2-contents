@@ -1,5 +1,5 @@
 ---
-title: Minería de Datos de un CNC para la identificación del desgaste de herramientas de corte
+title: Data mining of CNC data for cutting tool wear identification
 author:
     - "José Luis Pérez"
     - "Fernando Lango"
@@ -12,10 +12,15 @@ include-in-header:
         margin-bottom: 10%;
       }
       p, li {
-        font-size: 20pt; /* Ajusta el tamaño de la letra normal */
+        font-size: 16pt;
       }
       .reveal .footer {
-        z-index: 0; /* Ajusta el tamaño de la letra del footer */
+        z-index: 0; 
+      }
+      .reveal .slide figure > figcaption,
+      .reveal .slide img.stretch + p.caption,
+      .reveal .slide img.r-stretch + p.caption {
+        font-size: 12px;
       }
       </style>
 format: 
@@ -31,18 +36,53 @@ knitr::opts_chunk$set(echo = FALSE, cache = TRUE, cache.lazy = FALSE)
 library(tidyverse)
 library(kableExtra)
 library(skimr)
+library(corrplot)
+library(factoextra)
 
 options(scipen = 999)
 ```
 
+## Problem
 
-## Problema
+Identify the characteristics and CNC signals that help to indicate tool wear. The general behaviour of wear is illustrated in fig. 1a. At the beginning, a new component (in this case a cutting tool) has a progressive, non linear phase, where the required current to cut increases slowly (1). The following phase has a linear behaviour with very little increase under the same cutting conditions (2) until it reaches the end of usage (3). In this last phase a very progressive increase of the required current can be noticed.
 
-Identificar características/señales que indiquen desgaste de la herramienta.
+![fig. 1: Wear curve of a cutting tool](images/clipboard-1073081830.png)
 
-![](images/clipboard-1073081830.png)
+## Problem
 
-## Resumen de la base de datos
+Fig.2 shows the measurement of tool wear taken form different stage of the cutting process with reference to removed volume.
+
+![fig. 2: measurements of tool wear per volume](images/ToolWear_with_volume_ref.png)
+
+The challenge is to identify which of the available signals are the best indicator to identify a worn tool.
+
+## Project Structure
+
+![Fig. 3: Project Structure](images/project_structure.png)
+
+## Model
+
+::::: columns
+::: {.column width="50%"}
+![fig. 4: Indicator calculated form cutting model and real data](images/objective.png)
+:::
+
+::: {.column width="50%"}
+There are different models that describe the cutting force $F_c$ and the resulting cutting torque $M_c$ . The one used in this project is the model proposed by Otto Kienzle. It is based on the volume that each cutting tool removes from the material and two material parameters the specific cutting force $k_{c1,1}$ \[units $N/m^2$\] and increasing value of the specific cutting force $1-m_c$ . The parameters 𝑏 and ℎ are the geometric values of the removed material.
+
+It is necessary to estimate accurately the value for both parameter to model relaiable the cutting torque, since small variations have a significant impact of the modelled signal.
+:::
+:::::
+
+## Data structure
+
+The available data are stored in folder with the structure illustrated in the fig. 5. The meta data of each measurement is stored in the folders name {cutting edge type}\_{number of cutting edges}\_{cutting depth in mm}\_{tool diameter}\_{% of tool diameter involved}\_{process}
+
+![fig. 5: Data structure](images/DataStructure.png)
+
+Each csv file is a time series with a duration of approximately $10$ seconds and a sample time of $2 ms$, leading to approximatly $5,000$ entries per variable per csv file.
+
+## Selected data {.smaller}
 
 ```{r}
 directory_path <- "data/"
@@ -98,9 +138,9 @@ combined_data <- bind_rows(data) %>%
     select(any_of(selected_columns))
 ```
 
-Se han acotado los datos que utilizaremos en el análisis al proceso *WearMillingY_50* para la CNC E900 debido a que revisando los datos, determinamos que es el proceso que presenta la mejor calidad de la información.
+The data we will use in the analysis has been limited to the *WearMillingY_50* process for the CNC E900, as we determined that this process provides the best data quality.
 
-En total tenemos `r length(csv_files)` archivos CSV con las señales de los sensores. Estos archivos representan un total de `r nrow(combined_data)` observaciones y `r length(column_mapping)` columnas, las cuales se muestran a continuación:
+In total, we have `r length(csv_files)` CSV files containing sensor signals. These files represent a total of `r nrow(combined_data)` observations and `r length(column_mapping)` columns:
 
 ```{r}
 combined_data %>%
@@ -108,18 +148,18 @@ combined_data %>%
     str()
 ```
 
-## Datos faltantes {.scrollable}
+## Missing data
 
-Para las variables que presentan 7,953 datos faltantes, se eliminarán los registros, ya que se trata de un solo csv erróneo.
+For variables with 7,953 missing data points, the records will be removed, as they belong to a single erroneous CSV file.
 
-Las variables que presentan una gran cantidad de faltantes se eliminarán.
+Variables with a large amount of missing data will be removed.
 
 ```{r}
 data.frame(
-  Faltantes = colSums(is.na(combined_data)),
-  Porcentaje = round(colSums(is.na(combined_data))/nrow(combined_data)*100, 2)) %>%
+  Missing = colSums(is.na(combined_data)),
+  Percent = round(colSums(is.na(combined_data))/nrow(combined_data)*100, 2)) %>%
     kable() %>%
-    kable_styling(font_size = 20)
+    kable_styling(font_size = 16)
 ```
 
 ```{r}
@@ -129,9 +169,9 @@ clean_data <-
     drop_na()
 ```
 
-## Limpieza
+## Data cleaning
 
-La mayoría de las carpetas con los datos del proceso contienen una estructura del estilo "Level_###", donde ### es un número. Hemos identificado algunos con una estructura distinta. Identificamos que corresponden a archivos temporales, de otros procesos o momentos en los que no funcionó correctamente la grabación. Por lo tanto, se eliminarán.
+Most of the folders with process data follow a structure like "Level\_###," where \### is a number. We identified some with a different structure, which correspond to temporary files, other processes, or instances where recording did not function correctly. Therefore, they will be removed.
 
 ```{r}
 data.frame(
@@ -157,12 +197,14 @@ clean_data <-
     mutate(total_time = cumsum(time_increment))
 ```
 
-Resultando en un total de `r nrow(clean_data)` observaciones.
+Resulting in a total of `r nrow(clean_data)` observations.
 
-## Limpieza
+## Data cleaning
 
-Además, hemos creado las variables level_time y total_time para saber el tiempo total transcurrido del proceso y para cada nivel.
+Additionally, we have created the variables level_time and total_time to track the total elapsed time of the process and for each level.
 
+::::: columns
+::: {.column width="50%"}
 ```{r}
 clean_data %>%
     select(file_dir, level_time, total_time) %>%
@@ -170,7 +212,11 @@ clean_data %>%
     head() %>%
     kable() %>%
     kable_styling(font_size = 20)
+```
+:::
 
+::: {.column width="50%"}
+```{r}
 clean_data %>%
     select(file_dir, level_time, total_time) %>%
     mutate(total_time = sprintf("%.3f", total_time)) %>%
@@ -179,11 +225,12 @@ clean_data %>%
     kable() %>%
     kable_styling(font_size = 20)
 ```
+:::
+:::::
 
+## Statistical summary
 
-## Resumen estadístico
-
-Teniendo nuestros datos limpios, podemos observar un resumen estadístico de las variables numéricas.
+With our data cleaned, we can observe a statistical summary of the numerical variables.
 
 ```{r}
 stats <-
@@ -201,14 +248,176 @@ stats %>%
     kable_styling(font_size = 20)
 ```
 
+## Correlations & PCA
 
-## Correlaciones
+```{r}
+clean_data %>%
+    select(c("torque_x", "torque_y", "torque_spindle",
+             "position_y", "position_z", "position_spindle")) %>%
+    cor() %>%
+    corrplot(method = "number", type = "upper", tl.col = "black", tl.srt = 45)
+```
 
-## Baseline
+## Correlations & PCA {.scrollable}
 
-## Intuiciones y conclusiones
+::::: columns
+::: {.column width="50%"}
+```{r}
+clean_data %>%
+    select(c("torque_x", "torque_y", "torque_spindle",
+             "position_y", "position_z", "position_spindle")) %>%
+    prcomp(scale = TRUE) %>%
+    fviz_pca_var(col.var = "contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE,
+                 title = "PCA - .002 s")
+```
+:::
 
-## Referencias
+::: {.column width="50%"}
+```{r}
+clean_data %>%
+    select(c("torque_x", "torque_y", "torque_spindle",
+             "position_y", "position_z", "position_spindle")) %>%
+    prcomp(scale = TRUE) %>%
+    fviz_contrib(choice = "var", axes = 1, top = 10, title = "PCA - .002 s")
+```
+:::
+:::::
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+clean_data %>%
+    filter(level_time %% .008 == 0) %>%
+    select(c("torque_x", "torque_y", "torque_spindle",
+             "position_y", "position_z", "position_spindle")) %>%
+    prcomp(scale = TRUE) %>%
+    fviz_pca_var(col.var = "contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE,
+                 title = "PCA - .008 s")
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+clean_data %>%
+    filter(level_time %% .008 == 0) %>%
+    select(c("torque_x", "torque_y", "torque_spindle",
+             "position_y", "position_z", "position_spindle")) %>%
+    prcomp(scale = TRUE) %>%
+    fviz_contrib(choice = "var", axes = 1, top = 10, title = "PCA - .008 s")
+```
+:::
+:::::
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+clean_data %>%
+    filter(level_time %% .016 == 0) %>%
+    select(c("torque_x", "torque_y", "torque_spindle",
+             "position_y", "position_z", "position_spindle")) %>%
+    prcomp(scale = TRUE) %>%
+    fviz_pca_var(col.var = "contrib", gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), repel = TRUE,
+                 title = "PCA - .016 s")
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+clean_data %>%
+    filter(level_time %% .016 == 0) %>%
+    select(c("torque_x", "torque_y", "torque_spindle",
+             "position_y", "position_z", "position_spindle")) %>%
+    prcomp(scale = TRUE) %>%
+    fviz_contrib(choice = "var", axes = 1, top = 10, title = "PCA - .016 s")
+```
+:::
+:::::
+
+## Signal processing on the current signals
+
+In order to start analysing the most highly appreciated signals, some signal processing methods were conducted:
+
+1.  Moving Standard Scalar: $x_{ssc}=\frac{x-\mu_{mov}}{\sigma_{mov}}$
+
+With $x$ the current value, $\mu_{mov}$ the moving average value of the last N values and $\sigma_{mov}$ the standard deviation over the last N values.
+
+2.  low pass Butterworth filter: This filter cuts values with frequencies higher as a defined frequency form the signal and makes it "cleaner".
+
+## Signal processing on the current signals
+
+::::: columns
+::: {.column width="50%"}
+Applying the moving standard scalar to the signal of the spindle current eliminates the static component to the signal and leaves the dynamic of a signal. This is helpful in this application since we are analysing the amplitudes resulting form the material removing process and we do not want static behaviour in our signal. The following figure illustrates the results. The green signal is the rough signal without any precessing. The blue and orange signals are the butterworth filtered signal and the moving standard scalar signal, respectively. The same function calculating the standard scalar value returns the moving average value (not illustrated) to have the static behaviour as well.
+:::
+
+::: {.column width="50%"}
+![](images/clipboard-2041312673.png)
+:::
+:::::
+
+## Fast Fourier Transformation (FFT)
+
+Over the moving standard scalar value, the FFT was applied. Since the static components were eliminated, the the FFT has two significant peaks. The first one at aprox. $35Hz$ and the $105Hz$. $35Hz$ corresponds to the rotational speed and $105Hz$ is a multiple of the spindle speed and corresponds to the 3 cutting edges used. Doing the FFT over the complete time series gives the relevant information about significant frequencies. However, a FFT over a defined number of samples can lead to more information about when the material removing process starts and ends. To identify the amplitudes of the cutting signals, this is an important indicator.
+
+![](images/clipboard-3589973023.png){fig-align="center"}
+
+For this reason, the next step is to divide the time series in time windows and calculate the FFT again for each window. By doing this, one obtains a "moving FFT" with corresponding information.
+
+## Window FFT (wFFT) 
+
+For the wFFT, the same function was used as for the complete FFT. The algorithm starts evaluating the first N samples ($1....N$) and calculates the FFT over these signals. In the next step, it takes the values form $2...N+1$ and so on. Fig ? the results. For illustrative purposes, only some wFFTs are ploted (each 1000 times in this case.) What can be noticed that both frequencies are always dominant. The the frequency at $105Hz$, however, increases significantly when the material removing process starts and decreases a when finished
+
+::::: columns
+::: {.column width="45%"}
+![window FFT over the complete time series (examples each 1000 FFT)](images/wFFT.png)
+:::
+
+::: {.column width="55%"}
+![examples for wFFT at the beginning and during material removing process.](images/clipboard-1940175733.png)
+:::
+:::::
+
+## Model: Gibbs Sampler (Jags model)
+
+As a first approach to find reasonable values for $m_c$ and $k_{c,11}$ a gibbs sampler using jags was implemented using as input the maximal values of
+
+$$
+\hat{M_c} = \sum_1^z{F_{ci} r_{tool}}=a_p f_z^{1-m_c} sin(\kappa)^{m_c} k_{c1.1}
+$$
+
+$$
+\tau \sim \gamma(0.1,0.1)
+$$
+
+$$
+\hat{M_c} \sim dnorm(predict[i], \tau)
+$$
+
+$$
+log⁡(𝑝𝑟𝑒𝑑[𝑖])= log⁡(a_p) + (1 − 𝑚_𝑐)∗ log⁡(𝑓_𝑧) + (1−𝑚_𝑐)∗log⁡(sin⁡(𝜅)) +log⁡(𝑘_{𝑐11}) +log⁡( 𝑟_{𝑡𝑜𝑜𝑙})
+$$
+
+## Model: Gibbs Sampler (Jags model)
+
+::::: columns
+::: {.column width="50%"}
+![result gibbs sampler $k_{c11}$](images/gibbs_sampler_kc.png)
+:::
+
+::: {.column width="50%"}
+![results gibbs sampler $m_c$](images/gibbs_sampler_mc.png)
+:::
+:::::
+
+The first results for $𝑘_{𝑐11}$ as normal distribution with mean at 1481 MPa and standard deviation at 54 MPa are close to the expected values., and the $𝑚_𝑐$ was simulated as beta distribution with 𝛼=112.61 , 𝛽=382.14 (equiv. to mean value at 0.22 and std at 0.018) which also represents a good results. The value of deviance is relatively high with $8268.584$. This value is an indicator for the stability of the model using the identified values.
+
+## Insights and Conclusions
+
+-   **Data Reduction Benefits:** The exploration of reducing the frequency and number of variables for information recording can lead to significant improvements in processing efficiency. By simplifying the dataset, we can enhance computational performance and reduce noise, allowing for more accurate modeling and clearer insights.
+
+-   **Model Complexity and Performance:** While the Gibbs Sampler (JAGS model) has produced promising expected values, the complexity of the model can lead to challenges in interpretability and stability. Simplifying the model structure or using fewer variables may not only help reduce deviance but also improve convergence rates and make the results more robust.
+
+## References
 
 1.  Adaptive loggingmodule formonitoringapplicationsusingcontrol internaldigital drive signalsC. Brecher, T. Rudolf, 2009, ProductionEngineering3, 305-312
 

@@ -162,10 +162,11 @@ cython_debug/
 #.idea/
 
 # data
-data/
+#data/
 
 # Ignore all .RData files
 *.RData
 
 # Ignore all directories ending with _cache
 *_cache/
+.Rproj.user
