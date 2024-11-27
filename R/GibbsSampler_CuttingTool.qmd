@@ -1,0 +1,344 @@
+---
+title: "GibbsSampler_CuttingTool"
+author: "Thomas M. Rudolf"
+format: html
+editor: visual
+---
+
+## Necessary Library
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+library(gt)
+library(ggplot2)
+library(MASS)
+library(patchwork)
+library(R2OpenBUGS)
+library(rjags)
+library(R2jags)
+library(patchwork)
+library(tidyverse)
+# filters
+library(signal)
+```
+
+## Some functions
+
+```{r some usefull functions}
+# limiting phi to 2*pi
+lim22pi <- function(phi){
+  N <- length(phi)
+  id_reduce <- NULL
+  for(k in 1:N){
+    if(phi[k]>2*pi){
+      phi[k:N] <- phi[k:N] -2*pi
+      id_reduce <- append(id_reduce, k)
+    }
+}
+
+  listLim22pi <- list(phi, id_reduce)
+  return(listLim22pi)
+}
+
+# moving average filter /function moving scalar
+maf <- function(in_signal, n){
+  N <- length(in_signal)
+  maf_signal <- rep(0, N)
+  sdt_signal <- rep(0, N)
+  mStdScOut <- rep(0, N)
+  for(k1 in 1:n){
+    maf_signal[k1] <- mean(in_signal[1:k1])
+    sdt_signal[k1] <- std(in_signal[1:k1])
+    mStdScOut[k1] <- (in_signal[k1]-maf_signal[k1] )/sdt_signal[k1]
+  }
+  for(k2 in (n+1):N){
+    maf_signal[k2] <- mean(in_signal[(k2-n+1):k2])
+    sdt_signal[k2] <- std(in_signal[(k2-n+1):k2])
+    mStdScOut[k2] <- (in_signal[k2]-maf_signal[k2] )/sdt_signal[k2]
+
+  }
+  df = data.frame(maf_signal, sdt_signal, mStdScOut)
+  return(df)
+}
+
+# find max Mc in 2pi
+max_Mc <- function(id_reduce, Mc, phi){
+  # find max in intevall of 2pi
+  NMax <- length(id_reduce)
+  idx <- 1
+  k3_old <- 1
+  McMax <- NULL
+  phiMcMax <- NULL
+  for(k3 in id_reduce){
+      Mc_temp <- Mc[k3_old:k3]
+      phi_temp <- phi[k3_old:k3]
+      McMax <- append(McMax, max(Mc_temp))
+
+      ii <- which(McMax[idx]==Mc_temp)
+      #print(ii)
+      phiMcMax <- append(phiMcMax, phi_temp[ii[1]])
+      #print("angle:")
+      #print( phi_temp[ii[1]])
+      k3_old <- k3
+      idx <- idx+1
+  }
+  df <- data.frame(McMax, phiMcMax)
+  return(df)
+}
+
+```
+
+## Definition of Butterworth Filter
+
+```{r}
+# Parameters
+filter_order <- 4
+cutoff_frequency <- 0.1  # 0.1 times the Nyquist frequency (normalized)
+
+# Design a low-pass Butterworth filter
+butter_filter <- butter(filter_order, cutoff_frequency, type = "low")
+
+```
+
+
+
+
+## Read data
+
+p
+
+```{r}
+process_mill <- read.csv("..\\data\\080807_WearMillingY_50%\\Level_002\\Trace_080807_101102R00R110R40R50R60.csv")
+#process_mill <- read.csv("..\\data\\Trace_0331_150521.csv")
+iqSp <- process_mill$X..Nck..SD.nckServoDataActCurr32..u1..4.
+
+#velSp <- process_mill$X..Nck..SD.nckServoDataActVelMot32..u1..4./36 * 0.1047198 # rad/s
+rotAx4 <- process_mill$X..Nck..SD.nckServoDataActPos1stEnc32..u1..4.
+nsamples <- length(rotAx4)
+velSp <- rotAx4[2:nsamples] - rotAx4[1:nsamples-1]  
+time <- process_mill$time
+dtime <- diff(time)
+dtime <- append(dtime, 0.002)
+phi_real <-rotAx4# cumsum(velSp)*0.002
+df_phi_real <- lim22pi(phi_real)
+phi_real <- df_phi_real[[1]]
+N <- length(iqSp)
+raund_count = 0
+km <- 1.3
+Mc <- iqSp * km
+Mc_real4STAN <- iqSp * km
+
+df_plot_data_complete <- data.frame(iqSp = iqSp, 
+                                    #velSp = velSp, 
+                                    time = time, 
+                                    dtime = dtime, 
+                                    phi = phi_real, 
+                                    Mc = Mc)
+
+ggplot(df_plot_data_complete) + 
+  geom_line(aes(x = time, y = iqSp)) + 
+  geom_line(aes(x = time, y = maf(iqSp, 14)$maf_signal, colour="current"))+ 
+  geom_line(aes(x = time, y = Mc)) + 
+  geom_line(aes(x = time, y = maf(Mc, 14)$maf_signal, colour="torque"))
+  
+
+#ggplot(df_plot_data_complete) + 
+#  geom_line(aes(x = time, y = velSp)) + 
+#  geom_line(aes(x = time, y = maf(velSp, 14), colour="Spindle velocity")) 
+```
+
+```{r}
+df_sdtsca_iqSp_filt = maf(iqSp, 12)
+
+iqSp_maf = df_sdtsca_iqSp_filt$maf_signal
+iqSp_mStdScOut = df_sdtsca_iqSp_filt$mStdScOut
+df <- data.frame(t = time, iq = iqSp, iq_filt = iqSp_maf)
+
+ggplot(df) +
+   geom_line(aes(x=time, y=iq), color="red") + 
+   geom_line(aes(x=time, y=iq_filt))
+```
+
+## Band pass filter
+
+```{r}
+# Band-pass filter with lower and upper cutoff frequencies
+Ts <- time[2]-time[1]
+fs <- 1/Ts
+flow <- 10 # Hz
+fhigh <- 150 # Hz
+fband <-c(flow, fhigh) / (fs/2)
+filter_order <- 4
+bandpass_filter <- butter(filter_order, fband, type = "pass")
+iqSp_bpassfilter <- filter(bandpass_filter, iqSp)
+df_bpass <- data.frame(time, iqSp_bpassfilter)
+ggplot(df_bpass, aes(time, iqSp_bpassfilter)) + 
+  geom_line()
+
+
+```
+
+## Low pass filter
+
+```{r}
+# Parameters
+filter_order <- 4
+cutoff_frequency <- 0.1  # 0.1 times the Nyquist frequency (normalized)
+
+# Design a low-pass Butterworth filter
+butter_filter <- butter(filter_order, cutoff_frequency, type = "low")
+
+```
+
+```{r beta distribution alpha and beta by mean and varianz, echo = TRUE}
+beta_dist_param <- function(m, var){
+  alpha <- m^2*(1-m)/var - m
+  beta <- alpha * (1-m)/m
+  param <- data.frame(alpha, beta)
+  return(param)
+}
+
+mc <- 0.23
+kc11 <- (2306-977*0)*1e6
+
+beta_dist_mc <- beta_dist_param(mc, 0.02^2)
+beta_dist_mc
+
+beta_dist_kc <- beta_dist_param(kc11, 977^2)
+beta_dist_kc
+
+# test the result
+N <- 1000
+
+x = seq(0, 1, length.out=N)
+xnorm = seq(0, 6000, length.out=N)
+m_kc <- 2306
+sd_kc <- 977
+beta_init_mc <- dbeta(x, beta_dist_mc$alpha, beta_dist_mc$beta)
+norm_init_kc <- dnorm(xnorm, m_kc, sd_kc)
+df_prior_dist <- data.frame(x = x,
+                 xnorm = xnorm,
+                 beta_init_mc = beta_init_mc,
+                 norm_init_kc = norm_init_kc)
+
+g_mc <- ggplot(df_prior_dist, aes(x=x, y=beta_init_mc)) +
+  geom_line()
+g_mc
+g_kc <- ggplot(df_prior_dist, aes(x=xnorm, y=norm_init_kc)) +
+  geom_line()
+g_kc
+```
+
+## FFT
+
+```{r FFT of spindle current}
+# Perform FFT
+fft_iqSp <- fft(iqSp_maf)
+nsamples = length(fft_iqSp )
+magnitude <- Mod(fft_iqSp[1:(nsamples/2)])
+freq <- seq(0, (nsamples/2 - 1)) * fs / nsamples
+
+top_indices = rep(0,2)
+# Identify the top 3 frequencies with the highest amplitudes
+index_rot = which(freq>20 & freq<60)
+index_cut = which(freq>90 & freq<120)
+top_indices[1] <- order(magnitude[index_rot], decreasing = TRUE)[1] # Indices of the top 3 amplitudes
+top_indices[2] <- order(magnitude[index_cut], decreasing = TRUE)[1]
+top_frequencies <- c(freq_rot[top_indices[1]],freq_cut[top_indices[2]])   # Corresponding frequencies
+top_amplitudes <- magnitude[freq == top_frequencies]  # Corresponding amplitudes
+amp <- sum(top_amplitudes)*2/nsamples
+# Display results
+print(data.frame(Frequency = top_frequencies, Amplitude = top_amplitudes))
+
+# Plot the magnitude spectrum
+plot(freq, magnitude, type = "h", main = "Magnitude Spectrum",
+     xlab = "Frequency (Hz)", ylab = "Magnitude")
+points(top_frequencies, top_amplitudes, col = "red", pch = 19)  # Highlight top points
+
+```
+
+```{r prep data for jag}
+ap = 0.001  # cutting depth in m
+fz = 0.00015 # feed per tooth in m
+kappa = 105/180*pi # main angle of tool insert in degree
+z = 4     # number of cutting edges [2, 3, 4]
+rtool = 0.040/2# tool radius in m
+alpha_mc = beta_dist_mc$alpha
+beta_mc = beta_dist_mc$alpha
+m_kc = m_kc
+sd_kc = sd_kc
+
+
+
+
+data_mill <- list("k" = length(dfMcMax_clean$McMax), 
+                  "Mc" = dfMcMax_clean$McMax,
+                  "ap" = ap*1000, 
+                  "fz" = fz*1000,
+                  "rtool" = rtool,
+                  "kappa" = kappa, 
+                  "m_kc" = m_kc, 
+                  "tau_kc" = 1/(sd_kc)^2,
+                  "alpha_mc" = beta_dist_mc$alpha,
+                  "beta_mc" = beta_dist_mc$beta
+                  )
+inits <- function(){list(mc=0.25, kc11=1.2e3)}
+#inits <- function(){list(mc=0.25)}
+#parameters <- c("mc", "kc1", "mc_estim", "kc1_estim")
+parameters <- c("mc", "kc11")
+```
+
+```{r}
+# Apply the Butterworth filter
+filtered_signal <- filter(butter_filter, signal)
+```
+
+## FFT
+
+```{r}
+# Generate a simple signal
+set.seed(123) # For reproducibility
+n <- 128  # Number of points
+t <- seq(0, 1, length.out = n)  # Time vector
+signal <- sin(2 * pi * 10 * t) + 0.5 * sin(2 * pi * 20 * t)  # Combine two sine waves
+
+# Perform FFT
+fft_result <- fft(signal)
+
+# Compute frequency axis
+freq <- seq(0, (n/2 - 1)) * (1 / (t[2] - t[1])) / n
+
+# Get magnitude spectrum
+magnitude <- Mod(fft_result[1:(n/2)])
+
+# Plot the magnitude spectrum
+plot(freq, magnitude, type = "h", main = "Magnitude Spectrum",
+     xlab = "Frequency (Hz)", ylab = "Magnitude")
+
+```
+
+```{r definition of jags model to identify mc and kc11}
+
+cat("model {
+    # Likelihood
+    for (i in 1:k) {
+        # Model equation
+        Mc[i] ~ dnorm(pred[i], tau)
+        #pred[i] <- ap * fz^(1 - mc) * sin(kappa)^(mc) * kc11 * rtool
+        log(pred[i]) <- log(ap) + (1 - mc)* log(fz) + (1-mc)*log(sin(kappa)) +log(kc11) +log( rtool) 
+    }
+
+    # Priors
+    kc11 ~ dnorm(m_kc, tau_kc)  # Normal prior with mean 1200 and precision 1/50^2
+    mc ~ dbeta(alpha_mc, beta_mc)      # Uniform prior between 0 and 1
+
+    # Precision for the normal distribution (tau = 1/variance)
+    tau ~ dgamma(0.1, 0.1) # Gamma prior for precision
+}", file="jags_kienzle_McMax.txt")
+
+```
+
+```{r run jags model}
+jags_kienzle_McMax <- jags(data_mill, inits, parameters, model.file="jags_kienzle_McMax.txt", 
+                      n.iter=5000, n.chains=20, n.burnin=1000)
+```

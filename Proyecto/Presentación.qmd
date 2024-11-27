@@ -37,7 +37,7 @@ options(scipen = 999)
 
 ## Problema
 
-Identify the characteristics and CNC signals that that help to indicate tool wear. The general behaviour of wear is illustrated in fig. 1a. At the beginning a new component (in this case a cutting tool) has a progressive, non linear phase, where the requiredcurrent to cut increases slowly (1). The following phase has a linear behaviour with very little increase under the same cutting conditions (2) until it reaches the end of usage (3). In this last phase a very progressive increase of the required current can be noticed. Fig.1b shows the measurement of tool wear taken form different stage of the cutting process with reference to removed volume.
+Identify the characteristics and CNC signals that that help to indicate tool wear. The general behaviour of wear is illustrated in fig. 1a. At the beginning a new component (in this case a cutting tool) has a progressive, non linear phase, where the required current to cut increases slowly (1). The following phase has a linear behaviour with very little increase under the same cutting conditions (2) until it reaches the end of usage (3). In this last phase a very progressive increase of the required current can be noticed. Fig.1b shows the measurement of tool wear taken form different stage of the cutting process with reference to removed volume.
 
 ![fig 1a. wear curve of a cutting tool](images/clipboard-1073081830.png)
 
@@ -48,7 +48,7 @@ The challenge is to identify which of the available signals are the best indicat
 The available signals are listed in table 1:
 
 | Signal | NC variable | unit |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | time | time | s |
 | +/Nck/!SD/nckServoDataActCurr32 \[u1; 1\] | torque producing current of axis x | A |
 | +/Nck/!SD/nckServoDataActCurr32 \[u1; 2\] | torque producing current of axis y | A |
@@ -117,13 +117,13 @@ If one change the values of \$m_c\$ to its extreme values, the difference in the
 significant: The fig. 3 illustrates the amplitudes with $m_c=0.22,0.23,0.24$. fig 3a has an amplitude of approx. 2200 Nm while the case of fig. 3c results in an amplitude of 3000 Nm. In all three cases the value of $k_{c,11}=2306 MPa$ were set to the mean value.
 
 | $m_c=0.22$ | $m_c=0.23$ | $m_c=0.24$ |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | ![fig 3a](images/clipboard-409739672.png){width="100%"} | ![fig 3b](images/clipboard-936063025.png){width="100%"} | ![fig 3c](images/clipboard-2298907086.png){width="100%"} |
 
 The same analysis can be conducted to the effect of $k_{c,11}$. The values were set to the minimum, mean and maximum value of $k_{c,11}=1329MPa, 2306MPa, 3283MPa$ while $m_c$ was the mean value of 0.23. While with a minimum value of $k_{c,11}$ the amplitude is around $1500Nm$ increase with the maximum value of $k_{c,11}$ is around $3000Nm$.
 
 | $k_{c,11}=1329MPa$ | $k_{c,11}=2306MPa$ | $k_{c,11}=3283MPa$ |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | ![](images/clipboard-2683306313.png){width="100%"} | ![](images/clipboard-936063025.png){width="100%"} | ![](images/clipboard-205141012.png){width="100%"} |
 
 This analysis demonstrated the significance of an exact value for both parameter to model relaiable the cutting torque.
@@ -338,7 +338,7 @@ For this reason, the next step is to divide the time series in time windows and 
 For the wFFT, the same function was used as for the complete FFT. The algorithm starts evaluating the first N samples (\$1....N\$) and calculates the FFT over these signals. In the next step, it takes the values form $2...N+1$ and so on. Fig ? the results. For illustrative purposes, only some wFFTs are ploted (each 1000 times in this case.) What can be noticed that both frequencies are always dominant. The the frequency at $105Hz$, however, increases significantly when the material removing process starts and decreases a when finished
 
 | window FFT over the complete time series (examples each 1000 FFT) | examples for wFFT at the beginning and during material removing process. |
-|----|----|
+|------------------------------------|------------------------------------|
 | ![fig. ?](images/wFFT.png) | ![fig ??](images/clipboard-1940175733.png) |
 
 ### Model: Gibbs Sampler (Jags model)
