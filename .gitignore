@@ -170,3 +170,7 @@ cython_debug/
 # Ignore all directories ending with _cache
 *_cache/
 .Rproj.user
+
+
+# ignore data files
+ data/
