@@ -6,7 +6,7 @@ editor: visual
 ---
 
 ```{r set the directory }
-setwd("D:/github/DataMining2024")
+#setwd("D:/github/DataMining2024")
 ```
 
 ## Necessary Library
@@ -43,10 +43,6 @@ lim22pi <- function(phi){
   listLim22pi <- list(phi, id_reduce)
   return(listLim22pi)
 }
-
-
-
-
 ```
 
 ```{r moving average filter /function moving scalar}
@@ -159,20 +155,49 @@ butter_filter <- butter(filter_order, cutoff_frequency, type = "low")
 ## Read data
 
 ```{r}
-process_mill <- read.csv("..\\data\\080807_WearMillingY_50%\\Level_002\\Trace_080807_101102R00R110R40R50R60.csv")
+# Specify the folder path
+folder_path <- "..\\data\\080807_WearMillingY_50%\\Level_010\\"
+
+# Get a list of all .csv files in the folder
+csv_files <- list.files(path = folder_path, pattern = "\\.csv$", full.names = TRUE)
+
+# Print the list of .csv files
+#print(csv_files)
+iqAx4_L002 <- NULL
+time_L002 <- NULL
+toffset <- 0
+nfiles <- length(csv_files)
+for(fidx in 1:nfiles){
+  ## spindle current
+  process_mill <- read.csv(csv_files[fidx])
+  iqSp <- process_mill$X..Nck..SD.nckServoDataActCurr32..u1..4.
+  iqAx4_L002 <- append(iqAx4_L002, iqSp)
+  # time
+  time <- process_mill$time
+  time_L002 <- append(time_L002, time+toffset)
+  toffset <- time_L002[length(time_L002)]
+}
+  
+
+```
+
+```{r}
+#process_mill <- read.csv("..\\data\\080807_WearMillingY_50%\\Level_002\\Trace_080807_101102R00R110R40R50R60.csv")
 #process_mill <- read.csv("..\\data\\Trace_0331_150521.csv")
-iqSp <- process_mill$X..Nck..SD.nckServoDataActCurr32..u1..4.
+#iqSp <- process_mill$X..Nck..SD.nckServoDataActCurr32..u1..4.
 
 #velSp <- process_mill$X..Nck..SD.nckServoDataActVelMot32..u1..4./36 * 0.1047198 # rad/s
-rotAx4 <- process_mill$X..Nck..SD.nckServoDataActPos1stEnc32..u1..4.
-nsamples <- length(rotAx4)
-velSp <- rotAx4[2:nsamples] - rotAx4[1:nsamples-1]  
-time <- process_mill$time
+#rotAx4 <- process_mill$X..Nck..SD.nckServoDataActPos1stEnc32..u1..4.
+iqSp <- iqAx4_L002
+time <- time_L002
+nsamples <- length(iqSp)
+#velSp <- rotAx4[2:nsamples] - rotAx4[1:nsamples-1]  
+#time <- process_mill$time
 dtime <- diff(time)
 dtime <- append(dtime, 0.002)
-phi_real <-rotAx4# cumsum(velSp)*0.002
-df_phi_real <- lim22pi(phi_real)
-phi_real <- df_phi_real[[1]]
+#phi_real <-rotAx4# cumsum(velSp)*0.002
+#df_phi_real <- lim22pi(phi_real)
+#phi_real <- df_phi_real[[1]]
 N <- length(iqSp)
 raund_count = 0
 km <- 1.3
@@ -183,14 +208,14 @@ df_plot_data_complete <- data.frame(iqSp = iqSp,
                                     #velSp = velSp, 
                                     time = time, 
                                     dtime = dtime, 
-                                    phi = phi_real, 
+                                    #phi = phi_real, 
                                     Mc = Mc)
 
 ggplot(df_plot_data_complete) + 
   geom_line(aes(x = time, y = iqSp)) + 
-  geom_line(aes(x = time, y = maf(iqSp, 14)$maf_signal, colour="current"))+ 
+  geom_line(aes(x = time, y = maf(iqSp, 12)$maf_signal, colour="current"))+ 
   geom_line(aes(x = time, y = Mc)) + 
-  geom_line(aes(x = time, y = maf(Mc, 14)$maf_signal, colour="torque"))
+  geom_line(aes(x = time, y = maf(Mc, 12)$maf_signal, colour="torque"))
   
 
 #ggplot(df_plot_data_complete) + 
@@ -281,29 +306,32 @@ g_kc
 # band pass filtered
 freq_range = c(20,60, 90, 120)
 amp_bp <- get_amps_at_freq(iqSp_bpassfilter, freq_range, print=TRUE)
+# moving standard scalar
 amp_mSc <-get_amps_at_freq(na.omit(iqSp_mStdScOut), freq_range, print=TRUE)
-# Plot the magnitude spectrum
-#plot(amp_bp$freq, amp_bp$magnitude, type = "h", main = "Magnitude Spectrum \n (band pass filter)",#     xlab = "Frequency (Hz)", ylab = "Magnitude")
-#points(amp_bp$top_frequencies, amp_bp$top_amplitudes, col = "red", pch = 19)  # Highlight top points
 
-# Plot the magnitude spectrum
-#plot(amp_mSc$freq, amp_mSc$magnitude, type = "h", main = "Magnitude Spectrum \n (moving std scalar)",
-#     xlab = "Frequency (Hz)", ylab = "Magnitude")
-#points(amp_mSc$top_frequencies, amp_mSc$top_amplitudes, col = "red", pch = 19)  # Highlight top points
-
-g_fft_bp <- ggplot(data.frame(amp_bp), aes(x=freq, y= magnitude, color="Magnitude"))+
+## prep data for ggplot
+df_bp <- data.frame(freq=amp_bp$freq, magnitude = amp_bp$magnitude) 
+top_frequencies <- amp_bp$top_frequencies
+top_amplitudes <- amp_bp$top_amplitudes
+g_fft_bp <- ggplot(df_bp, aes(x=freq, y= magnitude, color="Magnitude"))+
   geom_line() + 
-  geom_point(aes(x=top_frequencies, y=top_amplitudes, color="relevent Magnitude")) +
+  geom_point(aes(x=top_frequencies[1], y=top_amplitudes[1], color="relevent Magnitude")) +
+  geom_point(aes(x=top_frequencies[2], y=top_amplitudes[2], color="relevent Magnitude")) +
   labs(
     title = "Magnitude Spectrum \n (band pass filter)",
     x =  "Frequency (Hz)",
     y =  "Magnitude"
   )+
   theme_minimal()
-
-g_fft_mSc <- ggplot(data.frame(amp_mSc), aes(x=freq, y= magnitude, color=" Magnitude"))+
+# moving standart scalar
+df_mSc <- data.frame(freq = amp_mSc$freq, magnitude = amp_mSc$magnitude)
+top_frequencies <- amp_mSc$top_frequencies
+top_amplitudes <- amp_mSc$top_amplitudes
+g_fft_mSc <- ggplot(df_mSc, aes(x=freq, y= magnitude, color=" Magnitude"))+
   geom_line() + 
-  geom_point(aes(x=top_frequencies, y=top_amplitudes, color="relevant Magnetude"))+
+  geom_point(aes(x=top_frequencies[1], y=top_amplitudes[1], color="relevant Magnetude"))+
+  geom_point(aes(x=top_frequencies[2], y=top_amplitudes[2], color="relevant Magnetude"))+
+
   labs(
     title = "Magnitude Spectrum \n (moving std scalar)",
     x =  "Frequency (Hz)",
@@ -311,7 +339,8 @@ g_fft_mSc <- ggplot(data.frame(amp_mSc), aes(x=freq, y= magnitude, color=" Magni
   )+
   theme_minimal()
 
-g_fft_bp + g_fft_mSc
+g_fft_bp + 
+  g_fft_mSc
 
 ```
 
@@ -327,15 +356,23 @@ for(idx in 0:(data_len-wind_len)){
   amp_bp <- get_amps_at_freq(iq_data[idx:(idx+wind_len)], freq_range)
   amp4jags <- append(amp4jags, amp_bp$amp)
 }
+lim <- 1.5+.25/4
+df_plot_fft_window = data.frame(amp4jags, 
+                                idx = 1:length(amp4jags), 
+                                limit = rep(lim, length(amp4jags)))
+ggplot(df_plot_fft_window, aes(x=idx, y=amp4jags))+
+  geom_line()+
+  geom_line(aes(x=idx, y=limit), color="red")
+amp4jags2eval = amp4jags[amp4jags>(lim)]
 
-amp4jags2eval = amp4jags[amp4jags>1.5]
+amp4jags2eval <- na.omit(amp4jags2eval)
 ```
 
 ```{r prep data for jag}
 ap = 0.001  # cutting depth in m
 fz = 0.00015 # feed per tooth in m
 kappa = 105/180*pi # main angle of tool insert in degree
-z = 4     # number of cutting edges [2, 3, 4]
+z = 3     # number of cutting edges [2, 3, 4]
 rtool = 0.040/2# tool radius in m
 alpha_mc = beta_dist_mc$alpha
 beta_mc = beta_dist_mc$alpha
@@ -345,8 +382,8 @@ sd_kc = sd_kc
 
 
 
-data_mill <- list("k" = length(amp4jags2eval*km), 
-                  "Mc" = amp4jags2eval,
+data_mill <- list("k" = length(amp4jags2eval), 
+                  "Mc" = amp4jags2eval*km,
                   "ap" = ap*1000, 
                   "fz" = fz*1000,
                   "rtool" = rtool,
@@ -359,13 +396,7 @@ data_mill <- list("k" = length(amp4jags2eval*km),
 inits <- function(){list(mc=0.25, kc11=1.2e3)}
 #inits <- function(){list(mc=0.25)}
 #parameters <- c("mc", "kc1", "mc_estim", "kc1_estim")
-parameters <- c("mc", "kc11")
-```
-
-```{}
-```
-
-```{}
+parameters <- c("mc", "kc11", "pred")
 ```
 
 ## Jags Model
@@ -377,8 +408,8 @@ cat("model {
     for (i in 1:k) {
         # Model equation
         Mc[i] ~ dnorm(pred[i], tau)
-        #pred[i] <- ap * fz^(1 - mc) * sin(kappa)^(mc) * kc11 * rtool
-        log(pred[i]) <- log(ap) + (1 - mc)* log(fz) + (1-mc)*log(sin(kappa)) +log(kc11) +log( rtool) 
+        pred[i] <- ap * fz^(1 - mc) * sin(kappa)^(-mc) * kc11 * rtool 
+        #log(pred[i]) <- log(ap) + (1 - mc)* log(fz) + (-mc)*log(sin(kappa)) +log(kc11) +log( rtool) 
     }
 
     # Priors
@@ -422,20 +453,21 @@ norm_post_kc <- dnorm(xnorm, kc11_post_mean, kc11_post_sd)
 df_prior_dist <- mutate(df_prior_dist, norm_post_kc)
 g_kc <- g_kc + geom_line(aes(x=xnorm, y=norm_post_kc, color="post")) +
   labs(
-    title = "prior and post kc11 )",
+    title = "prior and post kc11",
     x =  "value of kc",
     y =  "normal distribution of mc"
   )+
   theme_minimal()
 
-g_mc + g_kc
+g_mc 
+g_kc
 
 df_print <- data.frame(mc_post_mean,
-                       mc_post_sd,
+                       #mc_post_sd,
                        kc11_post_mean, 
-                       kc11_post_sd, 
-                       mc_alpha_post = mc_post_beta$alpha, 
-                       mc_beta_post = mc_post_beta$beta,
+                       #kc11_post_sd, 
+                       #mc_alpha_post = mc_post_beta$alpha, 
+                       #mc_beta_post = mc_post_beta$beta,
                        deviance= mc_deviance) |>  gt()
 df_print
 
