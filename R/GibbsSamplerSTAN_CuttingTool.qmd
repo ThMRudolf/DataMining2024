@@ -6,7 +6,7 @@ editor: visual
 ---
 
 ```{r set the directory }
-#setwd("D:/github/DataMining2024")
+setwd("D:/github/DataMining2024")
 ```
 
 ## Necessary Library

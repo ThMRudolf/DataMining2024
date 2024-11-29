@@ -46,7 +46,7 @@ model {
         real sin_sum = 0;
         real pred;
         for (j in 1:z) {
-            sin_sum += pow(sin(phi[i] + (j - 1) * 2 * pi / z), 1 - mc);
+            sin_sum += pow(sin(phi[i] + (j - 1) * 2 * pi() / z), 1 - mc);
         }
         pred = (ap * pow(fz, (1 - mc)) * pow(sin(kappa), mc) * kc11 * rtool) * sin_sum;
         Mc[i] ~ normal(pred, sqrt(1/tau));  // Normal likelihood with precision tau
