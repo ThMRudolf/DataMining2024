@@ -22,8 +22,10 @@ library(rjags)
 library(R2jags)
 library(patchwork)
 library(tidyverse)
+library(cmdstanr)
 # filters
 library(signal)
+library(rstan)
 ```
 
 ## Some functions
@@ -236,7 +238,7 @@ g1 <- ggplot(df_bpass, aes(time, iqSp_bpassfilter)) +
 g1
 ```
 
-## Band pass filter test 
+## Band pass filter test
 
 ```{r}
 sin0 <- function(s){
@@ -277,8 +279,6 @@ g2<-ggplot(df_fft) +
   geom_line(aes(x=freq, y=fft_cutt_bp, color="bp*"))
 g1+g2
 ```
-
-
 
 ```{r beta distribution alpha and beta by mean and varianz, echo = TRUE}
 
@@ -383,9 +383,8 @@ sd_kc = sd_kc
 Mc_real4STAN <- iqSp_bpassfilter
 phi_list <- lim22pi((rotAx4-rotAx4[1])*pi/180)
 phi_real <- phi_list[[1]]
+phi_real <- na.omit(phi_real)
 ```
-
-
 
 ## STAN Model
 
@@ -406,53 +405,22 @@ STAN_data_mill_cont <- list(k = length(Mc_real4STAN),
 
 ```
 
+```{r, output.var="STAN_kienzle_cont"}
 
-```{stan, output.var="STAN_kienzle_cont"}
-
-data { 
-    int<lower=0> k;        // number of data points
-    int<lower=0> z;        // number of cutting teeth
-    real<lower=0> fz;      // feed per tooth
-    real<lower=0> ap;      // cutting depth
-    real<lower=0> rtool;   // tool radius
-    real<lower=0> m_kc;    // prior mean for kc11
-    real<lower=0> alpha_mc; // alpha parameter for beta prior of mc
-    real<lower=0> beta_mc;  // beta parameter for beta prior of mc
-    real Mc[k];            // observed cutting torque
-    real<lower=0, upper=2*pi()> phi[k];           // observed cutting tooth position
-    real<lower=0> kappa;   // cutting tool angle
-    
-} 
-
-parameters { 
-    real<lower=0> kc11;    // parameter kc11 for normal distribution
-    real<lower=0, upper=1> mc; //  exponente mc (parameter for beta distribution)
-    real<lower=0> tau;     // precision parameter for normal distribution
-} 
-
-model { 
-    // Priors
-    kc11 ~ normal(m_kc, 50);     // Normal prior for kc11 with standard deviation 50
-    mc ~ beta(alpha_mc, beta_mc); // Beta prior for mc
-    tau ~ gamma(0.5, 0.5);        // Gamma prior for tau
-    
-    // Likelihood
-    for (i in 1:k) {
-        real sin_sum = 0;
-        for (j in 1:z) {
-            sin_sum += pow(sin(phi[i] + (j - 1) * 2 * pi() / z), 1 - mc);
-        }
-        
-        real pred = (ap * pow(fz, (1 - mc)) * pow(sin(kappa), mc) * kc11 * rtool) * sin_sum;
-        
-        Mc[i] ~ normal(pred, 1 / sqrt(tau));  // Normal likelihood with precision tau
-    }
-}
+model_code = rstan::stan_model(file="kienzle.stan")
 ```
 
 ```{r fit_STAN_kienzle_cont}
-model_fit <- rstan::sampling(STAN_kienzle_cont, 
+sample_iteration = 1e5
+model_fit <- rstan::sampling(object = model_code, 
                              data = STAN_data_mill_cont,
-                             refresh = 0)
+                             chain = 1,
+                             iter = sample_iteration,
+                             warmup = sample_iteration/2,
+                             refresh = sample_iteration/10, 
+                             seed = 1)
 ```
 
+```{r}
+print(model_fit)
+```
