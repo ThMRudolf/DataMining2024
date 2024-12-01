@@ -334,13 +334,13 @@ z = 3     # number of cutting edges [2, 3, 4]
 rtool = 0.040/2# tool radius in m
 alpha_mc = beta_dist_mc$alpha
 beta_mc = beta_dist_mc$alpha
-m_kc = m_kc*1e6
+m_kc = m_kc
 sd_kc = sd_kc
 
 
 
 
-data_mill_scsc <- list("k" = length(std_sc_amp4jags2eval), 
+data_mill_std_sc <- list("k" = length(std_sc_amp4jags2eval), 
                   "Mc" = std_sc_amp4jags2eval*km,
                   "ap" = ap*1000, 
                   "fz" = fz*1000,
@@ -385,7 +385,7 @@ cat("model {
 ```
 
 ```{r run jags model (Likelihood)}
-std_sc_jags_kienzle_McMax <- jags(data_mill_scsc, inits, parameters, model.file="jags_kienzle_McMaxL.txt", 
+std_sc_jags_kienzle_McMax <- jags(data_mill_sdt_sc, inits, parameters, model.file="jags_kienzle_McMaxL.txt", 
                       n.iter=5000, n.chains=20, n.burnin=1000)
 ```
 
@@ -457,7 +457,7 @@ cat("model {
 ```
 
 ```{r run jags model (LogLikelihood)}
-std_sc_jags_kienzle_McMax <- jags(data_mill_scsc inits, parameters, model.file="jags_kienzle_McMaxLL.txt", 
+std_sc_jags_kienzle_McMax <- jags(data_mill_std_sc inits, parameters, model.file="jags_kienzle_McMaxLL.txt", 
                       n.iter=5000, n.chains=20, n.burnin=1000)
 ```
 
