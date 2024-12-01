@@ -385,7 +385,7 @@ cat("model {
 ```
 
 ```{r run jags model (Likelihood)}
-std_sc_jags_kienzle_McMax <- jags(data_mill_sdt_sc, inits, parameters, model.file="jags_kienzle_McMaxL.txt", 
+std_sc_jags_kienzle_McMax <- jags(data_mill_std_sc, inits, parameters, model.file="jags_kienzle_McMaxL.txt", 
                       n.iter=5000, n.chains=20, n.burnin=1000)
 ```
 
