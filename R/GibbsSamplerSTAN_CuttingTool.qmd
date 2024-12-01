@@ -6,7 +6,7 @@ editor: visual
 ---
 
 ```{r set the directory }
-setwd("D:/github/DataMining2024")
+#setwd("D:/github/DataMining2024")
 ```
 
 ## Necessary Library
@@ -26,124 +26,14 @@ library(cmdstanr)
 # filters
 library(signal)
 library(rstan)
+library(parallel)
 ```
 
 ## Some functions
 
-```{r limiting phi to 2*pi}
-# limiting phi to 2*pi
-lim22pi <- function(phi){
-  N <- length(phi)
-  id_reduce <- NULL
-  for(k in 1:N){
-    if(phi[k]>2*pi){
-      phi[k:N] <- phi[k:N] -2*pi
-      id_reduce <- append(id_reduce, k)
-    }
-}
+```{r run and activate some usefull functions}
+source('cut_analysis_fcn.R')
 
-  listLim22pi <- list(phi, id_reduce)
-  return(listLim22pi)
-}
-
-
-
-
-```
-
-```{r moving average filter /function moving scalar}
-
-# moving average filter /function moving scalar
-maf <- function(in_signal, n){
-  N <- length(in_signal)
-  maf_signal <- rep(0, N)
-  sdt_signal <- rep(0, N)
-  mStdScOut <- rep(0, N)
-  for(k1 in 1:n){
-    maf_signal[k1] <- mean(in_signal[1:k1])
-    sdt_signal[k1] <- sd(in_signal[1:k1])
-    mStdScOut[k1] <- (in_signal[k1]-maf_signal[k1] )/sdt_signal[k1]
-  }
-  for(k2 in (n+1):N){
-    maf_signal[k2] <- mean(in_signal[(k2-n+1):k2])
-    sdt_signal[k2] <- sd(in_signal[(k2-n+1):k2])
-    mStdScOut[k2] <- (in_signal[k2]-maf_signal[k2] )/sdt_signal[k2]
-
-  }
-  df = data.frame(maf_signal, sdt_signal, mStdScOut)
-  return(df)
-}
-```
-
-```{r find max Mc in 2pi}
-# find max Mc in 2pi
-max_Mc <- function(id_reduce, Mc, phi){
-  # find max in intevall of 2pi
-  NMax <- length(id_reduce)
-  idx <- 1
-  k3_old <- 1
-  McMax <- NULL
-  phiMcMax <- NULL
-  for(k3 in id_reduce){
-      Mc_temp <- Mc[k3_old:k3]
-      phi_temp <- phi[k3_old:k3]
-      McMax <- append(McMax, max(Mc_temp))
-
-      ii <- which(McMax[idx]==Mc_temp)
-      #print(ii)
-      phiMcMax <- append(phiMcMax, phi_temp[ii[1]])
-      #print("angle:")
-      #print( phi_temp[ii[1]])
-      k3_old <- k3
-      idx <- idx+1
-  }
-  df <- data.frame(McMax, phiMcMax)
-  return(df)
-}
-```
-
-```{r beta distribution alpha and beta by mean and varianz, echo = TRUE}
-beta_dist_param <- function(m, var){
-  alpha <- m^2*(1-m)/var - m
-  beta <- alpha * (1-m)/m
-  param <- data.frame(alpha, beta)
-  return(param)
-}
-```
-
-```{r function analyse specific amplitude}
-get_amps_at_freq <- function(iq, freq_lim, print=FALSE)
-{
-    fft_iq <- fft(iq)
-    nsamples = length(fft_iq )
-    magnitude <- Mod(fft_iq[1:(nsamples/2)])
-    
-    freq <- seq(0, (nsamples/2 - 1)) * fs / nsamples
-
-    top_indices = rep(0,2)
-    # Identify the top 3 frequencies with the highest amplitudes
-    index_rot = which(freq>freq_lim[1] & freq<freq_lim[2])
-    index_cut = which(freq>freq_lim[3] & freq<freq_lim[4])
-    top_indices[1] <- order(magnitude[index_rot], decreasing = TRUE)[1] +   index_rot[1] - 1 # Indices of the top 1 amplitudes
-    top_indices[2] <- order(magnitude[index_cut], decreasing = TRUE)[1] + index_cut[1] - 1
-    top_frequencies <- c(freq[top_indices[1]],freq[top_indices[2]])   # Corresponding     frequencies
-    top_amplitudes <- magnitude[top_indices]  # Corresponding amplitudes
-    # Display results
-    if(print==TRUE){
-      print(data.frame(Frequency = top_frequencies, Amplitude = top_amplitudes))
-    }
-    
-    amp <- sum(top_amplitudes)*2/nsamples
-    plotData = data.frame(freq, magnitude)
-    
-    amps_list <- list(amp = amp,
-                      top_amplitudes = top_amplitudes,
-                      top_frequencies = top_frequencies,
-                      freq = freq, 
-                      magnitude = magnitude)
-    return(amps_list)
-  
-  }
 ```
 
 ## Definition of Butterworth Filter
@@ -238,48 +128,6 @@ g1 <- ggplot(df_bpass, aes(time, iqSp_bpassfilter)) +
 g1
 ```
 
-## Band pass filter test
-
-```{r}
-sin0 <- function(s){
-  n = length(s)
-  for (idx in 1:n){
-    if(s[idx]<0){s[idx]=0}
-    }
-  return (s)
-}
-w = 35
-z = 3
-t = seq(0, 1, length.out=500)
-phi = 2*pi/z 
-sin1 = sin0(sin(w*t))
-sin2 = sin0(sin(w*t + phi))
-sin3 = sin0(sin(w*t + 2*phi))
-df = data.frame(cuttsin = sin1+sin2+sin3, 
-                t=t, 
-                cuttsin_bp =  filter(bandpass_filter, sin1+sin2+sin3))
-ggplot(df, aes(x=t, y=cuttsin)) + 
-  geom_line() + 
-  geom_line(aes(x=t, y = cuttsin_bp))
-
-
-```
-
-```{r}
-freq_lim = c(20,60,90,120)
-fft_cuttsin <-get_amps_at_freq(df$cuttsin, freq_lim, print=FALSE)
-fft_cuttsin_bp <-get_amps_at_freq(df$cuttsin_bp, freq_lim, print=FALSE)
-df_fft = data.frame(freq = fft_cuttsin$freq, 
-                    fft_cutt = fft_cuttsin$magnitude, 
-                    fft_cutt_bp = fft_cuttsin_bp$magnitude)
-
-g1<-ggplot(df_fft) +
-  geom_line(aes(x=freq, y=fft_cutt_bp, color="clean")) 
-g2<-ggplot(df_fft) +
-  geom_line(aes(x=freq, y=fft_cutt_bp, color="bp*"))
-g1+g2
-```
-
 ```{r beta distribution alpha and beta by mean and varianz, echo = TRUE}
 
 mc <- 0.23
@@ -321,14 +169,6 @@ g_kc
 freq_range = c(20,60, 90, 120)
 amp_bp <- get_amps_at_freq(iqSp_bpassfilter, freq_range, print=TRUE)
 amp_mSc <-get_amps_at_freq(na.omit(iqSp_mStdScOut), freq_range, print=TRUE)
-# Plot the magnitude spectrum
-#plot(amp_bp$freq, amp_bp$magnitude, type = "h", main = "Magnitude Spectrum \n (band pass filter)",#     xlab = "Frequency (Hz)", ylab = "Magnitude")
-#points(amp_bp$top_frequencies, amp_bp$top_amplitudes, col = "red", pch = 19)  # Highlight top points
-
-# Plot the magnitude spectrum
-#plot(amp_mSc$freq, amp_mSc$magnitude, type = "h", main = "Magnitude Spectrum \n (moving std scalar)",
-#     xlab = "Frequency (Hz)", ylab = "Magnitude")
-#points(amp_mSc$top_frequencies, amp_mSc$top_amplitudes, col = "red", pch = 19)  # Highlight top points
 
 g_fft_bp <- ggplot(data.frame(amp_bp), aes(x=freq, y= magnitude, color="Magnitude"))+
   geom_line() + 
@@ -380,25 +220,49 @@ alpha_mc = beta_dist_mc$alpha
 beta_mc = beta_dist_mc$alpha
 m_kc = m_kc
 sd_kc = sd_kc
-Mc_real4STAN <- iqSp_bpassfilter
+
+```
+
+```{r prep Mc}
+# prep Mc
+Mc_real4STAN <- na.omit(iqSp_bpassfilter)
+Mc_real4STAN_min <-min( Mc_real4STAN)
+Mc_real4STAN_max <-max( Mc_real4STAN)
+off_Mc = (Mc_real4STAN_max - Mc_real4STAN_min)/2
+idx <- which(abs(Mc_real4STAN)>Mc_real4STAN_max*.2)
+
+Mc_real4STAN2Eval <- Mc_real4STAN[idx]
+Mc_real4STAN2Eval <- (Mc_real4STAN2Eval + off_Mc)*1
+
+
 phi_list <- lim22pi((rotAx4-rotAx4[1])*pi/180)
 phi_real <- phi_list[[1]]
-phi_real <- na.omit(phi_real)
+phi_real2Eval <- na.omit(phi_real[idx])
+
+df_plot_Mc2Eval <- data.frame(phi=phi_real2Eval, 
+                         Mc=Mc_real4STAN2Eval)
+g2Eval <- ggplot(df_plot_Mc2Eval, aes(x=phi, y=Mc)) + 
+  geom_point()
+df_plot_Mc <- data.frame(phi=phi_real, 
+                         Mc=(Mc_real4STAN+off_Mc)*1)
+g <- ggplot(df_plot_Mc, aes(x=phi, y=Mc)) + 
+  geom_point()
+g + g2Eval
 ```
 
 ## STAN Model
 
 ```{r data for STAN model}
-STAN_data_mill_cont <- list(k = length(Mc_real4STAN), 
-                  Mc = Mc_real4STAN,
-                  phi = (phi_real),
+STAN_data_mill_cont <- list(k = length(Mc_real4STAN2Eval), 
+                  Mc = Mc_real4STAN2Eval,
+                  phi = phi_real2Eval,
                   ap = ap, 
                   fz = fz,
                   z  = z,
                   rtool = rtool,
                   kappa = kappa, 
                   m_kc = m_kc, 
-                  tau_kc = 1/(sd_kc)^2,
+                  #tau_kc = 1/(sd_kc)^2,
                   alpha_mc = beta_dist_mc$alpha,
                   beta_mc = beta_dist_mc$beta
                   )
@@ -406,21 +270,23 @@ STAN_data_mill_cont <- list(k = length(Mc_real4STAN),
 ```
 
 ```{r, output.var="STAN_kienzle_cont"}
-
-model_code = rstan::stan_model(file="kienzle.stan")
+#stanc(file="kienzle.stan")
+model_code = stan_model(file="kienzle.stan", verbose=0)
 ```
 
-```{r fit_STAN_kienzle_cont}
-sample_iteration = 1e5
-model_fit <- rstan::sampling(object = model_code, 
-                             data = STAN_data_mill_cont,
-                             chain = 1,
-                             iter = sample_iteration,
-                             warmup = sample_iteration/2,
-                             refresh = sample_iteration/10, 
-                             seed = 1)
+```{r fit_STAN_kienzle_cont} #Mc_real4STAN2Eval}
+sample_iteration = 1e3
+model_fit <- stan("kienzle.stan", 
+                  data = STAN_data_mill_cont,
+                  chain = 1,
+                  iter = sample_iteration,
+                  warmup = sample_iteration/2,
+                  #refresh = sample_iteration/10, 
+                  cores = 10,
+                  thin = 1)
 ```
 
 ```{r}
 print(model_fit)
+stan_dens(model_fit)
 ```
