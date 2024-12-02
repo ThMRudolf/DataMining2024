@@ -180,9 +180,9 @@ g1 <- ggplot(df_bpass, aes(time, iqSp_bpassfilter)) +
 g1
 ```
 
-## Priors of $m_c$ and $k_{c11}$
+## Priori of $m_c$ and $k_{c11}$
 
-The value of $m_c$ must be in a range of *\[0,1\]*. Therefore a beta distribution is defined for this parameters. For the value of $k_{c11}$ a normal distribution is considered. The left hand side graphic shows the prior distruibution for $m_c$, the right hand side graphic the prior distribution for $k_{c11$.
+The value of $m_c$ must be in a range of *\[0,1\]*. Therefore a beta distribution is defined for this parameters. For the value of $k_{c11}$ a normal distribution is considered. The left hand side graphic shows the prior distribution for $m_c$, the right hand side graphic the prior distribution for $k_{c11}$.
 
 ```{r beta distribution alpha and beta by mean and varianz, echo = TRUE}
 
@@ -221,7 +221,7 @@ g_mc + g_kc
 
 The *Fast Fourier Transform (FFT)* is an efficient algorithm used to compute the Discrete Fourier Transform (DFT) of a sequence, or its inverse. It converts a signal from its original time or spatial domain into the frequency domain, revealing the signal's frequency components.
 
-The purpose of the FFT is to Identify dominant frequencies, phases, and amplitudes in a signal. It reduces computational complexity from $𝑂(𝑁2)O(N2)$ in a direct DFT to $O(NlogN)$. Applications: Widely used in signal processing, image analysis, audio engineering, and system modelling. For example, an FFT can analyze vibrations in machinery to detect faults or process audio signals for noise reduction. The band pass filtered signal and the standard scalar preprocessed signal it transformed into the FFT and the ampliutudes arround the frquencies of 35Hz and 105 Hz are exatracted. The following graphic illustrated the the results for both signals.
+The purpose of the FFT is to Identify dominant frequencies, phases, and amplitudes in a signal. It reduces computational complexity from $𝑂(𝑁2)O(N2)$ in a direct DFT to $O(NlogN)$. Applications: Widely used in signal processing, image analysis, audio engineering, and system modelling. For example, an FFT can analyse vibrations in machinery to detect faults or process audio signals for noise reduction. The band pass filtered signal and the standard scalar preprocessed signal it transformed into the FFT and the amplitudes around the frequencies of 35Hz and 105 Hz are extracted. The following graphic illustrated the the results for both signals.
 
 ```{r FFT of spindle current}
 # Perform FFT
@@ -266,9 +266,9 @@ g_fft_bp +
 
 ```
 
-## FFT over time window
+### FFT over time window
 
-To recieve information about the signal during the cutting process, the signal is divided into samples of 1000 signals and over the moving window of the 1000 the FFT is conducted over the Standard Scalar signal first. The values indicating that the cutting process is on are stored in a vector in order to model the process with this data. The graphs show the result of the FFT over the moving time window with 1000 samples. The values above the red line are taken to be evaluated.
+To receive information about the signal during the cutting process, the signal is divided into samples of 1000 signals and over the moving window of the 1000 the FFT is conducted over the Standard Scalar signal first. The values indicating that the cutting process is on are stored in a vector in order to model the process with this data. The graphs show the result of the FFT over the moving time window with 1000 samples. The values above the red line are taken to be evaluated.
 
 ```{r separating the signals into time windows and do the FFT (Standard Scalar)}
 freq_range <-  c(20,60, 90, 120)
@@ -297,6 +297,10 @@ amp4jags2eval = amp4jags[amp4jags>lim]
 
 std_sc_amp4jags2eval <- na.omit(amp4jags2eval)
 ```
+
+## Analysis for standard scalar filtered signal
+
+In this section, the moving standard scalar filtered signal is applied to the models. The signal is separated in moving average, moving standard deviation and themoving standard scalar. Then the signal in transformed into frequency domain (windows of 1000 samples) and the maximal amplitudes around 35 Hz and 105 Hz are obtained and stored in a vector. Additionally only the high values (higher than 90%) are used since this values correspond to the cutting process. The next figure shows the results.
 
 ```{r separating the signals into time windows and do the FFT (band pass)}
 freq_range <-  c(20,60, 90, 120)
@@ -357,11 +361,26 @@ inits <- function(){list(mc=0.25, kc11=1.2e3)}
 parameters <- c("mc", "kc11", "pred")
 ```
 
-## Jags Model
+### Jags Model
 
 JAGS (Just Another Gibbs Sampler) is a software tool used for Bayesian statistical analysis, particularly for models that require Markov Chain Monte Carlo (MCMC) methods. It is designed to generalize and extend the functionality of the BUGS (Bayesian inference Using Gibbs Sampling) project and works well with hierarchical and complex Bayesian models.
 
-### Analysis for standard scalar filtered signal
+Basically, two different models are implemented: the Likelihood and the Log-Likelihood:
+
+Likelihood:
+
+$$  pred[i] <- ap * fz^{(1 - mc)} * sin(kappa)^{-mc} * kc11 * rtool          $$
+
+Log-Likelihood:
+
+$$ log(pred[i]) <- log(ap) + (1 - mc)* log(fz) + (-mc)*log(sin(kappa)) +log(kc11) +log( rtool) 
+$$
+
+In the Log-Likelihood:, the parameters under investigation are lineariziced, what might leed to better results.
+
+### Likelihood
+
+The following part shows the jags code for the Likelihood approach.
 
 ```{r definition of jags model to identify mc and kc11: Likelihood}
 
@@ -435,6 +454,10 @@ df_print
 
 ```
 
+### Log-Likelihood
+
+The following part shows the jags code for the Log-Likelihood approach.
+
 ```{r definition of jags model to identify mc and kc11: Log-Likelihood}
 
 cat("model {
@@ -507,7 +530,9 @@ df_print
 
 ```
 
-### Analysis for band pass filtered signal
+## Analysis for band pass filtered signal
+
+In this section, the band pass filtered signal is applied to the models. The band pass cuts off at frequencies 10 Hz and 150 Hz. Then the signal in transformed into frequency domain (windows of 1000 samples) and the maximal amplitudes around 35 Hz and 105 Hz are obtained and stored in a vector. Additionally only the high values (higher than 90%) are used since this values correspond to the cutting process. The next figure shows the results.
 
 ```{r separating the signals into time windows and do the FFT (band pass)}
 freq_range <-  c(20,60, 90, 120)
@@ -531,6 +556,8 @@ amp4jags2eval = amp4jags[amp4jags>(lim)]
 
 bp_amp4jags2eval <- na.omit(amp4jags2eval)
 ```
+
+Using these results, the models for the jags model are prepared.
 
 ```{r prep data for jag (band pass model)}
 ap = 0.001  # cutting depth in m
@@ -563,12 +590,14 @@ inits <- function(){list(mc=0.25, kc11=1.2e3)}
 parameters <- c("mc", "kc11", "pred")
 ```
 
-#### Log-Likelihood
+### Log-Likelihood
 
 ```{r run jags model (LogLikelihood)}
 bp_jags_kienzle_McMax_LL <- jags(data_mill_bp, inits, parameters, model.file="jags_kienzle_McMaxLL.txt", 
                       n.iter=5000, n.chains=20, n.burnin=1000)
 ```
+
+The following figures show the results of the posterior distributions of $m_c$ and $k_{c11}$ based on the Log_likelihood model. It illustrates, both results, the band pass preprocessed signal and the moving standard scalar preprocessed signal.
 
 ```{r jags model evaluation and results bp signal printing (Log-Likelihood)}
 mc_post_mean_LL <- bp_jags_kienzle_McMax_LL$BUGSoutput$mean$mc
@@ -616,7 +645,9 @@ df_print
 
 ```
 
-#### Likelihood
+### Likelihood
+
+The following figures show the results of the posterior distributions of $m_c$ and $k_{c11}$ based on the Likelihood model. It illustrates, both results, the band pass preprocessed signal and the moving standard scalar preprocessed signal.
 
 ```{r run jags model (Likelihood)}
 bp_jags_kienzle_McMax_L <- jags(data_mill_bp, inits, parameters, model.file="jags_kienzle_McMaxL.txt", 
