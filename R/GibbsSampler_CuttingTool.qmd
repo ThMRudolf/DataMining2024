@@ -182,7 +182,7 @@ g1
 
 ## Priors of $m_c$ and $k_{c11}$
 
-The value of $m_c$ must be in a range of *\[0,1\]*. Therefore a beta distribution is defined for this parameters. For the value of $k_{c11}$ a normal distribution is considered. The left hand side graphic shows the prior distruibution for $m_c$, the rigth hand side graphic the prior distribution for $k_{c11$.
+The value of $m_c$ must be in a range of *\[0,1\]*. Therefore a beta distribution is defined for this parameters. For the value of $k_{c11}$ a normal distribution is considered. The left hand side graphic shows the prior distruibution for $m_c$, the right hand side graphic the prior distribution for $k_{c11$.
 
 ```{r beta distribution alpha and beta by mean and varianz, echo = TRUE}
 
@@ -385,20 +385,20 @@ cat("model {
 ```
 
 ```{r run jags model (Likelihood)}
-std_sc_jags_kienzle_McMax <- jags(data_mill_std_sc, inits, parameters, model.file="jags_kienzle_McMaxL.txt", 
+std_sc_jags_kienzle_McMax_L <- jags(data_mill_std_sc, inits, parameters, model.file="jags_kienzle_McMaxL.txt", 
                       n.iter=5000, n.chains=20, n.burnin=1000)
 ```
 
 ```{r jags model evaluation and results printing (Likelihood)}
-mc_post_mean <- std_sc_jags_kienzle_McMax$BUGSoutput$mean$mc
-mc_post_sd<- std_sc_jags_kienzle_McMax$BUGSoutput$sd$mc
-mc_deviance <- std_sc_jags_kienzle_McMax$BUGSoutput$mean$deviance
+mc_post_mean_L <- std_sc_jags_kienzle_McMax_L$BUGSoutput$mean$mc
+mc_post_sd_L <- std_sc_jags_kienzle_McMax_L$BUGSoutput$sd$mc
+mc_deviance_L <- std_sc_jags_kienzle_McMax_L$BUGSoutput$mean$deviance
 
-mc_post_beta <- beta_dist_param(mc_post_mean, mc_post_sd^2)
-beta_post_mc <- dbeta(x, mc_post_beta$alpha, mc_post_beta$beta)
+mc_post_beta_L <- beta_dist_param(mc_post_mean_L, mc_post_sd_L^2)
+beta_post_mc_L <- dbeta(x, mc_post_beta_L$alpha, mc_post_beta_L$beta)
 
-df_prior_dist <- mutate(df_prior_dist,beta_post_mc)
-g_mc <- g_mc +  geom_line(aes(x=x, y=beta_post_mc, color="post")) +
+df_prior_dist_L <- mutate(df_prior_dist,beta_post_mc_L)
+g_mc <- g_mc +  geom_line(aes(x=x, y=beta_post_mc_L, color="post")) +
   labs(
     title = "prior and post mc",
     x =  "value of mc",
@@ -408,12 +408,12 @@ g_mc <- g_mc +  geom_line(aes(x=x, y=beta_post_mc, color="post")) +
 
 
 
-kc11_post_mean <- std_sc_jags_kienzle_McMax$BUGSoutput$mean$kc11
-kc11_post_sd <- std_sc_jags_kienzle_McMax$BUGSoutput$sd$kc11
+kc11_post_mean_L <- std_sc_jags_kienzle_McMax_L$BUGSoutput$mean$kc11
+kc11_post_sd_L <- std_sc_jags_kienzle_McMax_L$BUGSoutput$sd$kc11
 
-norm_post_kc <- dnorm(xnorm, kc11_post_mean, kc11_post_sd)
-df_prior_dist <- mutate(df_prior_dist, norm_post_kc)
-g_kc <- g_kc + geom_line(aes(x=xnorm, y=norm_post_kc, color="post")) +
+norm_post_kc_L <- dnorm(xnorm, kc11_post_mean_L, kc11_post_sd_L)
+df_prior_dist <- mutate(df_prior_dist, norm_post_kc_L)
+g_kc <- g_kc + geom_line(aes(x=xnorm, y=norm_post_kc_L, color="post")) +
   labs(
     title = "prior and post kc11 \n(LogLikelihood, Standard Scalar)",
     x =  "value of kc",
@@ -424,13 +424,13 @@ g_kc <- g_kc + geom_line(aes(x=xnorm, y=norm_post_kc, color="post")) +
 g_mc 
 g_kc
 
-df_print <- data.frame(mc_post_mean,
+df_print <- data.frame(mc_post_mean_L,
                        #mc_post_sd,
-                       kc11_post_mean, 
+                       kc11_post_mean_L, 
                        #kc11_post_sd, 
                        #mc_alpha_post = mc_post_beta$alpha, 
                        #mc_beta_post = mc_post_beta$beta,
-                       deviance= mc_deviance) |>  gt()
+                       deviance= mc_deviance_L) |>  gt()
 df_print
 
 ```
@@ -457,20 +457,20 @@ cat("model {
 ```
 
 ```{r run jags model (LogLikelihood)}
-std_sc_jags_kienzle_McMax <- jags(data_mill_std_sc inits, parameters, model.file="jags_kienzle_McMaxLL.txt", 
+std_sc_jags_kienzle_McMax_LL <- jags(data_mill_std_sc, inits, parameters, model.file="jags_kienzle_McMaxLL.txt", 
                       n.iter=5000, n.chains=20, n.burnin=1000)
 ```
 
 ```{r jags model evaluation and results printing (Log-Likelihood)}
-mc_post_mean <- std_sc_jags_kienzle_McMax$BUGSoutput$mean$mc
-mc_post_sd<- std_sc_jags_kienzle_McMax$BUGSoutput$sd$mc
-mc_deviance <- std_sc_jags_kienzle_McMax$BUGSoutput$mean$deviance
+mc_post_mean_LL <- std_sc_jags_kienzle_McMax_LL$BUGSoutput$mean$mc
+mc_post_sd_LL<- std_sc_jags_kienzle_McMax_LL$BUGSoutput$sd$mc
+mc_deviance_LL <- std_sc_jags_kienzle_McMax_LL$BUGSoutput$mean$deviance
 
-mc_post_beta <- beta_dist_param(mc_post_mean, mc_post_sd^2)
-beta_post_mc <- dbeta(x, mc_post_beta$alpha, mc_post_beta$beta)
+mc_post_beta_LL <- beta_dist_param(mc_post_mean_LL, mc_post_sd_LL^2)
+beta_post_mc_LL <- dbeta(x, mc_post_beta_LL$alpha, mc_post_beta_LL$beta)
 
-df_prior_dist <- mutate(df_prior_dist,beta_post_mc)
-g_mc <- g_mc +  geom_line(aes(x=x, y=beta_post_mc, color="post")) +
+df_prior_dist <- mutate(df_prior_dist,beta_post_mc_LL)
+g_mc <- g_mc +  geom_line(aes(x=x, y=beta_post_mc_LL, color="post")) +
   labs(
     title = "prior and post mc (Log-Likelihood))",
     x =  "value of mc",
@@ -480,12 +480,12 @@ g_mc <- g_mc +  geom_line(aes(x=x, y=beta_post_mc, color="post")) +
 
 
 
-kc11_post_mean <- std_sc_jags_kienzle_McMax$BUGSoutput$mean$kc11
-kc11_post_sd <- std_sc_jags_kienzle_McMax$BUGSoutput$sd$kc11
+kc11_post_mean_LL <- std_sc_jags_kienzle_McMax_LL$BUGSoutput$mean$kc11
+kc11_post_sd_LL <- std_sc_jags_kienzle_McMax_LL$BUGSoutput$sd$kc11
 
-norm_post_kc <- dnorm(xnorm, kc11_post_mean, kc11_post_sd)
-df_prior_dist <- mutate(df_prior_dist, norm_post_kc)
-g_kc <- g_kc + geom_line(aes(x=xnorm, y=norm_post_kc, color="post")) +
+norm_post_kc_LL <- dnorm(xnorm, kc11_post_mean_LL, kc11_post_sd_LL)
+df_prior_dist <- mutate(df_prior_dist, norm_post_kc_LL)
+g_kc <- g_kc + geom_line(aes(x=xnorm, y=norm_post_kc_LL, color="post")) +
   labs(
     title = "prior and post kc11 \n(LogLikelihood, Standard Scalar)",
     x =  "value of kc",
@@ -496,13 +496,13 @@ g_kc <- g_kc + geom_line(aes(x=xnorm, y=norm_post_kc, color="post")) +
 g_mc 
 g_kc
 
-df_print <- data.frame(mc_post_mean,
+df_print <- data.frame(mc_post_mean_LL,
                        #mc_post_sd,
-                       kc11_post_mean, 
+                       kc11_post_mean_LL, 
                        #kc11_post_sd, 
                        #mc_alpha_post = mc_post_beta$alpha, 
                        #mc_beta_post = mc_post_beta$beta,
-                       deviance= mc_deviance) |>  gt()
+                       deviance= mc_deviance_LL) |>  gt()
 df_print
 
 ```
@@ -566,25 +566,120 @@ parameters <- c("mc", "kc11", "pred")
 #### Log-Likelihood
 
 ```{r run jags model (LogLikelihood)}
-bp_jags_kienzle_McMax <- jags(data_mill_bp, inits, parameters, model.file="jags_kienzle_McMaxLL.txt", 
+bp_jags_kienzle_McMax_LL <- jags(data_mill_bp, inits, parameters, model.file="jags_kienzle_McMaxLL.txt", 
                       n.iter=5000, n.chains=20, n.burnin=1000)
+```
+
+```{r jags model evaluation and results bp signal printing (Log-Likelihood)}
+mc_post_mean_LL <- bp_jags_kienzle_McMax_LL$BUGSoutput$mean$mc
+mc_post_sd_LL <- bp_jags_kienzle_McMax_LL$BUGSoutput$sd$mc
+mc_deviance_LL <- bp_jags_kienzle_McMax_LL$BUGSoutput$mean$deviance
+
+mc_post_beta_LL <- beta_dist_param(mc_post_mean_LL, mc_post_sd_LL^2)
+beta_post_mc_LL <- dbeta(x, mc_post_beta_LL$alpha, mc_post_beta_LL$beta)
+
+bp_df_prior_dist <- mutate(df_prior_dist,beta_post_mc_LL)
+g_mc <- g_mc +  geom_line(aes(x=x, y=beta_post_mc_LL, color="post")) +
+  labs(
+    title = "prior and post mc db signal (Log-Likelihood))",
+    x =  "value of mc",
+    y =  "beta distribution of mc"
+  )+
+  theme_minimal()
+
+
+
+kc11_post_mean_LL <- bp_jags_kienzle_McMax_LL$BUGSoutput$mean$kc11
+kc11_post_sd_LL <- bp_jags_kienzle_McMax_LL$BUGSoutput$sd$kc11
+
+norm_post_kc_LL <- dnorm(xnorm, kc11_post_mean_LL, kc11_post_sd_LL)
+dp_df_prior_dist <- mutate(df_prior_dist, norm_post_kc_LL)
+g_kc <- g_kc + geom_line(aes(x=xnorm, y=norm_post_kc_LL, color="post")) +
+  labs(
+    title = "prior and post kc11 \n(LogLikelihood, band pass)",
+    x =  "value of kc",
+    y =  "normal distribution of mc"
+  )+
+  theme_minimal()
+
+g_mc 
+g_kc
+
+df_print <- data.frame(mc_post_mean_LL,
+                       #mc_post_sd,
+                       kc11_post_mean_LL, 
+                       #kc11_post_sd, 
+                       #mc_alpha_post = mc_post_beta$alpha, 
+                       #mc_beta_post = mc_post_beta$beta,
+                       deviance= mc_deviance_LL) |>  gt()
+df_print
+
 ```
 
 #### Likelihood
 
 ```{r run jags model (Likelihood)}
-bp_jags_kienzle_McMax <- jags(data_mill_bp, inits, parameters, model.file="jags_kienzle_McMaxL.txt", 
+bp_jags_kienzle_McMax_L <- jags(data_mill_bp, inits, parameters, model.file="jags_kienzle_McMaxL.txt", 
                       n.iter=5000, n.chains=20, n.burnin=1000)
+```
+
+```{r jags model evaluation and results bp signal printing (Likelihood)}
+mc_post_mean_L <- bp_jags_kienzle_McMax_L$BUGSoutput$mean$mc
+mc_post_sd_L <- bp_jags_kienzle_McMax_L$BUGSoutput$sd$mc
+mc_deviance_L <- bp_jags_kienzle_McMax_L$BUGSoutput$mean$deviance
+
+mc_post_beta_L <- beta_dist_param(mc_post_mean, mc_post_sd^2)
+beta_post_mc_L <- dbeta(x, mc_post_beta_L$alpha, mc_post_beta_L$beta)
+
+bp_df_prior_dist <- mutate(df_prior_dist,beta_post_mc_L)
+g_mc <- g_mc +  geom_line(aes(x=x, y=beta_post_mc_L, color="post")) +
+  labs(
+    title = "prior and post mc db signal (Likelihood))",
+    x =  "value of mc",
+    y =  "beta distribution of mc"
+  )+
+  theme_minimal()
+
+
+
+kc11_post_mean_L <- bp_jags_kienzle_McMax_L$BUGSoutput$mean$kc11
+kc11_post_sd_L <- bp_sc_jags_kienzle_McMax_L$BUGSoutput$sd$kc11
+
+norm_post_kc_L <- dnorm(xnorm, kc11_post_mean, kc11_post_sd)
+dp_df_prior_dist <- mutate(df_prior_dist_L, norm_post_kc_L)
+g_kc <- g_kc + geom_line(aes(x=xnorm, y=norm_post_kc_L, color="post")) +
+  labs(
+    title = "prior and post kc11 \n(LogLikelihood, band pass)",
+    x =  "value of kc",
+    y =  "normal distribution of mc"
+  )+
+  theme_minimal()
+
+g_mc 
+g_kc
+
+df_print <- data.frame(mc_post_mean_L,
+                       #mc_post_sd,
+                       kc11_post_mean_L, 
+                       #kc11_post_sd, 
+                       #mc_alpha_post = mc_post_beta$alpha, 
+                       #mc_beta_post = mc_post_beta$beta,
+                       deviance= mc_deviance_L) |>  gt()
+df_print
+
+
 ```
 
 ### STAN Model
 
-The Stan model is a statistical framework developed for advanced Bayesian modeling and inference. It is built on the Stan probabilistic programming language, which allows users to define complex probabilistic models through a structured syntax. The key strengths of Stan include its efficiency and flexibility, making it ideal for applications in regression, hierarchical modeling, time series analysis, and more.
+The Stan model is a statistical framework developed for advanced Bayesian modelling and inference. It is built on the Stan probabilistic programming language, which allows users to define complex probabilistic models through a structured syntax. The key strengths of Stan include its efficiency and flexibility, making it ideal for applications in regression, hierarchical modelling, time series analysis, and more.
 
 Stan employs sophisticated sampling algorithms like Hamiltonian Monte Carlo (HMC) and its variant, the No-U-Turn Sampler (NUTS), to perform full Bayesian inference. These methods excel in exploring high-dimensional parameter spaces efficiently. Additionally, Stan supports other approaches, such as variational inference for approximate Bayesian methods and penalized maximum likelihood estimation for optimization tasks, \[2\].
 
 ## References
 
-\[1\] Oppenheim, A. V., & Schafer, R. W. (2009). Discrete-Time Signal Processing (3rd ed.). Prentice-Hall. Karris, S. (2011) \[2\] Jags.model: https://library.fiveable.me/key-terms/bayesian-statistics/jagsmodel, last checked 01.12.2024
+\[1\] Oppenheim, A. V., & Schafer, R. W. (2009). Discrete-Time Signal Processing (3rd ed.). Prentice-Hall. Karris, S. (2011)
+
+\[2\] Jags.model: https://library.fiveable.me/key-terms/bayesian-statistics/jagsmodel, last checked 01.12.2024
 
 \[3\] Official documentation: https://mc-stan.org/, last checked 01.12.2024
