@@ -540,7 +540,7 @@ z = 3     # number of cutting edges [2, 3, 4]
 rtool = 0.040/2# tool radius in m
 alpha_mc = beta_dist_mc$alpha
 beta_mc = beta_dist_mc$alpha
-m_kc = m_kc*1e6
+m_kc = m_kc
 sd_kc = sd_kc
 
 
@@ -628,7 +628,7 @@ mc_post_mean_L <- bp_jags_kienzle_McMax_L$BUGSoutput$mean$mc
 mc_post_sd_L <- bp_jags_kienzle_McMax_L$BUGSoutput$sd$mc
 mc_deviance_L <- bp_jags_kienzle_McMax_L$BUGSoutput$mean$deviance
 
-mc_post_beta_L <- beta_dist_param(mc_post_mean, mc_post_sd^2)
+mc_post_beta_L <- beta_dist_param(mc_post_mean_L, mc_post_sd_L^2)
 beta_post_mc_L <- dbeta(x, mc_post_beta_L$alpha, mc_post_beta_L$beta)
 
 bp_df_prior_dist <- mutate(df_prior_dist,beta_post_mc_L)
@@ -643,9 +643,9 @@ g_mc <- g_mc +  geom_line(aes(x=x, y=beta_post_mc_L, color="post")) +
 
 
 kc11_post_mean_L <- bp_jags_kienzle_McMax_L$BUGSoutput$mean$kc11
-kc11_post_sd_L <- bp_sc_jags_kienzle_McMax_L$BUGSoutput$sd$kc11
+kc11_post_sd_L <- bp_jags_kienzle_McMax_L$BUGSoutput$sd$kc11
 
-norm_post_kc_L <- dnorm(xnorm, kc11_post_mean, kc11_post_sd)
+norm_post_kc_L <- dnorm(xnorm, kc11_post_mean_L, kc11_post_sd_L)
 dp_df_prior_dist <- mutate(df_prior_dist_L, norm_post_kc_L)
 g_kc <- g_kc + geom_line(aes(x=xnorm, y=norm_post_kc_L, color="post")) +
   labs(
