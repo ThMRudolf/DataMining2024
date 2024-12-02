@@ -221,7 +221,7 @@ g_mc + g_kc
 
 The *Fast Fourier Transform (FFT)* is an efficient algorithm used to compute the Discrete Fourier Transform (DFT) of a sequence, or its inverse. It converts a signal from its original time or spatial domain into the frequency domain, revealing the signal's frequency components.
 
-The purpose of the FFT is to Identify dominant frequencies, phases, and amplitudes in a signal. It reduces computational complexity from $𝑂(𝑁2)O(N2)$ in a direct DFT to $O(NlogN)$. Applications: Widely used in signal processing, image analysis, audio engineering, and system modeling. For example, an FFT can analyze vibrations in machinery to detect faults or process audio signals for noise reduction. The band pass filtered signal and the standard scalar preprocessed signal it transformed into the FFT and the ampliutudes arround the frquencies of 35Hz and 105 Hz are exatracted. The following graphic illustrated the the results for both signals.
+The purpose of the FFT is to Identify dominant frequencies, phases, and amplitudes in a signal. It reduces computational complexity from $𝑂(𝑁2)O(N2)$ in a direct DFT to $O(NlogN)$. Applications: Widely used in signal processing, image analysis, audio engineering, and system modelling. For example, an FFT can analyze vibrations in machinery to detect faults or process audio signals for noise reduction. The band pass filtered signal and the standard scalar preprocessed signal it transformed into the FFT and the ampliutudes arround the frquencies of 35Hz and 105 Hz are exatracted. The following graphic illustrated the the results for both signals.
 
 ```{r FFT of spindle current}
 # Perform FFT
