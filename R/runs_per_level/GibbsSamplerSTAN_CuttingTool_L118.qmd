@@ -1,0 +1,288 @@
+---
+title: "GibbsSampler stan Cutting Tool"
+author: "Thomas M. Rudolf"
+format: html
+editor: visual
+---
+
+```{r set the directory }
+#setwd("D:/github/DataMining2024")
+```
+
+## Necessary Library
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+library(gt)
+library(ggplot2)
+library(MASS)
+library(patchwork)
+library(R2OpenBUGS)
+library(rjags)
+library(R2jags)
+library(patchwork)
+library(tidyverse)
+library(cmdstanr)
+# filters
+library(signal)
+library(rstan)
+library(parallel)
+```
+
+## Some functions
+
+```{r run and activate some usefull functions}
+source('cut_analysis_fcn.R')
+
+```
+
+## Read data
+
+```{r}
+# Specify the folder path
+folder_path <- "..\\data\\080807_WearMillingY_50%\\Level_118\\"
+
+# Get a list of all .csv files in the folder
+csv_files <- list.files(path = folder_path, pattern = "\\.csv$", full.names = TRUE)
+
+# Print the list of .csv files
+#print(csv_files)
+iqAx4_L002 <- NULL
+time_L002 <- NULL
+rotAx4_L002 <- NULL
+toffset <- 0
+nfiles <- length(csv_files)
+for(fidx in 1:nfiles){
+  ## spindle current
+  process_mill <- read.csv(csv_files[fidx])
+  iqSp <- process_mill$X..Nck..SD.nckServoDataActCurr32..u1..4.
+  rotAx4 <- process_mill$X..Nck..SD.nckServoDataActPos1stEnc32..u1..4.
+  iqAx4_L002 <- append(iqAx4_L002, iqSp)
+  rotAx4_L002 <- append(rotAx4_L002, rotAx4-rotAx4[1])
+  # time
+  time <- process_mill$time
+  time_L002 <- append(time_L002, time+toffset)
+  toffset <- time_L002[length(time_L002)]
+}
+```
+
+```{r plot level values}
+iqSp <- iqAx4_L002
+time <- time_L002
+rotAx4 <- rotAx4_L002
+nsamples <- length(iqSp)
+#velSp <- rotAx4[2:nsamples] - rotAx4[1:nsamples-1]  
+#time <- process_mill$time
+dtime <- diff(time)
+dtime <- append(dtime, 0.002)
+#phi_real <-rotAx4# cumsum(velSp)*0.002
+#df_phi_real <- lim22pi(phi_real)
+#phi_real <- df_phi_real[[1]]
+N <- length(iqSp)
+raund_count = 0
+km <- 1.3
+Mc <- iqSp * km
+Mc_real4STAN <- iqSp * km
+
+df_plot_data_complete <- data.frame(iqSp = iqSp, 
+                                    #velSp = velSp, 
+                                    time = time, 
+                                    dtime = dtime, 
+                                    #phi = phi_real, 
+                                    Mc = Mc_real4STAN)
+
+ggplot(df_plot_data_complete) + 
+  geom_line(aes(x = time, y = iqSp)) + 
+  geom_line(aes(x = time, y = maf(iqSp, 12)$maf_signal, colour="current"))+ 
+  geom_line(aes(x = time, y = Mc)) + 
+  geom_line(aes(x = time, y = maf(Mc, 12)$maf_signal, colour="torque"))
+  
+```
+
+```{r}
+df_sdtsca_iqSp_filt = maf(iqSp, 12)
+
+iqSp_maf = df_sdtsca_iqSp_filt$maf_signal
+iqSp_mStdScOut = df_sdtsca_iqSp_filt$mStdScOut
+df <- data.frame(t = time, iq = iqSp, iq_filt = iqSp_maf, iqSp_var = iqSp_mStdScOut)
+
+g1 <- ggplot(df) +
+   geom_line(aes(x=time, y=iq), color="red") + 
+   geom_line(aes(x=time, y=iq_filt))
+
+g2 <- ggplot(df) +
+   geom_line(aes(x=time, y=iq), color="red") + 
+   geom_line(aes(x=time, y=iqSp_var))
+
+g1+g2
+```
+
+## Band pass filter
+
+```{r}
+# Band-pass filter with lower and upper cutoff frequencies
+Ts <- time[2]-time[1]
+fs <- 1/Ts
+flow <- 10 # Hz
+fhigh <- 150 # Hz
+fband <-c(flow, fhigh) / (fs/2)
+filter_order <- 4
+bandpass_filter <- butter(filter_order, fband, type = "pass")
+iqSp_bpassfilter <- filter(bandpass_filter, iqSp)
+df_bpass <- data.frame(time, iqSp_bpassfilter, iqSp)
+g1 <- ggplot(df_bpass, aes(time, iqSp_bpassfilter)) + 
+  geom_line() + 
+  geom_line(aes(time, iqSp), color="red") 
+
+g1
+```
+
+```{r beta distribution alpha and beta by mean and varianz, echo = TRUE}
+
+mc <- 0.23
+kc11 <- (2306-977*0)
+
+beta_dist_mc <- beta_dist_param(mc, 0.02^2)
+beta_dist_mc
+
+beta_dist_kc <- beta_dist_param(kc11, 977^2)
+beta_dist_kc
+
+# test the result
+N <- 1000
+
+x = seq(0, 1, length.out=N)
+xnorm = seq(0, 6000, length.out=N)
+m_kc <- 2306
+sd_kc <- 977
+beta_init_mc <- dbeta(x, beta_dist_mc$alpha, beta_dist_mc$beta)
+norm_init_kc <- dnorm(xnorm, m_kc, sd_kc)
+df_prior_dist <- data.frame(x = x,
+                 xnorm = xnorm,
+                 beta_init_mc = beta_init_mc,
+                 norm_init_kc = norm_init_kc)
+
+g_mc <- ggplot(df_prior_dist, aes(x=x, y=beta_init_mc, color="prior")) +
+  geom_line()
+g_mc
+g_kc <- ggplot(df_prior_dist, aes(x=xnorm, y=norm_init_kc, color="prior")) +
+  geom_line()
+g_kc
+```
+
+## Prepare data for STAN model
+
+```{r prep data for STAN}
+ap = 0.001  # cutting depth in m
+fz = 0.00015 # feed per tooth in m
+kappa = 105/180*pi # main angle of tool insert in degree
+z = 3     # number of cutting edges [2, 3, 4]
+rtool = 0.040/2# tool radius in m
+alpha_mc = beta_dist_mc$alpha
+beta_mc = beta_dist_mc$alpha
+m_kc = m_kc
+sd_kc = sd_kc
+
+```
+
+```{r prep Mc for STAN}
+# prep Mc
+Mc_real4STAN <- na.omit(iqSp_bpassfilter)
+Mc_real4STAN_min <-min( Mc_real4STAN)
+Mc_real4STAN_max <-max( Mc_real4STAN)
+off_Mc = (Mc_real4STAN_max - Mc_real4STAN_min)/2
+idx <- which(abs(Mc_real4STAN)>Mc_real4STAN_max*.2)
+
+Mc_real4STAN2Eval <- Mc_real4STAN[idx]
+Mc_real4STAN2Eval <- (Mc_real4STAN2Eval + off_Mc)*1
+
+
+phi_list <- lim22pi((rotAx4-rotAx4[1])*pi/180)
+phi_real <- phi_list[[1]]
+phi_real2Eval <- na.omit(phi_real[idx])
+
+df_plot_Mc2Eval <- data.frame(phi=phi_real2Eval, 
+                         Mc=Mc_real4STAN2Eval)
+g2Eval <- ggplot(df_plot_Mc2Eval, aes(x=phi, y=Mc)) + 
+  geom_point()
+df_plot_Mc <- data.frame(phi=phi_real, 
+                         Mc=(Mc_real4STAN+off_Mc)*1)
+g <- ggplot(df_plot_Mc, aes(x=phi, y=Mc)) + 
+  geom_point()
+g + g2Eval
+```
+
+## STAN Model
+
+```{r data for STAN model}
+STAN_data_mill_cont <- list(k = length(Mc_real4STAN2Eval), 
+                  Mc = Mc_real4STAN2Eval,
+                  phi = phi_real2Eval,
+                  ap = ap, 
+                  fz = fz,
+                  z  = z,
+                  rtool = rtool,
+                  kappa = kappa, 
+                  m_kc = m_kc, 
+                  #tau_kc = 1/(sd_kc)^2,
+                  alpha_mc = beta_dist_mc$alpha,
+                  beta_mc = beta_dist_mc$beta
+                  )
+
+```
+
+```{r, output.var="STAN_kienzle_cont"}
+#stanc(file="kienzle.stan")
+model_code = stan_model(file="kienzle.stan", verbose=0)
+```
+
+```{r fit_STAN_kienzle_cont} #Mc_real4STAN2Eval}
+sample_iteration = 1e3
+model_fit <- stan("kienzle.stan", 
+                  data = STAN_data_mill_cont,
+                  chain = 1,
+                  iter = sample_iteration,
+                  warmup = sample_iteration/2,
+                  #refresh = sample_iteration/10, 
+                  cores = 10,
+                  thin = 1)
+```
+
+```{r}
+print(model_fit)
+stan_dens(model_fit)
+```
+
+```{r Extract samples from the posterior distribution}
+# 
+posterior_samples <- extract(model_fit)
+#
+post_mkc11_STAN <- mean(posterior_samples$kc11)
+post_sdkc11_STAN <- sd(posterior_samples$kc11)
+#
+post_kc11_STAN <- dnorm(xnorm, post_mkc11_STAN, post_sdkc11_STAN )
+#
+post_mmc_STAN <- mean(posterior_samples$mc)
+post_sdmc_STAN <- sd(posterior_samples$mc)
+post_beta_mc_STAN <- beta_dist_param(post_mmc_STAN, post_sdmc_STAN^2)
+#
+post_beta_dist_mc_STAN <- dbeta(x, post_beta_mc_STAN$alpha, post_beta_mc_STAN$beta)
+
+#
+df_prior_dist <- df_prior_dist |> mutate(post_beta_dist_mc_STAN,
+                                         post_kc11_STAN)
+```
+
+```{r results STAN post}
+ggplot(df_prior_dist) +
+  geom_line(aes(x=x, y = post_beta_dist_mc_STAN, color="mc posterior")) +
+  geom_line(aes(x=x, y = beta_init_mc, color="mc prior"))
+
+ggplot(df_prior_dist) +
+  geom_line(aes(x=xnorm, y = post_kc11_STAN, color="kc posterior")) +
+  geom_line(aes(x=xnorm, y = norm_init_kc, color="kc prior"))
+
+df_print <- data.frame(mc_post = post_mmc_STAN, 
+                       kc11_post = post_mkc11_STAN) |> gt()
+df_print
+```
