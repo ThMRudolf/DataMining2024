@@ -610,132 +610,207 @@ upset(fromList(upset_data),
       matrix.color = "steelblue",
       text.scale = c(2, 2, 2, 1.5, 2, 1.5))
 
-# Original dataset: all_data
-# Subsets: subset_008 and subset_016
+summary(all_data)
+summary(subset_008)
+summary(subset_016)
 
-# STEP 1: Analyze the frequency content of the original signal
+# Load required libraries
+library(ggplot2)
+library(dplyr)
+library(signal)
+library(zoo)
+
+# STEP 1: Adjust time at the folder level
+# Ensure time is cumulative at the folder level
+all_data <- all_data %>%
+  arrange(Folder, File, time) %>% 
+  group_by(Folder) %>%
+  mutate(adjusted_time = time + lag(cumsum(time), default = 0)) %>%
+  ungroup()
+
+# Extract original torque spindle signal and adjusted time
 original_signal <- all_data$torque_spindle[!is.na(all_data$torque_spindle)]  # Remove NA values
-original_time <- all_data$time[!is.na(all_data$torque_spindle)]
+original_time <- all_data$adjusted_time[!is.na(all_data$torque_spindle)]
 original_sampling_rate <- 1 / mean(diff(original_time))  # Original sampling rate in Hz
 
+# STEP 2: Analyze frequency content of the original signal
 # Perform FFT on the original signal
 fft_original <- fft(original_signal)
 n_original <- length(original_signal)
-
-# Adjust `freqs_original` to match `magnitude_original`
-freqs_original <- freqs_original[1:length(magnitude_original)]
-# Compute magnitude of FFT
-magnitude_original <- Mod(fft_original[1:(n_original / 2 + 1)])
-
-# Confirm lengths match
-cat("Length of freqs_original after adjustment:", length(freqs_original), "\n")
-cat("Length of magnitude_original after adjustment:", length(magnitude_original), "\n")
+freqs_original <- seq(0, original_sampling_rate / 2, length.out = n_original / 2)
+magnitude_original <- Mod(fft_original[1:(n_original / 2 + 1)])  # Magnitude of FFT
 
 # Plot the frequency spectrum
 ggplot(data.frame(Frequency = freqs_original, Magnitude = magnitude_original), aes(x = Frequency, y = Magnitude)) +
   geom_line(color = "blue") +
-  labs(title = "Frequency Spectrum of Original Signal", x = "Frequency (Hz)", y = "Magnitude")
+  labs(title = "Frequency Spectrum of Original Signal", x = "Frequency (Hz)", y = "Magnitude") +
+  theme_minimal()
 
-# Determine the Nyquist criterion
-max_frequency <- max(freqs_original[magnitude_original > 1e-6])  # Threshold to find significant frequencies
+# Nyquist frequency calculation
 nyquist_008 <- 1 / 0.008 / 2  # Nyquist frequency for .008s
 nyquist_016 <- 1 / 0.016 / 2  # Nyquist frequency for .016s
-
-cat("Max Frequency in Original Signal:", max_frequency, "Hz\n")
 cat("Nyquist Frequency for .008s:", nyquist_008, "Hz\n")
 cat("Nyquist Frequency for .016s:", nyquist_016, "Hz\n")
 
-# STEP 2: Analyze the subsets
+# STEP 3: Prepare subsets with folder-level time
+# Adjust subsets' time using cumulative time in each folder
+subset_008 <- subset_008 %>%
+  arrange(Folder, File, time) %>%
+  group_by(Folder) %>%
+  mutate(adjusted_time = time + lag(cumsum(time), default = 0)) %>%
+  ungroup()
+
+subset_016 <- subset_016 %>%
+  arrange(Folder, File, time) %>%
+  group_by(Folder) %>%
+  mutate(adjusted_time = time + lag(cumsum(time), default = 0)) %>%
+  ungroup()
+
+# Extract subset signals and adjusted times
 subset_008_signal <- subset_008$torque_spindle[!is.na(subset_008$torque_spindle)]
-subset_008_time <- subset_008$time[!is.na(subset_008$torque_spindle)]
-subset_008_sampling_rate <- 1 / mean(diff(subset_008_time))
+subset_008_time <- subset_008$adjusted_time[!is.na(subset_008$torque_spindle)]
 
 subset_016_signal <- subset_016$torque_spindle[!is.na(subset_016$torque_spindle)]
-subset_016_time <- subset_016$time[!is.na(subset_016$torque_spindle)]
-subset_016_sampling_rate <- 1 / mean(diff(subset_016_time))
+subset_016_time <- subset_016$adjusted_time[!is.na(subset_016$torque_spindle)]
 
-# STEP 3: Reconstruct the signal from subsets using FFT and interpolation
-
-# Function to reconstruct signal
-reconstruct_signal <- function(subset_signal, subset_sampling_rate, original_length, original_sampling_rate) {
-  # Perform FFT
-  fft_subset <- fft(subset_signal)
-  n_subset <- length(subset_signal)
-  
-  # Zero-pad in the frequency domain to match the original length
-  zero_padded_fft <- c(fft_subset, rep(0, original_length - n_subset))
-  
-  # Inverse FFT to reconstruct the signal
-  reconstructed_signal <- Re(fft(zero_padded_fft, inverse = TRUE)) / original_length
-  
-  # Adjust time vector
-  reconstructed_time <- seq(0, by = 1 / original_sampling_rate, length.out = original_length)
-  
-  return(data.frame(Time = reconstructed_time, Signal = reconstructed_signal))
+# STEP 4: Reconstruct the signal with respect to folder-level time
+reconstruct_signal_with_time <- function(subset_signal, subset_time, original_time) {
+  # Interpolate the subset signal onto the original time
+  interpolated_signal <- approx(x = subset_time, y = subset_signal, xout = original_time, rule = 2)$y
+  return(interpolated_signal)
 }
 
-# Reconstruct signals
-n_original <- length(original_signal)
-reconstructed_008 <- reconstruct_signal(subset_008_signal, subset_008_sampling_rate, n_original, original_sampling_rate)
-reconstructed_016 <- reconstruct_signal(subset_016_signal, subset_016_sampling_rate, n_original, original_sampling_rate)
+# Reconstruct signals onto the original timeframe
+reconstructed_008_signal <- reconstruct_signal_with_time(subset_008_signal, subset_008_time, original_time)
+reconstructed_016_signal <- reconstruct_signal_with_time(subset_016_signal, subset_016_time, original_time)
 
-# STEP 4: Validation
+# STEP 5: Validation
 
-# Plot original vs reconstructed signal
-plot_comparison <- function(original_time, original_signal, reconstructed_data, title) {
-  ggplot() +
-    geom_line(data = data.frame(Time = original_time, Signal = original_signal), aes(x = Time, y = Signal), color = "red", linetype = "dashed") +
-    geom_line(data = reconstructed_data, aes(x = Time, y = Signal), color = "blue") +
-    labs(title = title, x = "Time", y = "Torque Spindle Signal") +
-    theme_minimal()
-}
+# Plot original vs reconstructed signals
+plot(original_time, original_signal, type = "l", col = "red", xlab = "Time", ylab = "Torque Spindle",
+     main = "Original vs Reconstructed Signals at Folder Level")
+lines(original_time, reconstructed_008_signal, col = "blue")
+lines(original_time, reconstructed_016_signal, col = "green")
+legend("topright", legend = c("Original", "Reconstructed .008s", "Reconstructed .016s"),
+       col = c("red", "blue", "green"), lty = 1)
 
-plot_comparison(original_time, original_signal, reconstructed_008, "Original vs Reconstructed Signal (.008s Subset)")
-plot_comparison(original_time, original_signal, reconstructed_016, "Original vs Reconstructed Signal (.016s Subset)")
+# Zoomed plot for detailed validation
+zoom_start <- 0
+zoom_end <- 2
+idx <- which(original_time >= zoom_start & original_time <= zoom_end)
+plot(original_time[idx], original_signal[idx], type = "l", col = "red", xlab = "Time (Zoomed)", ylab = "Torque Spindle",
+     main = "Zoomed Comparison at Folder Level")
+lines(original_time[idx], reconstructed_008_signal[idx], col = "blue")
+lines(original_time[idx], reconstructed_016_signal[idx], col = "green")
 
-# Calculate RMSE
+# Calculate RMSE for reconstructions
 rmse <- function(original_signal, reconstructed_signal) {
   sqrt(mean((original_signal - reconstructed_signal)^2))
 }
-
-rmse_008 <- rmse(original_signal, reconstructed_008$Signal)
-rmse_016 <- rmse(original_signal, reconstructed_016$Signal)
+rmse_008 <- rmse(original_signal, reconstructed_008_signal)
+rmse_016 <- rmse(original_signal, reconstructed_016_signal)
 
 cat("RMSE for .008s Subset Reconstruction:", rmse_008, "\n")
 cat("RMSE for .016s Subset Reconstruction:", rmse_016, "\n")
 
-# Frequency domain comparison
-fft_reconstructed_008 <- fft(reconstructed_008$Signal)
-fft_reconstructed_016 <- fft(reconstructed_016$Signal)
+# STEP 6: Frequency domain validation
+fft_reconstructed_008 <- fft(reconstructed_008_signal)
+fft_reconstructed_016 <- fft(reconstructed_016_signal)
 
-# Adjust lengths for original and reconstructed FFTs
-freqs_original <- freqs_original[1:(length(magnitude_original))]
-magnitude_reconstructed_008 <- magnitude_reconstructed_008[1:(length(freqs_original))]
-magnitude_reconstructed_016 <- magnitude_reconstructed_016[1:(length(freqs_original))]
+# Compute magnitudes
+magnitude_reconstructed_008 <- Mod(fft_reconstructed_008[1:(n_original / 2 + 1)])
+magnitude_reconstructed_016 <- Mod(fft_reconstructed_016[1:(n_original / 2 + 1)])
 
-# Verify lengths
-cat("Length of freqs_original:", length(freqs_original), "\n")
-cat("Length of magnitude_original:", length(magnitude_original), "\n")
-cat("Length of magnitude_reconstructed_008:", length(magnitude_reconstructed_008), "\n")
-cat("Length of magnitude_reconstructed_016:", length(magnitude_reconstructed_016), "\n")
-
-# Plot comparison for .008s subset reconstruction
+# Plot frequency spectrum comparison
 ggplot() +
-  geom_line(data = data.frame(Frequency = freqs_original, Magnitude = magnitude_original), 
-            aes(x = Frequency, y = Magnitude), color = "red") +
-  geom_line(data = data.frame(Frequency = freqs_original, Magnitude = magnitude_reconstructed_008), 
-            aes(x = Frequency, y = Magnitude), color = "blue") +
-  labs(title = "Frequency Spectrum: Original vs Reconstructed (.008s Subset)", 
-       x = "Frequency (Hz)", y = "Magnitude") +
+  geom_line(data = data.frame(Frequency = freqs_original, Magnitude = magnitude_original), aes(x = Frequency, y = Magnitude), color = "red") +
+  geom_line(data = data.frame(Frequency = freqs_original, Magnitude = magnitude_reconstructed_008), aes(x = Frequency, y = Magnitude), color = "blue") +
+  geom_line(data = data.frame(Frequency = freqs_original, Magnitude = magnitude_reconstructed_016), aes(x = Frequency, y = Magnitude), color = "green") +
+  labs(title = "Frequency Spectrum Comparison at Folder Level", x = "Frequency (Hz)", y = "Magnitude") +
   theme_minimal()
 
-# Plot comparison for .016s subset reconstruction
-ggplot() +
-  geom_line(data = data.frame(Frequency = freqs_original, Magnitude = magnitude_original), 
-            aes(x = Frequency, y = Magnitude), color = "red") +
-  geom_line(data = data.frame(Frequency = freqs_original, Magnitude = magnitude_reconstructed_016), 
-            aes(x = Frequency, y = Magnitude), color = "green") +
-  labs(title = "Frequency Spectrum: Original vs Reconstructed (.016s Subset)", 
-       x = "Frequency (Hz)", y = "Magnitude") +
-  theme_minimal()
+# Correlation between original and reconstructed spectra
+correlation_008 <- cor(magnitude_original, magnitude_reconstructed_008, use = "complete.obs")
+correlation_016 <- cor(magnitude_original, magnitude_reconstructed_016, use = "complete.obs")
+
+cat("Frequency Correlation for .008s Subset Reconstruction:", correlation_008, "\n")
+cat("Frequency Correlation for .016s Subset Reconstruction:", correlation_016, "\n")
+
+# Define the cutoff frequency in Hz
+cutoff_freq <- 31.25  # Hz
+
+# Calculate the Nyquist frequency
+original_sampling_rate <- 1 / mean(diff(original_time))  # Ensure this is correct
+nyquist_frequency <- original_sampling_rate / 2
+cat("Nyquist Frequency:", nyquist_frequency, "Hz\n")
+
+# Adjust the cutoff frequency if it exceeds Nyquist
+if (cutoff_freq >= nyquist_frequency) {
+  cutoff_freq <- 0.9 * nyquist_frequency  # Reduce cutoff to 90% of Nyquist frequency
+  cat("Adjusted Cutoff Frequency:", cutoff_freq, "Hz\n")
+}
+
+# Normalize the cutoff frequency
+normalized_cutoff <- cutoff_freq / nyquist_frequency
+cat("Normalized Cutoff Frequency:", normalized_cutoff, "\n")
+
+# Ensure the normalized cutoff is in range (0, 1)
+if (normalized_cutoff <= 0 || normalized_cutoff >= 1) {
+  stop("Normalized cutoff frequency must be in the range (0, 1).")
+}
+
+# Create a Butterworth filter
+butter_filter <- butter(4, normalized_cutoff)
+
+# Apply the filter to the original signal
+filtered_signal <- filtfilt(butter_filter, original_signal)
+
+# Apply the filter to the subsets
+filtered_subset_008 <- filtfilt(butter_filter, subset_008_signal)
+filtered_subset_016 <- filtfilt(butter_filter, subset_016_signal)
+
+# Print confirmation
+cat("Filtering complete for all signals.\n")
+
+
+# Validate the filtered signals with updated reconstruction
+
+zoom_start <- 5  # Example
+zoom_end <- 6
+idx <- which(original_time >= zoom_start & original_time <= zoom_end)
+plot(original_time[idx], original_signal[idx], type = "l", col = "red", xlab = "Time", ylab = "Torque Spindle",
+     main = "Zoomed Comparison: Critical Time Window")
+lines(original_time[idx], reconstructed_008_signal[idx], col = "blue")
+lines(original_time[idx], reconstructed_016_signal[idx], col = "green")
+
+residual_008 <- original_signal - reconstructed_008_signal
+residual_016 <- original_signal - reconstructed_016_signal
+hist(residual_008, main = "Residuals for .008s Reconstruction", xlab = "Error", col = "blue")
+hist(residual_016, main = "Residuals for .016s Reconstruction", xlab = "Error", col = "green")
+plot(original_time, residual_008, type = "l", col = "blue", main = "Residuals over Time", ylab = "Residuals")
+lines(original_time, residual_016, col = "green")
+legend("topright", legend = c(".008s", ".016s"), col = c("blue", "green"), lty = 1)
+
+mae <- function(original, reconstructed) mean(abs(original - reconstructed))
+mae_008 <- mae(original_signal, reconstructed_008_signal)
+mae_016 <- mae(original_signal, reconstructed_016_signal)
+cat("MAE for .008s Subset Reconstruction:", mae_008, "\n")
+cat("MAE for .016s Subset Reconstruction:", mae_016, "\n")
+
+
+psnr <- function(original, reconstructed) {
+  mse <- mean((original - reconstructed)^2)
+  max_val <- max(original)
+  10 * log10(max_val^2 / mse)
+}
+psnr_008 <- psnr(original_signal, reconstructed_008_signal)
+psnr_016 <- psnr(original_signal, reconstructed_016_signal)
+cat("PSNR for .008s Subset Reconstruction:", psnr_008, "\n")
+cat("PSNR for .016s Subset Reconstruction:", psnr_016, "\n")
+
+
+
+
+
+
 
