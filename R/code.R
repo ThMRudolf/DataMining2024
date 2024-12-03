@@ -610,8 +610,132 @@ upset(fromList(upset_data),
       matrix.color = "steelblue",
       text.scale = c(2, 2, 2, 1.5, 2, 1.5))
 
+# Original dataset: all_data
+# Subsets: subset_008 and subset_016
 
+# STEP 1: Analyze the frequency content of the original signal
+original_signal <- all_data$torque_spindle[!is.na(all_data$torque_spindle)]  # Remove NA values
+original_time <- all_data$time[!is.na(all_data$torque_spindle)]
+original_sampling_rate <- 1 / mean(diff(original_time))  # Original sampling rate in Hz
 
+# Perform FFT on the original signal
+fft_original <- fft(original_signal)
+n_original <- length(original_signal)
 
+# Adjust `freqs_original` to match `magnitude_original`
+freqs_original <- freqs_original[1:length(magnitude_original)]
+# Compute magnitude of FFT
+magnitude_original <- Mod(fft_original[1:(n_original / 2 + 1)])
 
+# Confirm lengths match
+cat("Length of freqs_original after adjustment:", length(freqs_original), "\n")
+cat("Length of magnitude_original after adjustment:", length(magnitude_original), "\n")
+
+# Plot the frequency spectrum
+ggplot(data.frame(Frequency = freqs_original, Magnitude = magnitude_original), aes(x = Frequency, y = Magnitude)) +
+  geom_line(color = "blue") +
+  labs(title = "Frequency Spectrum of Original Signal", x = "Frequency (Hz)", y = "Magnitude")
+
+# Determine the Nyquist criterion
+max_frequency <- max(freqs_original[magnitude_original > 1e-6])  # Threshold to find significant frequencies
+nyquist_008 <- 1 / 0.008 / 2  # Nyquist frequency for .008s
+nyquist_016 <- 1 / 0.016 / 2  # Nyquist frequency for .016s
+
+cat("Max Frequency in Original Signal:", max_frequency, "Hz\n")
+cat("Nyquist Frequency for .008s:", nyquist_008, "Hz\n")
+cat("Nyquist Frequency for .016s:", nyquist_016, "Hz\n")
+
+# STEP 2: Analyze the subsets
+subset_008_signal <- subset_008$torque_spindle[!is.na(subset_008$torque_spindle)]
+subset_008_time <- subset_008$time[!is.na(subset_008$torque_spindle)]
+subset_008_sampling_rate <- 1 / mean(diff(subset_008_time))
+
+subset_016_signal <- subset_016$torque_spindle[!is.na(subset_016$torque_spindle)]
+subset_016_time <- subset_016$time[!is.na(subset_016$torque_spindle)]
+subset_016_sampling_rate <- 1 / mean(diff(subset_016_time))
+
+# STEP 3: Reconstruct the signal from subsets using FFT and interpolation
+
+# Function to reconstruct signal
+reconstruct_signal <- function(subset_signal, subset_sampling_rate, original_length, original_sampling_rate) {
+  # Perform FFT
+  fft_subset <- fft(subset_signal)
+  n_subset <- length(subset_signal)
+  
+  # Zero-pad in the frequency domain to match the original length
+  zero_padded_fft <- c(fft_subset, rep(0, original_length - n_subset))
+  
+  # Inverse FFT to reconstruct the signal
+  reconstructed_signal <- Re(fft(zero_padded_fft, inverse = TRUE)) / original_length
+  
+  # Adjust time vector
+  reconstructed_time <- seq(0, by = 1 / original_sampling_rate, length.out = original_length)
+  
+  return(data.frame(Time = reconstructed_time, Signal = reconstructed_signal))
+}
+
+# Reconstruct signals
+n_original <- length(original_signal)
+reconstructed_008 <- reconstruct_signal(subset_008_signal, subset_008_sampling_rate, n_original, original_sampling_rate)
+reconstructed_016 <- reconstruct_signal(subset_016_signal, subset_016_sampling_rate, n_original, original_sampling_rate)
+
+# STEP 4: Validation
+
+# Plot original vs reconstructed signal
+plot_comparison <- function(original_time, original_signal, reconstructed_data, title) {
+  ggplot() +
+    geom_line(data = data.frame(Time = original_time, Signal = original_signal), aes(x = Time, y = Signal), color = "red", linetype = "dashed") +
+    geom_line(data = reconstructed_data, aes(x = Time, y = Signal), color = "blue") +
+    labs(title = title, x = "Time", y = "Torque Spindle Signal") +
+    theme_minimal()
+}
+
+plot_comparison(original_time, original_signal, reconstructed_008, "Original vs Reconstructed Signal (.008s Subset)")
+plot_comparison(original_time, original_signal, reconstructed_016, "Original vs Reconstructed Signal (.016s Subset)")
+
+# Calculate RMSE
+rmse <- function(original_signal, reconstructed_signal) {
+  sqrt(mean((original_signal - reconstructed_signal)^2))
+}
+
+rmse_008 <- rmse(original_signal, reconstructed_008$Signal)
+rmse_016 <- rmse(original_signal, reconstructed_016$Signal)
+
+cat("RMSE for .008s Subset Reconstruction:", rmse_008, "\n")
+cat("RMSE for .016s Subset Reconstruction:", rmse_016, "\n")
+
+# Frequency domain comparison
+fft_reconstructed_008 <- fft(reconstructed_008$Signal)
+fft_reconstructed_016 <- fft(reconstructed_016$Signal)
+
+# Adjust lengths for original and reconstructed FFTs
+freqs_original <- freqs_original[1:(length(magnitude_original))]
+magnitude_reconstructed_008 <- magnitude_reconstructed_008[1:(length(freqs_original))]
+magnitude_reconstructed_016 <- magnitude_reconstructed_016[1:(length(freqs_original))]
+
+# Verify lengths
+cat("Length of freqs_original:", length(freqs_original), "\n")
+cat("Length of magnitude_original:", length(magnitude_original), "\n")
+cat("Length of magnitude_reconstructed_008:", length(magnitude_reconstructed_008), "\n")
+cat("Length of magnitude_reconstructed_016:", length(magnitude_reconstructed_016), "\n")
+
+# Plot comparison for .008s subset reconstruction
+ggplot() +
+  geom_line(data = data.frame(Frequency = freqs_original, Magnitude = magnitude_original), 
+            aes(x = Frequency, y = Magnitude), color = "red") +
+  geom_line(data = data.frame(Frequency = freqs_original, Magnitude = magnitude_reconstructed_008), 
+            aes(x = Frequency, y = Magnitude), color = "blue") +
+  labs(title = "Frequency Spectrum: Original vs Reconstructed (.008s Subset)", 
+       x = "Frequency (Hz)", y = "Magnitude") +
+  theme_minimal()
+
+# Plot comparison for .016s subset reconstruction
+ggplot() +
+  geom_line(data = data.frame(Frequency = freqs_original, Magnitude = magnitude_original), 
+            aes(x = Frequency, y = Magnitude), color = "red") +
+  geom_line(data = data.frame(Frequency = freqs_original, Magnitude = magnitude_reconstructed_016), 
+            aes(x = Frequency, y = Magnitude), color = "green") +
+  labs(title = "Frequency Spectrum: Original vs Reconstructed (.016s Subset)", 
+       x = "Frequency (Hz)", y = "Magnitude") +
+  theme_minimal()
 
