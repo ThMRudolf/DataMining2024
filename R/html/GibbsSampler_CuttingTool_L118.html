@@ -1,0 +1,3348 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Thomas M. Rudolf">
+
+<title>GibbsSampler_CuttingTool</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="GibbsSampler_CuttingTool_L118_files/libs/clipboard/clipboard.min.js"></script>
+<script src="GibbsSampler_CuttingTool_L118_files/libs/quarto-html/quarto.js"></script>
+<script src="GibbsSampler_CuttingTool_L118_files/libs/quarto-html/popper.min.js"></script>
+<script src="GibbsSampler_CuttingTool_L118_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="GibbsSampler_CuttingTool_L118_files/libs/quarto-html/anchor.min.js"></script>
+<link href="GibbsSampler_CuttingTool_L118_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="GibbsSampler_CuttingTool_L118_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="GibbsSampler_CuttingTool_L118_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="GibbsSampler_CuttingTool_L118_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="GibbsSampler_CuttingTool_L118_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">GibbsSampler_CuttingTool</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Thomas M. Rudolf </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#setwd("D:/github/DataMining2024")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="necessary-library" class="level2">
+<h2 class="anchored" data-anchor-id="necessary-library">Necessary Library</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.3.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'patchwork'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:MASS':
+
+    area</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(R2OpenBUGS)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rjags)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: coda</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linked to JAGS 4.3.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loaded modules: basemod,bugs</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(R2jags)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'R2jags' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 methods overwritten by 'R2WinBUGS':
+  method            from      
+  print.bugs        R2OpenBUGS
+  plot.bugs         R2OpenBUGS
+  as.mcmc.list.bugs R2OpenBUGS</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'R2jags'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:coda':
+
+    traceplot</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyverse' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'readr' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.3     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ lubridate 1.9.3     ✔ tibble    3.2.1
+✔ purrr     1.0.2     ✔ tidyr     1.3.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+✖ dplyr::select() masks MASS::select()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filters</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(signal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'signal' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'signal'
+
+The following object is masked from 'package:dplyr':
+
+    filter
+
+The following objects are masked from 'package:stats':
+
+    filter, poly</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstan)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'rstan' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: StanHeaders</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'StanHeaders' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+rstan version 2.32.6 (Stan version 2.32.2)
+
+For execution on a local, multicore CPU with excess RAM we recommend calling
+options(mc.cores = parallel::detectCores()).
+To avoid recompilation of unchanged Stan programs, we recommend calling
+rstan_options(auto_write = TRUE)
+For within-chain threading using `reduce_sum()` or `map_rect()` Stan functions,
+change `threads_per_chain` option:
+rstan_options(threads_per_chain = 1)
+
+Do not specify '-march=native' in 'LOCAL_CPPFLAGS' or a Makevars file
+
+Attaching package: 'rstan'
+
+The following object is masked from 'package:tidyr':
+
+    extract
+
+The following object is masked from 'package:R2jags':
+
+    traceplot
+
+The following object is masked from 'package:coda':
+
+    traceplot
+
+The following object is masked from 'package:R2OpenBUGS':
+
+    monitor</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parallel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="some-functions" class="level2">
+<h2 class="anchored" data-anchor-id="some-functions">Some functions</h2>
+<p>To analise and preprocess, there are dedined different auxialary fucntions:</p>
+<ul>
+<li><p><em>lim22pi(phi)</em>: converts the angular signal obtained from the CNC into a angular signal limited between <span class="math inline">\(0\)</span> and <span class="math inline">\(2\pi\)</span>. The input signal <span class="math inline">\(\phi\)</span> has the unit degree. The output is a list with the rearranged signal <span class="math inline">\(\phi\)</span> and the index, where the signal restarts in <span class="math inline">\(0\)</span>.</p></li>
+<li><p><em>maf(in_signal, n)</em>: calcualtes the moving average value for la last <span class="math inline">\(n\)</span> values of the signal <em>in_signal</em> and the moving standard scalar. The output in data frame with the moving averge signal, moving average standard deviation and moving standard scalar signal.</p></li>
+<li><p><em>max_Mc(id_reduce, Mc, phi)</em>: calculates the maximal value within a interval of <span class="math inline">\(0\)</span> and <span class="math inline">\(2\pi\)</span>. It requires the output from <em>lim22pi(phi)</em> and the signal of the cutting torque. The output is a data frame with the maximal torque in the interval of <span class="math inline">\(2\pi\)</span> and its angular position.</p></li>
+<li><p><em>beta_dist_param(m, var)</em>: calculates the <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> of a beta distribution based on a mean value and its standard deviation.</p></li>
+<li><p><em>get_amps_at_freq(iq, freq_lim, print=FALSE)</em>: gets the maximal ampliudes of a signal iq between the frequences <em>freq_lim[1,2]</em> and <em>freq_lim[3,4]</em>. If <em>print</em> in <strong>TRUE</strong>, the fft is plotted. Outputs are: amplitude and magnitude of the FFT, the values of the maximal amplituds in the defined frequency interval and the corresponding frequencies and the complete frequency range.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'cut_analysis_fcn.R'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="definition-of-butterworth-filter" class="level2">
+<h2 class="anchored" data-anchor-id="definition-of-butterworth-filter">Definition of Butterworth Filter</h2>
+<p>A Butterworth filter is a type of signal processing filter designed to have a frequency response that is as flat as possible in the passband, meaning it doesn’t distort the signal within its pass frequency range. It is also called a “maximally flat magnitude” filter because of its smooth response, [1].</p>
+<p>The gain is constant and flat in the passband, with no ripple. The response decreases monotonically past the cutoff frequency, meaning the signal’s power attenuates smoothly without oscillation. It does not have a flat phase response, but its behavior is well-structured. The filter’s sharpness (rate of attenuation after the cutoff) depends on the filter order. A higher order results in a steeper roll-off.</p>
+<p>Variants:</p>
+<ul>
+<li><p>Low-pass Butterworth filter: Passes frequencies below a specific cutoff frequency and attenuates frequencies above it.</p></li>
+<li><p>High-pass Butterworth filter: Passes frequencies above a specific cutoff and attenuates those below.</p></li>
+<li><p>Band-pass Butterworth filter: Passes a specific range of frequencies, attenuating those outside the band. Band-stop Butterworth filter: Attenuates frequencies within a specific range and passes others.</p></li>
+</ul>
+<p>In this project, the band pass filter was applied as it cuts off static complnents of the signal and parts of the signal beyond the requiered frequencies: rotational speed in Hz and its multiple of number of cutting edges: <span class="math inline">\(f_{rot}\)</span> and <span class="math inline">\(zf_{rot}\)</span> .</p>
+</section>
+<section id="read-data" class="level2">
+<h2 class="anchored" data-anchor-id="read-data">Read data</h2>
+<p>As previously describe, the results of the PCA shows, that the spindle torque has the main influence to detect wear characteristics. Therefore, the main focus in on evaluating this signal and the correspinding angular position. The evaluation is conducted on different cutting levels starting with the level 002, then two levels during the cut and at the end of the tool life (level 117 and 118). The spindle current is is combined for all recordings in one level together with the time vector.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the folder path</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>folder_path <span class="ot">&lt;-</span> <span class="st">"..</span><span class="sc">\\</span><span class="st">data</span><span class="sc">\\</span><span class="st">080807_WearMillingY_50%</span><span class="sc">\\</span><span class="st">Level_118</span><span class="sc">\\</span><span class="st">"</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a list of all .csv files in the folder</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>csv_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> folder_path, <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.csv$"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the list of .csv files</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co">#print(csv_files)</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>iqAx4_L002 <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>time_L002 <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>toffset <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>nfiles <span class="ot">&lt;-</span> <span class="fu">length</span>(csv_files)</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(fidx <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nfiles){</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="do">## spindle current</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  process_mill <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(csv_files[fidx])</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>  iqSp <span class="ot">&lt;-</span> process_mill<span class="sc">$</span>X..Nck..SD.nckServoDataActCurr32..u1..<span class="fl">4.</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>  iqAx4_L002 <span class="ot">&lt;-</span> <span class="fu">append</span>(iqAx4_L002, iqSp)</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># time</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>  time <span class="ot">&lt;-</span> process_mill<span class="sc">$</span>time</span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>  time_L002 <span class="ot">&lt;-</span> <span class="fu">append</span>(time_L002, time<span class="sc">+</span>toffset)</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>  toffset <span class="ot">&lt;-</span> time_L002[<span class="fu">length</span>(time_L002)]</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then the spindle torque is calculated by multiplying with the motor constant <span class="math inline">\(k_m\)</span> and the data are stored in a data frame.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>iqSp <span class="ot">&lt;-</span> iqAx4_L002</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>time <span class="ot">&lt;-</span> time_L002</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>nsamples <span class="ot">&lt;-</span> <span class="fu">length</span>(iqSp)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>dtime <span class="ot">&lt;-</span> <span class="fu">diff</span>(time)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>dtime <span class="ot">&lt;-</span> <span class="fu">append</span>(dtime, <span class="fl">0.002</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">length</span>(iqSp)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>raund_count <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>km <span class="ot">&lt;-</span> <span class="fl">1.3</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>Mc <span class="ot">&lt;-</span> iqSp <span class="sc">*</span> km</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>Mc_real4STAN <span class="ot">&lt;-</span> iqSp <span class="sc">*</span> km</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>df_plot_data_complete <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">iqSp =</span> iqSp, </span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>                                    <span class="co">#velSp = velSp, </span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">time =</span> time, </span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">dtime =</span> dtime, </span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>                                    <span class="co">#phi = phi_real, </span></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">Mc =</span> Mc)</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_plot_data_complete) <span class="sc">+</span> </span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> iqSp)) <span class="sc">+</span> </span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> <span class="fu">maf</span>(iqSp, <span class="dv">12</span>)<span class="sc">$</span>maf_signal, <span class="at">colour=</span><span class="st">"current"</span>))<span class="sc">+</span> </span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> Mc)) <span class="sc">+</span> </span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> <span class="fu">maf</span>(Mc, <span class="dv">12</span>)<span class="sc">$</span>maf_signal, <span class="at">colour=</span><span class="st">"torque"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GibbsSampler_CuttingTool_L118_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="signal-processing" class="level2">
+<h2 class="anchored" data-anchor-id="signal-processing">Signal processing</h2>
+<p>To process the model and identify the process parameters, it is necessary to prepocess the data. In this case, two strategies were applied: the <em>Moving Standard Scalar</em> and a <em>Band Pass Filter</em>.</p>
+<section id="moving-standard-scalar" class="level3">
+<h3 class="anchored" data-anchor-id="moving-standard-scalar">Moving Standard Scalar</h3>
+<p>The moving standard scalar is based on the standard scalar function, but evaluated over an specific number of values.:</p>
+<p><span class="math display">\[
+scsc = \frac{x_i - \hat{x_n}{\sigma_n}\
+i=k,..k+n\
+n: the number of values considering for the interval
+\]</span></p>
+<p>The left hand side of the plot shows the moving average value of the signal together with the original signals and the right hand side the moving standard scalar signal together with the original signal.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df_sdtsca_iqSp_filt <span class="ot">=</span> <span class="fu">maf</span>(iqSp, <span class="dv">12</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>iqSp_maf <span class="ot">=</span> df_sdtsca_iqSp_filt<span class="sc">$</span>maf_signal</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>iqSp_mStdScOut <span class="ot">=</span> df_sdtsca_iqSp_filt<span class="sc">$</span>mStdScOut</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">t =</span> time, <span class="at">iq =</span> iqSp, <span class="at">iq_filt =</span> iqSp_maf, <span class="at">iqSp_var =</span> iqSp_mStdScOut)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>time, <span class="at">y=</span>iq), <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span> </span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>time, <span class="at">y=</span>iq_filt))</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>g2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>time, <span class="at">y=</span>iq), <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span> </span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>time, <span class="at">y=</span>iqSp_var))</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>g1<span class="sc">+</span>g2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 1 row containing missing values or values outside the scale range
+(`geom_line()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GibbsSampler_CuttingTool_L118_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="band-pass-filter" class="level2">
+<h2 class="anchored" data-anchor-id="band-pass-filter">Band pass filter</h2>
+<p>As mention previously, the band pass filter cuts off the frequency components outside the defined frequency range. In this case, it is necessary to cut off the static part of the signal and the component above of relevant frequency. Therefore the lower frequency was set to 10 Hz and the higher frequency to 150Hz. The cutting process is conducted at approximately 35 Hz and the tool has 3 cutting edges. Therefore, the relevant frequencies are 35 Hz and 105Hz.</p>
+<p>The figure show the original signal and the band pass filtered signal.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Band-pass filter with lower and upper cutoff frequencies</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>Ts <span class="ot">&lt;-</span> time[<span class="dv">2</span>]<span class="sc">-</span>time[<span class="dv">1</span>]</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>fs <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>Ts</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>flow <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># Hz</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>fhigh <span class="ot">&lt;-</span> <span class="dv">150</span> <span class="co"># Hz</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>fband <span class="ot">&lt;-</span><span class="fu">c</span>(flow, fhigh) <span class="sc">/</span> (fs<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>filter_order <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>bandpass_filter <span class="ot">&lt;-</span> <span class="fu">butter</span>(filter_order, fband, <span class="at">type =</span> <span class="st">"pass"</span>)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>iqSp_bpassfilter <span class="ot">&lt;-</span> <span class="fu">filter</span>(bandpass_filter, iqSp)</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>df_bpass <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(time, iqSp_bpassfilter, iqSp)</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_bpass, <span class="fu">aes</span>(time, iqSp_bpassfilter)) <span class="sc">+</span> </span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(time, iqSp), <span class="at">color=</span><span class="st">"red"</span>) </span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>g1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Don't know how to automatically pick scale for object of type &lt;ts&gt;. Defaulting
+to continuous.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GibbsSampler_CuttingTool_L118_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="priors-of-m_c-and-k_c11" class="level2">
+<h2 class="anchored" data-anchor-id="priors-of-m_c-and-k_c11">Priors of <span class="math inline">\(m_c\)</span> and <span class="math inline">\(k_{c11}\)</span></h2>
+<p>The value of <span class="math inline">\(m_c\)</span> must be in a range of <em>[0,1]</em>. Therefore a beta distribution is defined for this parameters. For the value of <span class="math inline">\(k_{c11}\)</span> a normal distribution is considered. The left hand side graphic shows the prior distruibution for <span class="math inline">\(m_c\)</span>, the right hand side graphic the prior distribution for <span class="math inline">\(k_{c11\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="fl">0.23</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>kc11 <span class="ot">&lt;-</span> (<span class="dv">2306-977</span><span class="sc">*</span><span class="dv">0</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>beta_dist_mc <span class="ot">&lt;-</span> <span class="fu">beta_dist_param</span>(mc, <span class="fl">0.02</span><span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>beta_dist_mc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     alpha     beta
+1 101.6025 340.1475</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>beta_dist_kc <span class="ot">&lt;-</span> <span class="fu">beta_dist_param</span>(kc11, <span class="dv">977</span><span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>beta_dist_kc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      alpha     beta
+1 -15147.05 15140.48</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># test the result</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out=</span>N)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>xnorm <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">100</span>, <span class="dv">5000</span>, <span class="at">length.out=</span>N)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>m_kc <span class="ot">&lt;-</span> <span class="dv">2306</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>sd_kc <span class="ot">&lt;-</span> <span class="dv">977</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>beta_init_mc <span class="ot">&lt;-</span> <span class="fu">dbeta</span>(x, beta_dist_mc<span class="sc">$</span>alpha, beta_dist_mc<span class="sc">$</span>beta)</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>norm_init_kc <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(xnorm, m_kc, sd_kc)</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>df_prior_dist <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x,</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">xnorm =</span> xnorm,</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">beta_init_mc =</span> beta_init_mc,</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">norm_init_kc =</span> norm_init_kc)</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>g_mc <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_prior_dist, <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>beta_init_mc, <span class="at">color=</span><span class="st">"prior"</span>)) <span class="sc">+</span></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>g_kc <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_prior_dist, <span class="fu">aes</span>(<span class="at">x=</span>xnorm, <span class="at">y=</span>norm_init_kc, <span class="at">color=</span><span class="st">"prior"</span>)) <span class="sc">+</span></span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>g_mc <span class="sc">+</span> g_kc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GibbsSampler_CuttingTool_L118_files/figure-html/beta%20distribution%20alpha%20and%20beta%20by%20mean%20and%20varianz-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="fft" class="level2">
+<h2 class="anchored" data-anchor-id="fft">FFT</h2>
+<p>The <em>Fast Fourier Transform (FFT)</em> is an efficient algorithm used to compute the Discrete Fourier Transform (DFT) of a sequence, or its inverse. It converts a signal from its original time or spatial domain into the frequency domain, revealing the signal’s frequency components.</p>
+<p>The purpose of the FFT is to Identify dominant frequencies, phases, and amplitudes in a signal. It reduces computational complexity from <span class="math inline">\(𝑂(𝑁2)O(N2)\)</span> in a direct DFT to <span class="math inline">\(O(NlogN)\)</span>. Applications: Widely used in signal processing, image analysis, audio engineering, and system modelling. For example, an FFT can analyze vibrations in machinery to detect faults or process audio signals for noise reduction. The band pass filtered signal and the standard scalar preprocessed signal it transformed into the FFT and the ampliutudes arround the frequencies of 35Hz and 105 Hz are extractedd. The following graphic illustrated the the results for both signals.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform FFT</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># band pass filtered</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>freq_range <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">60</span>, <span class="dv">90</span>, <span class="dv">120</span>)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>amp_bp <span class="ot">&lt;-</span> <span class="fu">get_amps_at_freq</span>(iqSp_bpassfilter, freq_range, <span class="at">print=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Frequency Amplitude
+1   34.6304  2604.668
+2  103.9832  7854.736</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># moving standard scalar</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>amp_mSc <span class="ot">&lt;-</span><span class="fu">get_amps_at_freq</span>(<span class="fu">na.omit</span>(iqSp_mStdScOut), freq_range, <span class="at">print=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Frequency Amplitude
+1  34.63111  3703.808
+2 104.09769  5007.307</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="do">## prep data for ggplot</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>df_bp <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">freq=</span>amp_bp<span class="sc">$</span>freq, <span class="at">magnitude =</span> amp_bp<span class="sc">$</span>magnitude) </span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>top_frequencies <span class="ot">&lt;-</span> amp_bp<span class="sc">$</span>top_frequencies</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>top_amplitudes <span class="ot">&lt;-</span> amp_bp<span class="sc">$</span>top_amplitudes</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>g_fft_bp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_bp, <span class="fu">aes</span>(<span class="at">x=</span>freq, <span class="at">y=</span> magnitude, <span class="at">color=</span><span class="st">"Magnitude"</span>))<span class="sc">+</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>top_frequencies[<span class="dv">1</span>], <span class="at">y=</span>top_amplitudes[<span class="dv">1</span>], <span class="at">color=</span><span class="st">"relevent Magnitude"</span>)) <span class="sc">+</span></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>top_frequencies[<span class="dv">2</span>], <span class="at">y=</span>top_amplitudes[<span class="dv">2</span>], <span class="at">color=</span><span class="st">"relevent Magnitude"</span>)) <span class="sc">+</span></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Magnitude Spectrum </span><span class="sc">\n</span><span class="st"> (band pass filter)"</span>,</span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span>  <span class="st">"Frequency (Hz)"</span>,</span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span>  <span class="st">"Magnitude"</span></span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a><span class="co"># moving standart scalar</span></span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>df_mSc <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">freq =</span> amp_mSc<span class="sc">$</span>freq, <span class="at">magnitude =</span> amp_mSc<span class="sc">$</span>magnitude)</span>
+<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>top_frequencies <span class="ot">&lt;-</span> amp_mSc<span class="sc">$</span>top_frequencies</span>
+<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a>top_amplitudes <span class="ot">&lt;-</span> amp_mSc<span class="sc">$</span>top_amplitudes</span>
+<span id="cb46-19"><a href="#cb46-19" aria-hidden="true" tabindex="-1"></a>g_fft_mSc <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_mSc, <span class="fu">aes</span>(<span class="at">x=</span>freq, <span class="at">y=</span> magnitude, <span class="at">color=</span><span class="st">" Magnitude"</span>))<span class="sc">+</span></span>
+<span id="cb46-20"><a href="#cb46-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb46-21"><a href="#cb46-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>top_frequencies[<span class="dv">1</span>], <span class="at">y=</span>top_amplitudes[<span class="dv">1</span>], <span class="at">color=</span><span class="st">"relevant Magnetude"</span>))<span class="sc">+</span></span>
+<span id="cb46-22"><a href="#cb46-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>top_frequencies[<span class="dv">2</span>], <span class="at">y=</span>top_amplitudes[<span class="dv">2</span>], <span class="at">color=</span><span class="st">"relevant Magnetude"</span>))<span class="sc">+</span></span>
+<span id="cb46-23"><a href="#cb46-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-24"><a href="#cb46-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb46-25"><a href="#cb46-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Magnitude Spectrum </span><span class="sc">\n</span><span class="st"> (moving std scalar)"</span>,</span>
+<span id="cb46-26"><a href="#cb46-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span>  <span class="st">"Frequency (Hz)"</span>,</span>
+<span id="cb46-27"><a href="#cb46-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span>  <span class="st">"Magnitude"</span></span>
+<span id="cb46-28"><a href="#cb46-28" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb46-29"><a href="#cb46-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb46-30"><a href="#cb46-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-31"><a href="#cb46-31" aria-hidden="true" tabindex="-1"></a>g_fft_bp <span class="sc">+</span> </span>
+<span id="cb46-32"><a href="#cb46-32" aria-hidden="true" tabindex="-1"></a>  g_fft_mSc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in geom_point(aes(x = top_frequencies[1], y = top_amplitudes[1], : All aesthetics have length 1, but the data has 24465 rows.
+ℹ Did you mean to use `annotate()`?</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in geom_point(aes(x = top_frequencies[2], y = top_amplitudes[2], : All aesthetics have length 1, but the data has 24465 rows.
+ℹ Did you mean to use `annotate()`?</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in geom_point(aes(x = top_frequencies[1], y = top_amplitudes[1], : All aesthetics have length 1, but the data has 24465 rows.
+ℹ Did you mean to use `annotate()`?</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in geom_point(aes(x = top_frequencies[2], y = top_amplitudes[2], : All aesthetics have length 1, but the data has 24465 rows.
+ℹ Did you mean to use `annotate()`?</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GibbsSampler_CuttingTool_L118_files/figure-html/FFT%20of%20spindle%20current-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="fft-over-time-window" class="level2">
+<h2 class="anchored" data-anchor-id="fft-over-time-window">FFT over time window</h2>
+<p>To recieve information about the signal during the cutting process, the signal is divided into samples of 1000 signals and over the moving window of the 1000 the FFT is conducted over the Standard Scalar signal first. The values indicating that the cutting process is on are stored in a vector in order to model the process with this data. The graphs show the result of the FFT over the moving time window with 1000 samples. The values above the red line are taken to be evaluated.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>freq_range <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">60</span>, <span class="dv">90</span>, <span class="dv">120</span>)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>iq_data <span class="ot">&lt;-</span>  iqSp_mStdScOut</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>data_len <span class="ot">&lt;-</span>  <span class="fu">length</span>(iq_data)</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>wind_len <span class="ot">&lt;-</span>  <span class="dv">1000</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>amp4jags <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"numeric"</span>)</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(idx <span class="cf">in</span> <span class="dv">0</span><span class="sc">:</span>(data_len<span class="sc">-</span>wind_len)){</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>  amp_bp <span class="ot">&lt;-</span> <span class="fu">get_amps_at_freq</span>(iq_data[idx<span class="sc">:</span>(idx<span class="sc">+</span>wind_len)], freq_range)</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>  amp4jags <span class="ot">&lt;-</span> <span class="fu">append</span>(amp4jags, amp_bp<span class="sc">$</span>amp)</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>amp4jags <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(amp4jags)</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>lim <span class="ot">&lt;-</span> <span class="fu">max</span>(amp4jags)<span class="sc">*</span><span class="fl">0.9</span></span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>df_plot_fft_window <span class="ot">=</span> <span class="fu">data.frame</span>(amp4jags, </span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>                                <span class="at">idx =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(amp4jags), </span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>                                <span class="at">limit =</span> <span class="fu">rep</span>(lim, <span class="fu">length</span>(amp4jags)))</span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_plot_fft_window)<span class="sc">+</span></span>
+<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>( <span class="fu">aes</span>(<span class="at">x=</span>idx, <span class="at">y=</span>amp4jags, <span class="at">color=</span> <span class="st">"magnitude"</span>))<span class="sc">+</span></span>
+<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>idx, <span class="at">y=</span>limit, <span class="at">color=</span><span class="st">"limit"</span>) ) <span class="sc">+</span></span>
+<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Magnitude Spectrum </span><span class="sc">\n</span><span class="st"> (moving std scalar)"</span>,</span>
+<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span>  <span class="st">"time window"</span>,</span>
+<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span>  <span class="st">"Magnitude"</span></span>
+<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GibbsSampler_CuttingTool_L118_files/figure-html/separating%20the%20signals%20into%20time%20windows%20and%20do%20the%20FFT%20(Standard%20Scalar)-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>amp4jags2eval <span class="ot">=</span> amp4jags[amp4jags<span class="sc">&gt;</span>lim]</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>std_sc_amp4jags2eval <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(amp4jags2eval)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>freq_range <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">60</span>, <span class="dv">90</span>, <span class="dv">120</span>)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>iq_data <span class="ot">&lt;-</span>  iqSp_bpassfilter</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>data_len <span class="ot">&lt;-</span>  <span class="fu">length</span>(iq_data)</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>wind_len <span class="ot">&lt;-</span>  <span class="dv">1000</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>amp4jags <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"numeric"</span>)</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(idx <span class="cf">in</span> <span class="dv">0</span><span class="sc">:</span>(data_len<span class="sc">-</span>wind_len)){</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>  amp_bp <span class="ot">&lt;-</span> <span class="fu">get_amps_at_freq</span>(iq_data[idx<span class="sc">:</span>(idx<span class="sc">+</span>wind_len)], freq_range)</span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>  amp4jags <span class="ot">&lt;-</span> <span class="fu">append</span>(amp4jags, amp_bp<span class="sc">$</span>amp)</span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>amp4jags <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(amp4jags)</span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>lim <span class="ot">&lt;-</span> <span class="fu">max</span>(amp4jags)<span class="sc">*</span><span class="fl">0.9</span></span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>df_plot_fft_window <span class="ot">=</span> <span class="fu">data.frame</span>(amp4jags, </span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>                                <span class="at">idx =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(amp4jags), </span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>                                <span class="at">limit =</span> <span class="fu">rep</span>(lim, <span class="fu">length</span>(amp4jags)))</span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_plot_fft_window)<span class="sc">+</span></span>
+<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>idx, <span class="at">y=</span>amp4jags, <span class="at">color=</span> <span class="st">"magnitude"</span>))<span class="sc">+</span></span>
+<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>idx, <span class="at">y=</span>limit, <span class="at">color=</span><span class="st">"limit"</span>))<span class="sc">+</span></span>
+<span id="cb53-18"><a href="#cb53-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Magnitude Spectrum </span><span class="sc">\n</span><span class="st"> (band pass)"</span>,</span>
+<span id="cb53-20"><a href="#cb53-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span>  <span class="st">"time window"</span>,</span>
+<span id="cb53-21"><a href="#cb53-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span>  <span class="st">"Magnitude"</span></span>
+<span id="cb53-22"><a href="#cb53-22" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GibbsSampler_CuttingTool_L118_files/figure-html/separating%20the%20signals%20into%20time%20windows%20and%20do%20the%20FFT%20(band%20pass1)-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>amp4jags2eval <span class="ot">=</span> amp4jags[amp4jags<span class="sc">&gt;</span>lim]</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>bp_amp4jags2eval <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(amp4jags2eval)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>ap <span class="ot">=</span> <span class="fl">0.001</span>  <span class="co"># cutting depth in m</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>fz <span class="ot">=</span> <span class="fl">0.00015</span> <span class="co"># feed per tooth in m</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>kappa <span class="ot">=</span> <span class="dv">105</span><span class="sc">/</span><span class="dv">180</span><span class="sc">*</span>pi <span class="co"># main angle of tool insert in degree</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>z <span class="ot">=</span> <span class="dv">3</span>     <span class="co"># number of cutting edges [2, 3, 4]</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>rtool <span class="ot">=</span> <span class="fl">0.040</span><span class="sc">/</span><span class="dv">2</span><span class="co"># tool radius in m</span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>alpha_mc <span class="ot">=</span> beta_dist_mc<span class="sc">$</span>alpha</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>beta_mc <span class="ot">=</span> beta_dist_mc<span class="sc">$</span>alpha</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>m_kc <span class="ot">=</span> m_kc</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>sd_kc <span class="ot">=</span> sd_kc</span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a>data_mill_std_sc <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"k"</span> <span class="ot">=</span> <span class="fu">length</span>(std_sc_amp4jags2eval), </span>
+<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Mc"</span> <span class="ot">=</span> std_sc_amp4jags2eval<span class="sc">*</span>km,</span>
+<span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"ap"</span> <span class="ot">=</span> ap<span class="sc">*</span><span class="dv">1000</span>, </span>
+<span id="cb55-17"><a href="#cb55-17" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"fz"</span> <span class="ot">=</span> fz<span class="sc">*</span><span class="dv">1000</span>,</span>
+<span id="cb55-18"><a href="#cb55-18" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"rtool"</span> <span class="ot">=</span> rtool,</span>
+<span id="cb55-19"><a href="#cb55-19" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"kappa"</span> <span class="ot">=</span> kappa, </span>
+<span id="cb55-20"><a href="#cb55-20" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"m_kc"</span> <span class="ot">=</span> m_kc, </span>
+<span id="cb55-21"><a href="#cb55-21" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"tau_kc"</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">/</span>(sd_kc)<span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb55-22"><a href="#cb55-22" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"alpha_mc"</span> <span class="ot">=</span> beta_dist_mc<span class="sc">$</span>alpha,</span>
+<span id="cb55-23"><a href="#cb55-23" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"beta_mc"</span> <span class="ot">=</span> beta_dist_mc<span class="sc">$</span>beta</span>
+<span id="cb55-24"><a href="#cb55-24" aria-hidden="true" tabindex="-1"></a>                  )</span>
+<span id="cb55-25"><a href="#cb55-25" aria-hidden="true" tabindex="-1"></a>inits <span class="ot">&lt;-</span> <span class="cf">function</span>(){<span class="fu">list</span>(<span class="at">mc=</span><span class="fl">0.25</span>, <span class="at">kc11=</span><span class="fl">1.2e3</span>)}</span>
+<span id="cb55-26"><a href="#cb55-26" aria-hidden="true" tabindex="-1"></a><span class="co">#inits &lt;- function(){list(mc=0.25)}</span></span>
+<span id="cb55-27"><a href="#cb55-27" aria-hidden="true" tabindex="-1"></a><span class="co">#parameters &lt;- c("mc", "kc1", "mc_estim", "kc1_estim")</span></span>
+<span id="cb55-28"><a href="#cb55-28" aria-hidden="true" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"mc"</span>, <span class="st">"kc11"</span>, <span class="st">"pred"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="jags-model" class="level2">
+<h2 class="anchored" data-anchor-id="jags-model">Jags Model</h2>
+<p>JAGS (Just Another Gibbs Sampler) is a software tool used for Bayesian statistical analysis, particularly for models that require Markov Chain Monte Carlo (MCMC) methods. It is designed to generalize and extend the functionality of the BUGS (Bayesian inference Using Gibbs Sampling) project and works well with hierarchical and complex Bayesian models.</p>
+<section id="analysis-for-standard-scalar-filtered-signal" class="level3">
+<h3 class="anchored" data-anchor-id="analysis-for-standard-scalar-filtered-signal">Analysis for standard scalar filtered signal</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"model {</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="st">    # Likelihood</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="st">    for (i in 1:k) {</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="st">        # Model equation</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="st">        Mc[i] ~ dnorm(pred[i], tau)</span></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="st">        pred[i] &lt;- ap * fz^(1 - mc) * sin(kappa)^(-mc) * kc11 * rtool </span></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="st">        #log(pred[i]) &lt;- log(ap) + (1 - mc)* log(fz) + (-mc)*log(sin(kappa)) +log(kc11) +log( rtool) </span></span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a><span class="st">    # Priors</span></span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a><span class="st">    kc11 ~ dnorm(m_kc, tau_kc)  # Normal prior with mean 1200 and precision 1/50^2</span></span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a><span class="st">    mc ~ dbeta(alpha_mc, beta_mc)      # Uniform prior between 0 and 1</span></span>
+<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-14"><a href="#cb56-14" aria-hidden="true" tabindex="-1"></a><span class="st">    # Precision for the normal distribution (tau = 1/variance)</span></span>
+<span id="cb56-15"><a href="#cb56-15" aria-hidden="true" tabindex="-1"></a><span class="st">    tau ~ dgamma(0.1, 0.1) # Gamma prior for precision</span></span>
+<span id="cb56-16"><a href="#cb56-16" aria-hidden="true" tabindex="-1"></a><span class="st">}"</span>, <span class="at">file=</span><span class="st">"jags_kienzle_McMaxL.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>std_sc_jags_kienzle_McMax_L <span class="ot">&lt;-</span> <span class="fu">jags</span>(data_mill_std_sc, inits, parameters, <span class="at">model.file=</span><span class="st">"jags_kienzle_McMaxL.txt"</span>, </span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">n.iter=</span><span class="dv">5000</span>, <span class="at">n.chains=</span><span class="dv">20</span>, <span class="at">n.burnin=</span><span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>module glm loaded</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 10548
+   Unobserved stochastic nodes: 3
+   Total graph size: 10568
+
+Initializing model</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>mc_post_mean_L <span class="ot">&lt;-</span> std_sc_jags_kienzle_McMax_L<span class="sc">$</span>BUGSoutput<span class="sc">$</span>mean<span class="sc">$</span>mc</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>mc_post_sd_L <span class="ot">&lt;-</span> std_sc_jags_kienzle_McMax_L<span class="sc">$</span>BUGSoutput<span class="sc">$</span>sd<span class="sc">$</span>mc</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>mc_deviance_L <span class="ot">&lt;-</span> std_sc_jags_kienzle_McMax_L<span class="sc">$</span>BUGSoutput<span class="sc">$</span>mean<span class="sc">$</span>deviance</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>mc_post_beta_L <span class="ot">&lt;-</span> <span class="fu">beta_dist_param</span>(mc_post_mean_L, mc_post_sd_L<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>beta_post_mc_L <span class="ot">&lt;-</span> <span class="fu">dbeta</span>(x, mc_post_beta_L<span class="sc">$</span>alpha, mc_post_beta_L<span class="sc">$</span>beta)</span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>df_prior_dist_L <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df_prior_dist,beta_post_mc_L)</span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a>g_mc <span class="ot">&lt;-</span> g_mc <span class="sc">+</span>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>beta_post_mc_L, <span class="at">color=</span><span class="st">"post"</span>)) <span class="sc">+</span></span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"prior and post mc"</span>,</span>
+<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span>  <span class="st">"value of mc"</span>,</span>
+<span id="cb60-13"><a href="#cb60-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span>  <span class="st">"beta distribution of mc"</span></span>
+<span id="cb60-14"><a href="#cb60-14" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb60-15"><a href="#cb60-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb60-16"><a href="#cb60-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-17"><a href="#cb60-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-18"><a href="#cb60-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-19"><a href="#cb60-19" aria-hidden="true" tabindex="-1"></a>kc11_post_mean_L <span class="ot">&lt;-</span> std_sc_jags_kienzle_McMax_L<span class="sc">$</span>BUGSoutput<span class="sc">$</span>mean<span class="sc">$</span>kc11</span>
+<span id="cb60-20"><a href="#cb60-20" aria-hidden="true" tabindex="-1"></a>kc11_post_sd_L <span class="ot">&lt;-</span> std_sc_jags_kienzle_McMax_L<span class="sc">$</span>BUGSoutput<span class="sc">$</span>sd<span class="sc">$</span>kc11</span>
+<span id="cb60-21"><a href="#cb60-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-22"><a href="#cb60-22" aria-hidden="true" tabindex="-1"></a>norm_post_kc_L <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(xnorm, kc11_post_mean_L, kc11_post_sd_L)</span>
+<span id="cb60-23"><a href="#cb60-23" aria-hidden="true" tabindex="-1"></a>df_prior_dist <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df_prior_dist, norm_post_kc_L)</span>
+<span id="cb60-24"><a href="#cb60-24" aria-hidden="true" tabindex="-1"></a>g_kc <span class="ot">&lt;-</span> g_kc <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>xnorm, <span class="at">y=</span>norm_post_kc_L, <span class="at">color=</span><span class="st">"post"</span>)) <span class="sc">+</span></span>
+<span id="cb60-25"><a href="#cb60-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb60-26"><a href="#cb60-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"prior and post kc11 </span><span class="sc">\n</span><span class="st">(LogLikelihood, Standard Scalar)"</span>,</span>
+<span id="cb60-27"><a href="#cb60-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span>  <span class="st">"value of kc"</span>,</span>
+<span id="cb60-28"><a href="#cb60-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span>  <span class="st">"normal distribution of mc"</span></span>
+<span id="cb60-29"><a href="#cb60-29" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb60-30"><a href="#cb60-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb60-31"><a href="#cb60-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-32"><a href="#cb60-32" aria-hidden="true" tabindex="-1"></a>g_mc </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GibbsSampler_CuttingTool_L118_files/figure-html/jags%20model%20evaluation%20and%20results%20printing%20(Likelihood)-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>g_kc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GibbsSampler_CuttingTool_L118_files/figure-html/jags%20model%20evaluation%20and%20results%20printing%20(Likelihood)-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>df_print <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(mc_post_mean_L,</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>                       <span class="co">#mc_post_sd,</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>                       kc11_post_mean_L, </span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>                       <span class="co">#kc11_post_sd, </span></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>                       <span class="co">#mc_alpha_post = mc_post_beta$alpha, </span></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>                       <span class="co">#mc_beta_post = mc_post_beta$beta,</span></span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">deviance=</span> mc_deviance_L) <span class="sc">|&gt;</span>  <span class="fu">gt</span>()</span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>df_print</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="sfidjfixyv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sfidjfixyv table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#sfidjfixyv thead, #sfidjfixyv tbody, #sfidjfixyv tfoot, #sfidjfixyv tr, #sfidjfixyv td, #sfidjfixyv th {
+  border-style: none;
+}
+
+#sfidjfixyv p {
+  margin: 0;
+  padding: 0;
+}
+
+#sfidjfixyv .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#sfidjfixyv .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#sfidjfixyv .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#sfidjfixyv .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#sfidjfixyv .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#sfidjfixyv .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sfidjfixyv .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#sfidjfixyv .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#sfidjfixyv .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#sfidjfixyv .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#sfidjfixyv .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#sfidjfixyv .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#sfidjfixyv .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#sfidjfixyv .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#sfidjfixyv .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#sfidjfixyv .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#sfidjfixyv .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#sfidjfixyv .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#sfidjfixyv .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sfidjfixyv .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#sfidjfixyv .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#sfidjfixyv .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#sfidjfixyv .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sfidjfixyv .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#sfidjfixyv .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#sfidjfixyv .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sfidjfixyv .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sfidjfixyv .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#sfidjfixyv .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sfidjfixyv .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#sfidjfixyv .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sfidjfixyv .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#sfidjfixyv .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sfidjfixyv .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#sfidjfixyv .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sfidjfixyv .gt_left {
+  text-align: left;
+}
+
+#sfidjfixyv .gt_center {
+  text-align: center;
+}
+
+#sfidjfixyv .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#sfidjfixyv .gt_font_normal {
+  font-weight: normal;
+}
+
+#sfidjfixyv .gt_font_bold {
+  font-weight: bold;
+}
+
+#sfidjfixyv .gt_font_italic {
+  font-style: italic;
+}
+
+#sfidjfixyv .gt_super {
+  font-size: 65%;
+}
+
+#sfidjfixyv .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#sfidjfixyv .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#sfidjfixyv .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#sfidjfixyv .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#sfidjfixyv .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#sfidjfixyv .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#sfidjfixyv .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="mc_post_mean_L" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">mc_post_mean_L</th>
+<th id="kc11_post_mean_L" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">kc11_post_mean_L</th>
+<th id="deviance" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">deviance</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="mc_post_mean_L">0.2484954</td>
+<td class="gt_row gt_right" headers="kc11_post_mean_L">322.9996</td>
+<td class="gt_row gt_right" headers="deviance">-37221.23</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"model {</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="st">    # Likelihood</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="st">    for (i in 1:k) {</span></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="st">        # Model equation</span></span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="st">        Mc[i] ~ dnorm(pred[i], tau)</span></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a><span class="st">        #pred[i] &lt;- ap * fz^(1 - mc) * sin(kappa)^(-mc) * kc11 * rtool </span></span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a><span class="st">        log(pred[i]) &lt;- log(ap) + (1 - mc)* log(fz) + (-mc)*log(sin(kappa)) +log(kc11) +log( rtool) </span></span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a><span class="st">    # Priors</span></span>
+<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a><span class="st">    kc11 ~ dnorm(m_kc, tau_kc)  # Normal prior with mean 1200 and precision 1/50^2</span></span>
+<span id="cb63-12"><a href="#cb63-12" aria-hidden="true" tabindex="-1"></a><span class="st">    mc ~ dbeta(alpha_mc, beta_mc)      # Uniform prior between 0 and 1</span></span>
+<span id="cb63-13"><a href="#cb63-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-14"><a href="#cb63-14" aria-hidden="true" tabindex="-1"></a><span class="st">    # Precision for the normal distribution (tau = 1/variance)</span></span>
+<span id="cb63-15"><a href="#cb63-15" aria-hidden="true" tabindex="-1"></a><span class="st">    tau ~ dgamma(0.1, 0.1) # Gamma prior for precision</span></span>
+<span id="cb63-16"><a href="#cb63-16" aria-hidden="true" tabindex="-1"></a><span class="st">}"</span>, <span class="at">file=</span><span class="st">"jags_kienzle_McMaxLL.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>std_sc_jags_kienzle_McMax_LL <span class="ot">&lt;-</span> <span class="fu">jags</span>(data_mill_std_sc, inits, parameters, <span class="at">model.file=</span><span class="st">"jags_kienzle_McMaxLL.txt"</span>, </span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">n.iter=</span><span class="dv">5000</span>, <span class="at">n.chains=</span><span class="dv">20</span>, <span class="at">n.burnin=</span><span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 10548
+   Unobserved stochastic nodes: 3
+   Total graph size: 10574
+
+Initializing model</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>mc_post_mean_LL <span class="ot">&lt;-</span> std_sc_jags_kienzle_McMax_LL<span class="sc">$</span>BUGSoutput<span class="sc">$</span>mean<span class="sc">$</span>mc</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>mc_post_sd_LL<span class="ot">&lt;-</span> std_sc_jags_kienzle_McMax_LL<span class="sc">$</span>BUGSoutput<span class="sc">$</span>sd<span class="sc">$</span>mc</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>mc_deviance_LL <span class="ot">&lt;-</span> std_sc_jags_kienzle_McMax_LL<span class="sc">$</span>BUGSoutput<span class="sc">$</span>mean<span class="sc">$</span>deviance</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>mc_post_beta_LL <span class="ot">&lt;-</span> <span class="fu">beta_dist_param</span>(mc_post_mean_LL, mc_post_sd_LL<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>beta_post_mc_LL <span class="ot">&lt;-</span> <span class="fu">dbeta</span>(x, mc_post_beta_LL<span class="sc">$</span>alpha, mc_post_beta_LL<span class="sc">$</span>beta)</span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>df_prior_dist <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df_prior_dist,beta_post_mc_LL)</span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>g_mc <span class="ot">&lt;-</span> g_mc <span class="sc">+</span>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>beta_post_mc_LL, <span class="at">color=</span><span class="st">"post"</span>)) <span class="sc">+</span></span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"prior and post mc (Log-Likelihood))"</span>,</span>
+<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span>  <span class="st">"value of mc"</span>,</span>
+<span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span>  <span class="st">"beta distribution of mc"</span></span>
+<span id="cb66-14"><a href="#cb66-14" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb66-15"><a href="#cb66-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb66-16"><a href="#cb66-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-17"><a href="#cb66-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-18"><a href="#cb66-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-19"><a href="#cb66-19" aria-hidden="true" tabindex="-1"></a>kc11_post_mean_LL <span class="ot">&lt;-</span> std_sc_jags_kienzle_McMax_LL<span class="sc">$</span>BUGSoutput<span class="sc">$</span>mean<span class="sc">$</span>kc11</span>
+<span id="cb66-20"><a href="#cb66-20" aria-hidden="true" tabindex="-1"></a>kc11_post_sd_LL <span class="ot">&lt;-</span> std_sc_jags_kienzle_McMax_LL<span class="sc">$</span>BUGSoutput<span class="sc">$</span>sd<span class="sc">$</span>kc11</span>
+<span id="cb66-21"><a href="#cb66-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-22"><a href="#cb66-22" aria-hidden="true" tabindex="-1"></a>norm_post_kc_LL <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(xnorm, kc11_post_mean_LL, kc11_post_sd_LL)</span>
+<span id="cb66-23"><a href="#cb66-23" aria-hidden="true" tabindex="-1"></a>df_prior_dist <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df_prior_dist, norm_post_kc_LL)</span>
+<span id="cb66-24"><a href="#cb66-24" aria-hidden="true" tabindex="-1"></a>g_kc <span class="ot">&lt;-</span> g_kc <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>xnorm, <span class="at">y=</span>norm_post_kc_LL, <span class="at">color=</span><span class="st">"post"</span>)) <span class="sc">+</span></span>
+<span id="cb66-25"><a href="#cb66-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb66-26"><a href="#cb66-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"prior and post kc11 </span><span class="sc">\n</span><span class="st">(LogLikelihood, Standard Scalar)"</span>,</span>
+<span id="cb66-27"><a href="#cb66-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span>  <span class="st">"value of kc"</span>,</span>
+<span id="cb66-28"><a href="#cb66-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span>  <span class="st">"normal distribution of mc"</span></span>
+<span id="cb66-29"><a href="#cb66-29" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb66-30"><a href="#cb66-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb66-31"><a href="#cb66-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-32"><a href="#cb66-32" aria-hidden="true" tabindex="-1"></a>g_mc </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GibbsSampler_CuttingTool_L118_files/figure-html/jags%20model%20evaluation%20and%20results%20printing%20(Log-Likelihood)-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>g_kc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GibbsSampler_CuttingTool_L118_files/figure-html/jags%20model%20evaluation%20and%20results%20printing%20(Log-Likelihood)-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>df_print <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(mc_post_mean_LL,</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>                       <span class="co">#mc_post_sd,</span></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>                       kc11_post_mean_LL, </span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>                       <span class="co">#kc11_post_sd, </span></span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>                       <span class="co">#mc_alpha_post = mc_post_beta$alpha, </span></span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>                       <span class="co">#mc_beta_post = mc_post_beta$beta,</span></span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">deviance=</span> mc_deviance_LL) <span class="sc">|&gt;</span>  <span class="fu">gt</span>()</span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>df_print</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="uvyjxwacva" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#uvyjxwacva table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#uvyjxwacva thead, #uvyjxwacva tbody, #uvyjxwacva tfoot, #uvyjxwacva tr, #uvyjxwacva td, #uvyjxwacva th {
+  border-style: none;
+}
+
+#uvyjxwacva p {
+  margin: 0;
+  padding: 0;
+}
+
+#uvyjxwacva .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#uvyjxwacva .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#uvyjxwacva .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#uvyjxwacva .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#uvyjxwacva .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#uvyjxwacva .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uvyjxwacva .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#uvyjxwacva .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#uvyjxwacva .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#uvyjxwacva .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#uvyjxwacva .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#uvyjxwacva .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#uvyjxwacva .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#uvyjxwacva .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#uvyjxwacva .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#uvyjxwacva .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#uvyjxwacva .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#uvyjxwacva .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#uvyjxwacva .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uvyjxwacva .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#uvyjxwacva .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#uvyjxwacva .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#uvyjxwacva .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uvyjxwacva .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#uvyjxwacva .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#uvyjxwacva .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uvyjxwacva .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uvyjxwacva .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#uvyjxwacva .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uvyjxwacva .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#uvyjxwacva .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uvyjxwacva .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#uvyjxwacva .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uvyjxwacva .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#uvyjxwacva .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uvyjxwacva .gt_left {
+  text-align: left;
+}
+
+#uvyjxwacva .gt_center {
+  text-align: center;
+}
+
+#uvyjxwacva .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#uvyjxwacva .gt_font_normal {
+  font-weight: normal;
+}
+
+#uvyjxwacva .gt_font_bold {
+  font-weight: bold;
+}
+
+#uvyjxwacva .gt_font_italic {
+  font-style: italic;
+}
+
+#uvyjxwacva .gt_super {
+  font-size: 65%;
+}
+
+#uvyjxwacva .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#uvyjxwacva .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#uvyjxwacva .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#uvyjxwacva .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#uvyjxwacva .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#uvyjxwacva .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#uvyjxwacva .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="mc_post_mean_LL" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">mc_post_mean_LL</th>
+<th id="kc11_post_mean_LL" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">kc11_post_mean_LL</th>
+<th id="deviance" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">deviance</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="mc_post_mean_LL">0.07631945</td>
+<td class="gt_row gt_right" headers="kc11_post_mean_LL">450.5727</td>
+<td class="gt_row gt_right" headers="deviance">-37221.23</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="analysis-for-band-pass-filtered-signal" class="level3">
+<h3 class="anchored" data-anchor-id="analysis-for-band-pass-filtered-signal">Analysis for band pass filtered signal</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>freq_range <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">60</span>, <span class="dv">90</span>, <span class="dv">120</span>)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>iq_data <span class="ot">&lt;-</span>  iqSp_bpassfilter</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>data_len <span class="ot">&lt;-</span>  <span class="fu">length</span>(iq_data)</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>wind_len <span class="ot">&lt;-</span>  <span class="dv">1000</span></span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>amp4jags <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"numeric"</span>)</span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(idx <span class="cf">in</span> <span class="dv">0</span><span class="sc">:</span>(data_len<span class="sc">-</span>wind_len)){</span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>  amp_bp <span class="ot">&lt;-</span> <span class="fu">get_amps_at_freq</span>(iq_data[idx<span class="sc">:</span>(idx<span class="sc">+</span>wind_len)], freq_range)</span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>  amp4jags <span class="ot">&lt;-</span> <span class="fu">append</span>(amp4jags, amp_bp<span class="sc">$</span>amp)</span>
+<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a>amp4jags <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(amp4jags)</span>
+<span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a>lim <span class="ot">&lt;-</span> <span class="fu">max</span>(amp4jags)<span class="sc">*</span><span class="fl">0.9</span></span>
+<span id="cb69-12"><a href="#cb69-12" aria-hidden="true" tabindex="-1"></a>df_plot_fft_window <span class="ot">=</span> <span class="fu">data.frame</span>(amp4jags, </span>
+<span id="cb69-13"><a href="#cb69-13" aria-hidden="true" tabindex="-1"></a>                                <span class="at">idx =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(amp4jags), </span>
+<span id="cb69-14"><a href="#cb69-14" aria-hidden="true" tabindex="-1"></a>                                <span class="at">limit =</span> <span class="fu">rep</span>(lim, <span class="fu">length</span>(amp4jags)))</span>
+<span id="cb69-15"><a href="#cb69-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_plot_fft_window, <span class="fu">aes</span>(<span class="at">x=</span>idx, <span class="at">y=</span>amp4jags))<span class="sc">+</span></span>
+<span id="cb69-16"><a href="#cb69-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb69-17"><a href="#cb69-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>idx, <span class="at">y=</span>limit), <span class="at">color=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GibbsSampler_CuttingTool_L118_files/figure-html/separating%20the%20signals%20into%20time%20windows%20and%20do%20the%20FFT%20(band%20pass)-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>amp4jags2eval <span class="ot">=</span> amp4jags[amp4jags<span class="sc">&gt;</span>(lim)]</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>bp_amp4jags2eval <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(amp4jags2eval)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>ap <span class="ot">=</span> <span class="fl">0.001</span>  <span class="co"># cutting depth in m</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>fz <span class="ot">=</span> <span class="fl">0.00015</span> <span class="co"># feed per tooth in m</span></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>kappa <span class="ot">=</span> <span class="dv">105</span><span class="sc">/</span><span class="dv">180</span><span class="sc">*</span>pi <span class="co"># main angle of tool insert in degree</span></span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>z <span class="ot">=</span> <span class="dv">3</span>     <span class="co"># number of cutting edges [2, 3, 4]</span></span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>rtool <span class="ot">=</span> <span class="fl">0.040</span><span class="sc">/</span><span class="dv">2</span><span class="co"># tool radius in m</span></span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>alpha_mc <span class="ot">=</span> beta_dist_mc<span class="sc">$</span>alpha</span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>beta_mc <span class="ot">=</span> beta_dist_mc<span class="sc">$</span>alpha</span>
+<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a>m_kc <span class="ot">=</span> m_kc</span>
+<span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a>sd_kc <span class="ot">=</span> sd_kc</span>
+<span id="cb71-10"><a href="#cb71-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-11"><a href="#cb71-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-12"><a href="#cb71-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-13"><a href="#cb71-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-14"><a href="#cb71-14" aria-hidden="true" tabindex="-1"></a>data_mill_bp <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"k"</span> <span class="ot">=</span> <span class="fu">length</span>(bp_amp4jags2eval), </span>
+<span id="cb71-15"><a href="#cb71-15" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Mc"</span> <span class="ot">=</span> bp_amp4jags2eval<span class="sc">*</span>km,</span>
+<span id="cb71-16"><a href="#cb71-16" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"ap"</span> <span class="ot">=</span> ap<span class="sc">*</span><span class="dv">1000</span>, </span>
+<span id="cb71-17"><a href="#cb71-17" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"fz"</span> <span class="ot">=</span> fz<span class="sc">*</span><span class="dv">1000</span>,</span>
+<span id="cb71-18"><a href="#cb71-18" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"rtool"</span> <span class="ot">=</span> rtool,</span>
+<span id="cb71-19"><a href="#cb71-19" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"kappa"</span> <span class="ot">=</span> kappa, </span>
+<span id="cb71-20"><a href="#cb71-20" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"m_kc"</span> <span class="ot">=</span> m_kc, </span>
+<span id="cb71-21"><a href="#cb71-21" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"tau_kc"</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">/</span>(sd_kc)<span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb71-22"><a href="#cb71-22" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"alpha_mc"</span> <span class="ot">=</span> beta_dist_mc<span class="sc">$</span>alpha,</span>
+<span id="cb71-23"><a href="#cb71-23" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"beta_mc"</span> <span class="ot">=</span> beta_dist_mc<span class="sc">$</span>beta</span>
+<span id="cb71-24"><a href="#cb71-24" aria-hidden="true" tabindex="-1"></a>                  )</span>
+<span id="cb71-25"><a href="#cb71-25" aria-hidden="true" tabindex="-1"></a>inits <span class="ot">&lt;-</span> <span class="cf">function</span>(){<span class="fu">list</span>(<span class="at">mc=</span><span class="fl">0.25</span>, <span class="at">kc11=</span><span class="fl">1.2e3</span>)}</span>
+<span id="cb71-26"><a href="#cb71-26" aria-hidden="true" tabindex="-1"></a><span class="co">#inits &lt;- function(){list(mc=0.25)}</span></span>
+<span id="cb71-27"><a href="#cb71-27" aria-hidden="true" tabindex="-1"></a><span class="co">#parameters &lt;- c("mc", "kc1", "mc_estim", "kc1_estim")</span></span>
+<span id="cb71-28"><a href="#cb71-28" aria-hidden="true" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"mc"</span>, <span class="st">"kc11"</span>, <span class="st">"pred"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="log-likelihood" class="level4">
+<h4 class="anchored" data-anchor-id="log-likelihood">Log-Likelihood</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>bp_jags_kienzle_McMax_LL <span class="ot">&lt;-</span> <span class="fu">jags</span>(data_mill_bp, inits, parameters, <span class="at">model.file=</span><span class="st">"jags_kienzle_McMaxLL.txt"</span>, </span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">n.iter=</span><span class="dv">5000</span>, <span class="at">n.chains=</span><span class="dv">20</span>, <span class="at">n.burnin=</span><span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 5845
+   Unobserved stochastic nodes: 3
+   Total graph size: 5871
+
+Initializing model</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>mc_post_mean_LL <span class="ot">&lt;-</span> bp_jags_kienzle_McMax_LL<span class="sc">$</span>BUGSoutput<span class="sc">$</span>mean<span class="sc">$</span>mc</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>mc_post_sd_LL <span class="ot">&lt;-</span> bp_jags_kienzle_McMax_LL<span class="sc">$</span>BUGSoutput<span class="sc">$</span>sd<span class="sc">$</span>mc</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>mc_deviance_LL <span class="ot">&lt;-</span> bp_jags_kienzle_McMax_LL<span class="sc">$</span>BUGSoutput<span class="sc">$</span>mean<span class="sc">$</span>deviance</span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>mc_post_beta_LL <span class="ot">&lt;-</span> <span class="fu">beta_dist_param</span>(mc_post_mean_LL, mc_post_sd_LL<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>beta_post_mc_LL <span class="ot">&lt;-</span> <span class="fu">dbeta</span>(x, mc_post_beta_LL<span class="sc">$</span>alpha, mc_post_beta_LL<span class="sc">$</span>beta)</span>
+<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-8"><a href="#cb74-8" aria-hidden="true" tabindex="-1"></a>bp_df_prior_dist <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df_prior_dist,beta_post_mc_LL)</span>
+<span id="cb74-9"><a href="#cb74-9" aria-hidden="true" tabindex="-1"></a>g_mc <span class="ot">&lt;-</span> g_mc <span class="sc">+</span>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>beta_post_mc_LL, <span class="at">color=</span><span class="st">"post"</span>)) <span class="sc">+</span></span>
+<span id="cb74-10"><a href="#cb74-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb74-11"><a href="#cb74-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"prior and post mc db signal (Log-Likelihood))"</span>,</span>
+<span id="cb74-12"><a href="#cb74-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span>  <span class="st">"value of mc"</span>,</span>
+<span id="cb74-13"><a href="#cb74-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span>  <span class="st">"beta distribution of mc"</span></span>
+<span id="cb74-14"><a href="#cb74-14" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb74-15"><a href="#cb74-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb74-16"><a href="#cb74-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-17"><a href="#cb74-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-18"><a href="#cb74-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-19"><a href="#cb74-19" aria-hidden="true" tabindex="-1"></a>kc11_post_mean_LL <span class="ot">&lt;-</span> bp_jags_kienzle_McMax_LL<span class="sc">$</span>BUGSoutput<span class="sc">$</span>mean<span class="sc">$</span>kc11</span>
+<span id="cb74-20"><a href="#cb74-20" aria-hidden="true" tabindex="-1"></a>kc11_post_sd_LL <span class="ot">&lt;-</span> bp_jags_kienzle_McMax_LL<span class="sc">$</span>BUGSoutput<span class="sc">$</span>sd<span class="sc">$</span>kc11</span>
+<span id="cb74-21"><a href="#cb74-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-22"><a href="#cb74-22" aria-hidden="true" tabindex="-1"></a>norm_post_kc_LL <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(xnorm, kc11_post_mean_LL, kc11_post_sd_LL)</span>
+<span id="cb74-23"><a href="#cb74-23" aria-hidden="true" tabindex="-1"></a>dp_df_prior_dist <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df_prior_dist, norm_post_kc_LL)</span>
+<span id="cb74-24"><a href="#cb74-24" aria-hidden="true" tabindex="-1"></a>g_kc <span class="ot">&lt;-</span> g_kc <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>xnorm, <span class="at">y=</span>norm_post_kc_LL, <span class="at">color=</span><span class="st">"post"</span>)) <span class="sc">+</span></span>
+<span id="cb74-25"><a href="#cb74-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb74-26"><a href="#cb74-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"prior and post kc11 </span><span class="sc">\n</span><span class="st">(LogLikelihood, band pass)"</span>,</span>
+<span id="cb74-27"><a href="#cb74-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span>  <span class="st">"value of kc"</span>,</span>
+<span id="cb74-28"><a href="#cb74-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span>  <span class="st">"normal distribution of mc"</span></span>
+<span id="cb74-29"><a href="#cb74-29" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb74-30"><a href="#cb74-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb74-31"><a href="#cb74-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-32"><a href="#cb74-32" aria-hidden="true" tabindex="-1"></a>g_mc </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GibbsSampler_CuttingTool_L118_files/figure-html/jags%20model%20evaluation%20and%20results%20bp%20signal%20printing%20(Log-Likelihood)-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>g_kc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GibbsSampler_CuttingTool_L118_files/figure-html/jags%20model%20evaluation%20and%20results%20bp%20signal%20printing%20(Log-Likelihood)-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>df_print <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(mc_post_mean_LL,</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>                       <span class="co">#mc_post_sd,</span></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>                       kc11_post_mean_LL, </span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>                       <span class="co">#kc11_post_sd, </span></span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>                       <span class="co">#mc_alpha_post = mc_post_beta$alpha, </span></span>
+<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a>                       <span class="co">#mc_beta_post = mc_post_beta$beta,</span></span>
+<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">deviance=</span> mc_deviance_LL) <span class="sc">|&gt;</span>  <span class="fu">gt</span>()</span>
+<span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a>df_print</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="ftypubzqch" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ftypubzqch table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ftypubzqch thead, #ftypubzqch tbody, #ftypubzqch tfoot, #ftypubzqch tr, #ftypubzqch td, #ftypubzqch th {
+  border-style: none;
+}
+
+#ftypubzqch p {
+  margin: 0;
+  padding: 0;
+}
+
+#ftypubzqch .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ftypubzqch .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ftypubzqch .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ftypubzqch .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ftypubzqch .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ftypubzqch .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ftypubzqch .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ftypubzqch .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ftypubzqch .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ftypubzqch .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ftypubzqch .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ftypubzqch .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ftypubzqch .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ftypubzqch .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ftypubzqch .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ftypubzqch .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ftypubzqch .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ftypubzqch .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ftypubzqch .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ftypubzqch .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ftypubzqch .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ftypubzqch .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ftypubzqch .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ftypubzqch .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ftypubzqch .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ftypubzqch .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ftypubzqch .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ftypubzqch .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ftypubzqch .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ftypubzqch .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ftypubzqch .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ftypubzqch .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ftypubzqch .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ftypubzqch .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ftypubzqch .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ftypubzqch .gt_left {
+  text-align: left;
+}
+
+#ftypubzqch .gt_center {
+  text-align: center;
+}
+
+#ftypubzqch .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ftypubzqch .gt_font_normal {
+  font-weight: normal;
+}
+
+#ftypubzqch .gt_font_bold {
+  font-weight: bold;
+}
+
+#ftypubzqch .gt_font_italic {
+  font-style: italic;
+}
+
+#ftypubzqch .gt_super {
+  font-size: 65%;
+}
+
+#ftypubzqch .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ftypubzqch .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ftypubzqch .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ftypubzqch .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ftypubzqch .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ftypubzqch .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ftypubzqch .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="mc_post_mean_LL" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">mc_post_mean_LL</th>
+<th id="kc11_post_mean_LL" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">kc11_post_mean_LL</th>
+<th id="deviance" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">deviance</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="mc_post_mean_LL">0.09037358</td>
+<td class="gt_row gt_right" headers="kc11_post_mean_LL">546.8747</td>
+<td class="gt_row gt_right" headers="deviance">-18880.42</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="likelihood" class="level4">
+<h4 class="anchored" data-anchor-id="likelihood">Likelihood</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>bp_jags_kienzle_McMax_L <span class="ot">&lt;-</span> <span class="fu">jags</span>(data_mill_bp, inits, parameters, <span class="at">model.file=</span><span class="st">"jags_kienzle_McMaxL.txt"</span>, </span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">n.iter=</span><span class="dv">5000</span>, <span class="at">n.chains=</span><span class="dv">20</span>, <span class="at">n.burnin=</span><span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 5845
+   Unobserved stochastic nodes: 3
+   Total graph size: 5865
+
+Initializing model</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>mc_post_mean_L <span class="ot">&lt;-</span> bp_jags_kienzle_McMax_L<span class="sc">$</span>BUGSoutput<span class="sc">$</span>mean<span class="sc">$</span>mc</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>mc_post_sd_L <span class="ot">&lt;-</span> bp_jags_kienzle_McMax_L<span class="sc">$</span>BUGSoutput<span class="sc">$</span>sd<span class="sc">$</span>mc</span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>mc_deviance_L <span class="ot">&lt;-</span> bp_jags_kienzle_McMax_L<span class="sc">$</span>BUGSoutput<span class="sc">$</span>mean<span class="sc">$</span>deviance</span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>mc_post_beta_L <span class="ot">&lt;-</span> <span class="fu">beta_dist_param</span>(mc_post_mean_L, mc_post_sd_L<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>beta_post_mc_L <span class="ot">&lt;-</span> <span class="fu">dbeta</span>(x, mc_post_beta_L<span class="sc">$</span>alpha, mc_post_beta_L<span class="sc">$</span>beta)</span>
+<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a>bp_df_prior_dist <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df_prior_dist,beta_post_mc_L)</span>
+<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a>g_mc <span class="ot">&lt;-</span> g_mc <span class="sc">+</span>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>beta_post_mc_L, <span class="at">color=</span><span class="st">"post"</span>)) <span class="sc">+</span></span>
+<span id="cb79-10"><a href="#cb79-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb79-11"><a href="#cb79-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"prior and post mc db signal (Likelihood))"</span>,</span>
+<span id="cb79-12"><a href="#cb79-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span>  <span class="st">"value of mc"</span>,</span>
+<span id="cb79-13"><a href="#cb79-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span>  <span class="st">"beta distribution of mc"</span></span>
+<span id="cb79-14"><a href="#cb79-14" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb79-15"><a href="#cb79-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb79-16"><a href="#cb79-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-17"><a href="#cb79-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-18"><a href="#cb79-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-19"><a href="#cb79-19" aria-hidden="true" tabindex="-1"></a>kc11_post_mean_L <span class="ot">&lt;-</span> bp_jags_kienzle_McMax_L<span class="sc">$</span>BUGSoutput<span class="sc">$</span>mean<span class="sc">$</span>kc11</span>
+<span id="cb79-20"><a href="#cb79-20" aria-hidden="true" tabindex="-1"></a>kc11_post_sd_L <span class="ot">&lt;-</span> bp_jags_kienzle_McMax_L<span class="sc">$</span>BUGSoutput<span class="sc">$</span>sd<span class="sc">$</span>kc11</span>
+<span id="cb79-21"><a href="#cb79-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-22"><a href="#cb79-22" aria-hidden="true" tabindex="-1"></a>norm_post_kc_L <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(xnorm, kc11_post_mean_L, kc11_post_sd_L)</span>
+<span id="cb79-23"><a href="#cb79-23" aria-hidden="true" tabindex="-1"></a>dp_df_prior_dist <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df_prior_dist_L, norm_post_kc_L)</span>
+<span id="cb79-24"><a href="#cb79-24" aria-hidden="true" tabindex="-1"></a>g_kc <span class="ot">&lt;-</span> g_kc <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>xnorm, <span class="at">y=</span>norm_post_kc_L, <span class="at">color=</span><span class="st">"post"</span>)) <span class="sc">+</span></span>
+<span id="cb79-25"><a href="#cb79-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb79-26"><a href="#cb79-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"prior and post kc11 </span><span class="sc">\n</span><span class="st">(LogLikelihood, band pass)"</span>,</span>
+<span id="cb79-27"><a href="#cb79-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span>  <span class="st">"value of kc"</span>,</span>
+<span id="cb79-28"><a href="#cb79-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span>  <span class="st">"normal distribution of mc"</span></span>
+<span id="cb79-29"><a href="#cb79-29" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb79-30"><a href="#cb79-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb79-31"><a href="#cb79-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-32"><a href="#cb79-32" aria-hidden="true" tabindex="-1"></a>g_mc </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GibbsSampler_CuttingTool_L118_files/figure-html/jags%20model%20evaluation%20and%20results%20bp%20signal%20printing%20(Likelihood)-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>g_kc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GibbsSampler_CuttingTool_L118_files/figure-html/jags%20model%20evaluation%20and%20results%20bp%20signal%20printing%20(Likelihood)-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>df_print <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(mc_post_mean_L,</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>                       <span class="co">#mc_post_sd,</span></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>                       kc11_post_mean_L, </span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>                       <span class="co">#kc11_post_sd, </span></span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>                       <span class="co">#mc_alpha_post = mc_post_beta$alpha, </span></span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a>                       <span class="co">#mc_beta_post = mc_post_beta$beta,</span></span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">deviance=</span> mc_deviance_L) <span class="sc">|&gt;</span>  <span class="fu">gt</span>()</span>
+<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a>df_print</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="llhrgttfso" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#llhrgttfso table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#llhrgttfso thead, #llhrgttfso tbody, #llhrgttfso tfoot, #llhrgttfso tr, #llhrgttfso td, #llhrgttfso th {
+  border-style: none;
+}
+
+#llhrgttfso p {
+  margin: 0;
+  padding: 0;
+}
+
+#llhrgttfso .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#llhrgttfso .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#llhrgttfso .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#llhrgttfso .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#llhrgttfso .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#llhrgttfso .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#llhrgttfso .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#llhrgttfso .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#llhrgttfso .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#llhrgttfso .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#llhrgttfso .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#llhrgttfso .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#llhrgttfso .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#llhrgttfso .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#llhrgttfso .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#llhrgttfso .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#llhrgttfso .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#llhrgttfso .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#llhrgttfso .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#llhrgttfso .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#llhrgttfso .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#llhrgttfso .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#llhrgttfso .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#llhrgttfso .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#llhrgttfso .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#llhrgttfso .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#llhrgttfso .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#llhrgttfso .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#llhrgttfso .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#llhrgttfso .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#llhrgttfso .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#llhrgttfso .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#llhrgttfso .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#llhrgttfso .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#llhrgttfso .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#llhrgttfso .gt_left {
+  text-align: left;
+}
+
+#llhrgttfso .gt_center {
+  text-align: center;
+}
+
+#llhrgttfso .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#llhrgttfso .gt_font_normal {
+  font-weight: normal;
+}
+
+#llhrgttfso .gt_font_bold {
+  font-weight: bold;
+}
+
+#llhrgttfso .gt_font_italic {
+  font-style: italic;
+}
+
+#llhrgttfso .gt_super {
+  font-size: 65%;
+}
+
+#llhrgttfso .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#llhrgttfso .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#llhrgttfso .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#llhrgttfso .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#llhrgttfso .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#llhrgttfso .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#llhrgttfso .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="mc_post_mean_L" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">mc_post_mean_L</th>
+<th id="kc11_post_mean_L" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">kc11_post_mean_L</th>
+<th id="deviance" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">deviance</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="mc_post_mean_L">0.2470495</td>
+<td class="gt_row gt_right" headers="kc11_post_mean_L">403.9133</td>
+<td class="gt_row gt_right" headers="deviance">-18880.41</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="stan-model" class="level3">
+<h3 class="anchored" data-anchor-id="stan-model">STAN Model</h3>
+<p>The Stan model is a statistical framework developed for advanced Bayesian modelling and inference. It is built on the Stan probabilistic programming language, which allows users to define complex probabilistic models through a structured syntax. The key strengths of Stan include its efficiency and flexibility, making it ideal for applications in regression, hierarchical modelling, time series analysis, and more.</p>
+<p>Stan employs sophisticated sampling algorithms like Hamiltonian Monte Carlo (HMC) and its variant, the No-U-Turn Sampler (NUTS), to perform full Bayesian inference. These methods excel in exploring high-dimensional parameter spaces efficiently. Additionally, Stan supports other approaches, such as variational inference for approximate Bayesian methods and penalized maximum likelihood estimation for optimization tasks, [2].</p>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>[1] Oppenheim, A. V., &amp; Schafer, R. W. (2009). Discrete-Time Signal Processing (3rd ed.). Prentice-Hall. Karris, S. (2011)</p>
+<p>[2] Jags.model: https://library.fiveable.me/key-terms/bayesian-statistics/jagsmodel, last checked 01.12.2024</p>
+<p>[3] Official documentation: https://mc-stan.org/, last checked 01.12.2024</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
