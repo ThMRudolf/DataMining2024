@@ -1,0 +1,489 @@
+---
+title: Data mining of CNC data for cutting tool wear identification
+author:
+    - "José Luis Pérez"
+    - "Fernando Lango"
+    - "Thomas M. Rudolf"
+include-in-header:
+  - text: |
+      <style>
+      #title-slide .title {
+        font-size: 1.5em;
+        margin-bottom: 10%;
+      }
+      p, li {
+        font-size: 16pt;
+      }
+      .reveal .footer {
+        z-index: 0; 
+      }
+      .reveal .slide figure > figcaption,
+      .reveal .slide img.stretch + p.caption,
+      .reveal .slide img.r-stretch + p.caption {
+        font-size: 12px;
+      }
+      </style>
+format: 
+    revealjs:
+        theme: serif
+        logo: images/logo-ITAM.png
+        footer: "Minería y Análisis de Datos"
+---
+
+```{r}
+knitr::opts_chunk$set(echo = FALSE, cache = TRUE, cache.lazy = FALSE)
+
+
+library(kableExtra)
+library(skimr)
+library(corrplot)
+library(factoextra)
+
+library(RcppRoll) # Needed for MAF
+library(signal) # Butter filter
+
+library(rstan)
+library(parallel)
+
+library(tidyverse)
+
+
+source('cut_analysis_fcn.R')
+
+options(scipen = 999)
+```
+
+## Problem
+
+Identify the characteristics and CNC signals that help to indicate tool wear. The general behaviour of wear is illustrated in fig. 1a. At the beginning, a new component (in this case a cutting tool) has a progressive, non linear phase, where the required current to cut increases slowly (1). The following phase has a linear behaviour with very little increase under the same cutting conditions (2) until it reaches the end of usage (3). In this last phase a very progressive increase of the required current can be noticed.
+
+![fig. 1: Wear curve of a cutting tool](images/clipboard-1073081830.png)
+
+## Model
+
+::::: columns
+::: {.column width="50%"}
+![fig. 4: Indicator calculated form cutting model and real data](images/objective.png)
+:::
+
+::: {.column width="50%"}
+There are different models that describe the cutting force $F_c$ and the resulting cutting torque $M_c$ . The one used in this project is the model proposed by Otto Kienzle. It is based on the volume that each cutting tool removes from the material and two material parameters the specific cutting force $k_{c1,1}$ \[units $N/m^2$\] and increasing value of the specific cutting force $1-m_c$ . The parameters 𝑏 and ℎ are the geometric values of the removed material.
+
+It is necessary to estimate accurately the value for both parameter to model reliable the cutting torque, since small variations have a significant impact of the modeled signal.
+:::
+:::::
+
+## Data structure
+
+The available data are stored in folder with the structure illustrated in the fig. 5. The meta data of each measurement is stored in the folders name {cutting edge type}\_{number of cutting edges}\_{cutting depth in mm}\_{tool diameter}\_{% of tool diameter involved}\_{process}
+
+![fig. 5: Data structure](images/DataStructure.png)
+
+Each csv file is a time series with a duration of approximately $10$ seconds and a sample time of $2 ms$, leading to approximatly $5,000$ entries per variable per csv file.
+
+## Selected data {.smaller}
+
+```{r}
+directory_path <- "data/"
+csv_files <- list.files(path = directory_path, pattern = "\\.csv$", full.names = TRUE, recursive = TRUE)
+
+column_mapping <- c(
+  'time' = 'time',
+  '+/Nck/!SD/nckServoDataActCurr32 [u1; 1]' = 'torque_x',
+  '+/Nck/!SD/nckServoDataActCurr32 [u1; 2]' = 'torque_y',
+  '+/Nck/!SD/nckServoDataActCurr32 [u1; 3]' = 'torque_z',
+  '+/Nck/!SD/nckServoDataActCurr32 [u1; 4]' = 'torque_spindle',
+  #'+/Nck/!SD/nckServoDataActPos2ndEnc32 [u1; 1]' = 'posAx1',
+  #'+/Nck/!SD/nckServoDataActPos2ndEnc32 [u1; 2]' = 'posAx2',
+  #'+/Nck/!SD/nckServoDataActPos2ndEnc32 [u1; 3]' = 'posAx3',
+  #'+/Nck/!SD/nckServoDataActPower32 [u1; 6]' = 'PowerSp',
+  #'+/Nck/!SD/nckServoDataActVelMot32 [u1; 6]' = 'VelMotSp',
+  #'+/Nck/!SD/nckServoDataActVelMot32 [u1; 4]' = 'ActVelMot32',
+  '+/Nck/!SD/nckServoDataActPos1stEnc32 [u1; 1]' = 'position_x',
+  '+/Nck/!SD/nckServoDataActPos1stEnc32 [u1; 2]' = 'position_y',
+  '+/Nck/!SD/nckServoDataActPos1stEnc32 [u1; 3]' = 'position_z',
+  '+/Nck/!SD/nckServoDataActPos1stEnc32 [u1; 4]' = 'position_spindle',    
+  '+/Channel/!RP/rpa [u1; 15]' = 'Recording_flag'
+)
+
+data <- list()
+
+for (file in csv_files){
+    df <- read_csv(file, col_names = TRUE, show_col_types = FALSE)
+    # Obtener nombres de columnas presentes en el archivo y que están en el diccionario
+    columns_to_rename <- intersect(names(df), names(column_mapping))
+    
+    # Renombrar las columnas solo si coinciden con el diccionario
+    if (length(columns_to_rename) > 0) {
+        df <- df %>%
+            rename_with(~ column_mapping[.x], .cols = columns_to_rename)
+    }
+    
+    df$file_path <- file
+    file_path_parts <- str_split(file, "/")[[1]]
+    
+    df$file_name <- file_path_parts[length(file_path_parts)]
+    df$file_dir <- file_path_parts[length(file_path_parts) - 1]
+    
+    df$time_increment <- c(0, diff(df$time))
+    data[[file]] <- df
+}
+
+selected_columns <- c(unname(column_mapping), "file_path", "file_dir",
+                      "file_name", "time_increment")
+
+
+combined_data <- bind_rows(data) %>%
+    select(any_of(selected_columns))
+```
+
+The data we will use in the analysis has been limited to the *WearMillingY_50* process for the CNC E900, as we determined that this process provides the best data quality.
+
+In total, we have `r length(csv_files)` CSV files containing sensor signals. These files represent a total of `r nrow(combined_data)` observations and `r length(column_mapping)` columns:
+
+```{r}
+combined_data %>%
+    as.data.frame() %>%
+    str()
+```
+
+## Data cleaning
+
+For variables with 7,953 missing data points, the records will be removed, as they belong to a single erroneous CSV file.
+
+Variables with a large amount of missing data will be removed.
+
+```{r}
+clean_data <-
+    combined_data %>%
+    select(-c("torque_z", "position_x", "Recording_flag")) %>%
+    drop_na()
+```
+
+Most of the folders with process data follow a structure like "Level\_###," where \### is a number. We identified some with a different structure, which correspond to temporary files, other processes, or instances where recording did not function correctly. Therefore, they will be removed.
+
+```{r}
+clean_data <-
+    clean_data %>%
+    filter(grepl("^Level_[0-9]{3}$", file_dir)) %>%
+    arrange(file_dir, file_name, time)
+
+clean_data <-
+    clean_data %>%
+    group_by(file_dir) %>%
+    mutate(level_time = cumsum(time_increment)) %>%
+    ungroup() %>%
+    mutate(total_time = cumsum(time_increment))
+```
+
+Resulting in a total of `r nrow(clean_data)` observations across `r length(unique(clean_data$file_dir))` levels.
+
+Additionally, we have created the variables level_time and total_time to track the total elapsed time of the process and for each level.
+
+## Correlations & PCA
+
+The results of the Correlation analysis and PCA shows that the first two components:
+
+-   Has almost the same variance explained across different time spans (.002s, .008s, .016s).
+-   Explain more than 90% of the variance in the data.
+-   Are highly correlated with each other.
+
+We decided to use the *Spindle Torque* signal to determine the cutting tool wear, as it is the most relevant signal for this process.
+
+As described in the model for the cutting force $F_c$, the resulting cutting torque $M_c$ its obtained by multiplying the motor constant $K_m$ (1.3 for this process) with the Spindle Torque.
+
+## Signal processing
+
+It is necessary to prepocess the data in order to reduce the noise of the signal. In this case, two strategies were applied: the Moving Standard Scalar and a Band Pass Filter.
+
+-   Moving Standard Scalar: based on the standard scalar function, but evaluated over an specific number of values, we took 12 values.
+-   Band pass filter: cuts off the frequency components outside the defined frequency range. In this case, it is necessary to cut off the static part of the signal and the component above of relevant frequency. Therefore the lower frequency was set to 10 Hz and the higher frequency to 150Hz. The cutting process is conducted at approximately 35 Hz and the tool has 3 cutting edges. Therefore, the relevant frequencies are 35 Hz and 105Hz.
+
+```{r}
+km <- 1.3
+selected_signal <- 
+    clean_data %>%
+    select(file_dir, torque_spindle, position_spindle, level_time, 
+           total_time) %>%
+    mutate(Mc = km * torque_spindle) %>%
+    mutate(phi_adjusted = position_spindle %% (2 * pi)) %>%
+    group_by(file_dir) %>%
+    mutate(torque_spindle_std = maf_rcpp(torque_spindle, 12)$mStdScOut,
+           Mc_std = maf_rcpp(Mc, 12)$mStdScOut) 
+```
+
+```{r}
+Ts <- .002
+fs <- 1/Ts
+flow <- 10 # Hz
+fhigh <- 150 # Hz
+fband <-c(flow, fhigh) / (fs/2)
+filter_order <- 4
+bandpass_filter <- butter(filter_order, fband, type = "pass")
+
+selected_signal <-
+    selected_signal %>%
+    group_by(file_dir) %>%
+    mutate(torque_spindle_bpass = signal::filter(bandpass_filter,
+                                                 torque_spindle))
+```
+
+```{r}
+selected_signal_level <-
+    selected_signal %>%
+    dplyr::filter(file_dir == "Level_002")
+
+p1 <-
+    selected_signal_level %>%
+    ggplot() + 
+    geom_line(aes(x = level_time, y = torque_spindle)) +
+    geom_line(aes(x = level_time, y = torque_spindle_std, colour="std")) +
+    ggtitle("Moving scalar")
+
+p2 <-
+    selected_signal_level %>%
+    ggplot() + 
+    geom_line(aes(x = level_time, y = torque_spindle)) +
+    geom_line(aes(x = level_time, y = torque_spindle_bpass, colour="bpass")) +
+    ggtitle("Band pass filter")
+```
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+p1
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+p2
+```
+:::
+:::::
+
+Since its not possible to see a higher torque spindle when idle in the moving scalar, the band pass filter is more suitable for this case.
+
+## Priors of $m_c$ and $k_{c11}$
+
+Following the theoretical model, the value of $m_c$ must be in a range of *\[0,1\]*. Therefore a beta distribution is defined for this parameters. For the value of $k_{c11}$ a normal distribution is considered.
+
+```{r}
+
+mc <- 0.23
+kc11 <- (2306-977*0)
+
+beta_dist_mc <- beta_dist_param(mc, 0.02^2)
+
+# test the result
+N <- 10000
+
+x_beta <- seq(0, 1, length.out=N)
+x_norm <- seq(100, 5000, length.out=N)
+
+m_kc <- 2306
+sd_kc <- 977
+
+mc_prior <- data.frame(x = x_beta, 
+                       f = dbeta(x_beta, beta_dist_mc$alpha, beta_dist_mc$beta))
+
+kc_prior <- data.frame(x = x_norm, 
+                       f = dnorm(x_norm, m_kc, sd_kc))
+```
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+ggplot(mc_prior, aes(x=x, y=f)) +
+    geom_line(color = "blue") +
+    ggtitle("mc prior - beta distribution")
+
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+
+ggplot(kc_prior, aes(x=x, y=f)) +
+    geom_line(color = "blue") +
+    ggtitle("kc prior - normal distribution")
+```
+:::
+:::::
+
+## Jags Model (Just Another Gibbs Sampler)
+
+The Gibbs Sampler is a Markov Chain Monte Carlo (MCMC) algorithm that allows us to sample from the posterior distribution of a model. In this case, we are using it to estimate the parameters $m_c$ and $k_{c11}$.
+
+In order to use Jags, we need to use a Fast Fourier Transform (FFT) by a time window to extract the amplitudes around the frequencies of 35Hz (rotational speed) and 105 Hz (multiple of the spindle speed).
+
+![window FFT over the complete time series (examples each 1000 FFT)](images/wFFT.png)
+
+What can be noticed that both frequencies are always dominant. The frequency at $105Hz$, however, increases significantly when the material removing process starts and decreases when finished
+
+## Jags Model (Just Another Gibbs Sampler)
+
+Have a good fit on $m_c$ but not on $k_{c11}$. The value of $k_{c11}$ is not stable and the deviance is high. This is an indicator that the model is not stable and the values are not reliable. And also it takes a long time because of the FFT by window calculation.
+
+::::: columns
+::: {.column width="50%"}
+![result gibbs sampler $k_{c11}$](images/gibbs_sampler_kc.png)
+:::
+
+::: {.column width="50%"}
+![results gibbs sampler $m_c$](images/gibbs_sampler_mc.png)
+:::
+:::::
+
+## STAN Model
+
+The Stan model is a statistical framework developed for advanced Bayesian modelling and inference. It is more efficient than Jags and allows for more complex models.
+
+The model was built using the same data and priors as the Jags model. The results show a better fit for $k_{c11}$ and $m_c$.
+
+By using the results of PCA and the correlation analysis, we choose a timespan of .008 instead of .002. Reducing the processessing time from 170s to 30s for each level.
+
+We also need to prepare the data for the STAN model:
+
+![](images/clipboard-1768376557.png)
+
+## STAN Model
+
+The results of the STAN model show a better fit for $k_{c11}$ and $m_c$ compared to the Jags model, the values are more stable.
+
+::::: columns
+::: {.column width="50%"}
+![result STAN $k_{c11}$](images/clipboard-3717323736.png)
+:::
+
+::: {.column width="50%"}
+![results STAN $m_c$](images/clipboard-1917109351.png)
+:::
+:::::
+
+```{r}
+selected_signal_sub <- selected_signal[seq(1, 
+                                           nrow(selected_signal), by = 4), 
+                                            ]
+```
+
+```{r}
+model_code = stan_model(file="kienzle.stan", verbose=0)
+```
+
+```{r}
+ap <- 0.001  # cutting depth in m
+fz <- 0.00015 # feed per tooth in m
+kappa <- 105/180*pi # main angle of tool insert in degree
+z <- 3     # number of cutting edges [2, 3, 4]
+rtool <- 0.040/2# tool radius in m
+alpha_mc <- beta_dist_mc$alpha
+beta_mc <- beta_dist_mc$alpha
+m_kc <- m_kc
+sd_kc <- sd_kc
+```
+
+```{r}
+# Function to run the STAN model for each file_dir
+run_stan_model <- function(dir, data) {
+    
+    cat("Processing file_dir:", dir, "\n")
+  
+  # Filter data for the current file_dir
+  selected_signal_filtered <- data %>% filter(file_dir == dir)
+  
+  # Prepare data for STAN model
+  Mc_real4STAN <- na.omit(selected_signal_filtered$torque_spindle_bpass)
+  Mc_real4STAN_min <- min(Mc_real4STAN)
+  Mc_real4STAN_max <- max(Mc_real4STAN)
+  off_Mc <- (Mc_real4STAN_max - Mc_real4STAN_min) / 2
+  idx <- which(abs(Mc_real4STAN) > Mc_real4STAN_max * 0.2)
+  
+  Mc_real4STAN2Eval <- Mc_real4STAN[idx]
+  Mc_real4STAN2Eval <- (Mc_real4STAN2Eval + off_Mc) * 1
+  
+  # Convert degrees to radians
+  phi_list <- lim22pi((selected_signal_filtered$torque_spindle - 
+                       selected_signal_filtered$torque_spindle[1]) * pi / 180)
+  phi_real <- phi_list[[1]]
+  phi_real2Eval <- na.omit(phi_real[idx])
+  
+  # Prepare STAN data
+  STAN_data_mill_cont <- list(
+    k = length(Mc_real4STAN2Eval), 
+    Mc = Mc_real4STAN2Eval,
+    phi = phi_real2Eval,
+    ap = ap, 
+    fz = fz,
+    z  = z,
+    rtool = rtool,
+    kappa = kappa, 
+    m_kc = m_kc,
+    alpha_mc = beta_dist_mc$alpha,
+    beta_mc = beta_dist_mc$beta
+  )
+  
+  # Run STAN model
+  sample_iteration <- 1e3
+  model_fit <- stan(
+    file = "kienzle.stan", 
+    data = STAN_data_mill_cont,
+    chains = 1,
+    iter = sample_iteration,
+    warmup = sample_iteration / 2,
+    cores = 1,
+    thin = 1
+  )
+  
+  # Extract posterior samples
+  posterior_samples <- rstan::extract(model_fit)
+  
+  # Calculate posterior means and standard deviations
+  post_mkc11_STAN <- mean(posterior_samples$kc11)
+  post_sdkc11_STAN <- sd(posterior_samples$kc11)
+  post_kc11_STAN <- dnorm(x_norm, post_mkc11_STAN, post_sdkc11_STAN)
+  
+  post_mmc_STAN <- mean(posterior_samples$mc)
+  post_sdmc_STAN <- sd(posterior_samples$mc)
+  post_beta_mc <- beta_dist_param(post_mmc_STAN, post_sdmc_STAN^2)
+  post_beta_dist_mc_STAN <- dbeta(x_beta, post_beta_mc$alpha, post_beta_mc$beta)
+  
+  # Return the result as a data frame
+  data.frame(
+    file_dir = dir,
+    post_mmc_STAN = post_mmc_STAN,
+    post_mkc11_STAN = post_mkc11_STAN
+  )
+}
+
+# Use map_dfr to apply the function over all unique file_dir and combine results
+# results_df <- purrr::map_dfr(unique(selected_signal_sub$file_dir),
+#                              run_stan_model,
+#                              data = selected_signal_sub)
+```
+
+
+
+## Conclusions
+
+-   **Data Reduction Benefits:** The exploration of reducing the frequency and number of variables for information recording lead to significant improvements in processing efficiency. By simplifying the dataset, we can enhance computational performance and reduce noise, allowing for more accurate modeling and clearer insights.
+
+-   **Signal Processing:** The signal processing techniques applied to the data have shown to be effective in reducing noise and enhancing the quality of the data. The bandpass filter has been particularly useful in isolating the relevant frequencies for the cutting process.
+
+-   **Model Complexity and Performance:** While the Gibbs Sampler (JAGS model) has produced almost expected values, the complexity of the model can lead to challenges in interpretability and stability. Otherways, the STAN model has shown better performance and stability, providing more reliable results.
+
+-   **Future Work:** Future work could focus on further refining the signal processing techniques and exploring additional models to improve the accuracy and stability of the results. Additionally, modelling the cutting force with the parameters obtained from the cutting torque could provide a more comprehensive understanding of the cutting process.
+
+## References
+
+1.  Adaptive loggingmodule formonitoringapplicationsusingcontrol internaldigital drive signalsC. Brecher, T. Rudolf, 2009, ProductionEngineering3, 305-312
+
+2.  Signalvorverarbeitung zur Anwendung steuerungsintegrierter ProzessüberwachungC.Brecher, T Rudolf , wt-online, 2009, S. 479-486
+
+3.  Fundamentals of Modern Manufacturing; M. P. Groover, John Wiley & Sons, Inc. 2002
+
+4.  Werkzeugmaschinen 3 Mechatronische Systeme, Vorschubantriebe, Prozessdiagnose M. Weck, C. Brecher; Springer, 2006
+
+5.  JAGS Version4.3.0 usermanual, https://people.stat.sc.edu/hansont/stat740/jags_user_manual.pdf
+
+6.  Regresión Avanzada (con enfoque Bayesiano); L. E. Nieto Barajas, Scriptum maetriaen Ciencias de Datos, ITAM
